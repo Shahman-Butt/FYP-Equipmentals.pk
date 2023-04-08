@@ -83,6 +83,7 @@ const Home = ({ user, match }) => {
   function logoutUser() {
     dispatch(logout());
     alert.success("Logout Successfully");
+    history.push("/login");
   }
 
   const alert = useAlert();

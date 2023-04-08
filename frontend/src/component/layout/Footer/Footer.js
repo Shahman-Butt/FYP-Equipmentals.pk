@@ -16,6 +16,9 @@ const Footer = () => {
   if (location.pathname === "/contact") {
     return null;
   }
+  if (location.pathname === "/me/update") {
+    return null;
+  }
   return (
     <footer id="footer">
       <div className="leftFooter">

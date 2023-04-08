@@ -85,7 +85,7 @@ const UpdateProfile = ({ history }) => {
       ) : (
         <Fragment>
           <MetaData title="Update Profile" />
-          <div className="updateProfileContainer">
+          <div className="updateProfileContainer bg-transparent">
             <div className="updateProfileBox">
               <h2 className="updateProfileHeading">Update Profile</h2>
 
