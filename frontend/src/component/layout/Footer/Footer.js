@@ -10,15 +10,22 @@ const Footer = () => {
 
   const location = useLocation();
 
-  if (location.pathname === "/about") {
+  // if (location.pathname === "/about") {
+  //   return null;
+  // }
+  // if (location.pathname === "/account") {
+  //   return null;
+  // }
+  // if (location.pathname === "/contact") {
+  //   return null;
+  // }
+  // if (location.pathname === "/me/update") {
+  //   return null;
+  // }
+  if (location.pathname === "/about" || location.pathname === "/account" || location.pathname === "/contact" || location.pathname === "/me/update") {
     return null;
   }
-  if (location.pathname === "/contact") {
-    return null;
-  }
-  if (location.pathname === "/me/update") {
-    return null;
-  }
+  
   return (
     <footer id="footer">
       <div className="leftFooter">
