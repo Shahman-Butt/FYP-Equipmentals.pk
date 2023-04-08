@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import FaceIcon from "@material-ui/icons/Face";
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import AddIcCallIcon from '@material-ui/icons/AddIcCall';
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, login, register } from "../../actions/userAction";
 import { useAlert } from "react-alert";
@@ -80,7 +82,7 @@ const LoginSignUp = ({ history, location }) => {
     }
   };
 
-  const redirect = location.search ? location.search.split("=")[1] : "/account";
+  const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
     if (error) {
@@ -120,8 +122,8 @@ const LoginSignUp = ({ history, location }) => {
             <div className="LoginSignUpBox">
 
               <div>
-                <div style={{"padding":"5%", "font-weight": "bold"}} className="login_signUp_toggle">
-                  <p            onClick={(e) => switchTabs(e, "login")}>LOGIN</p>
+                <div style={{ "padding": "5%", "font-weight": "bold" }} className="login_signUp_toggle">
+                  <p onClick={(e) => switchTabs(e, "login")}>LOGIN</p>
                   <p onClick={(e) => switchTabs(e, "register")}>REGISTER</p>
                 </div>
                 <button ref={switcherTab}></button>
@@ -141,7 +143,7 @@ const LoginSignUp = ({ history, location }) => {
               </div>
               <form className="loginForm" ref={loginTab} onSubmit={loginSubmit}>
                 <div>
-                  <label  style={{"font-weight": "bold" }}>Enter your username or email address</label>
+                  <label style={{ "font-weight": "bold" }}>Enter your username or email address</label>
 
                 </div>
                 <div className="loginEmail">
@@ -156,7 +158,7 @@ const LoginSignUp = ({ history, location }) => {
                 </div>
                 <div >
 
-                  <label style={{"font-weight": "bold" }} >Enter your Password</label>
+                  <label style={{ "font-weight": "bold" }} >Enter your Password</label>
 
                 </div>
                 <div className="loginPassword">
@@ -200,36 +202,29 @@ const LoginSignUp = ({ history, location }) => {
                     onChange={registerDataChange}
                   />
                 </div>
-                <MailOutlineIcon />
-                <input
-                  type="text"
-                  placeholder="Location"
-                  required
-                  name="addr"
-                  value={addr}
-                  onChange={registerDataChange}
-                />
-
-                <input
-                  type="number"
-                  placeholder="Contact Number"
-                  required
-                  name="numb"
-                  value={numb}
-                  onChange={registerDataChange}
-                />
-                {/* </div> */}
-                {/* <div className="signUpEmail">
-                  <MailOutlineIcon />
+                <div className="signUpName">
+                  <LocationOnIcon />
                   <input
                     type="text"
                     placeholder="Location"
                     required
-                    name="loc"
-                    value={loc}
+                    name="addr"
+                    value={addr}
                     onChange={registerDataChange}
                   />
-                </div> */}
+                </div>
+                <div className="signUpName">
+                  <AddIcCallIcon />
+                  <input
+                    type="number"
+                    placeholder="Contact Number"
+                    required
+                    name="numb"
+                    value={numb}
+                    onChange={registerDataChange}
+                  />
+                </div>
+             
                 <div className="signUpPassword">
                   <LockOpenIcon />
                   <input
