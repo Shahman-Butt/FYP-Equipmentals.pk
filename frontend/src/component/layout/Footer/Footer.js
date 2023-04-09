@@ -22,7 +22,7 @@ const Footer = () => {
   // if (location.pathname === "/me/update") {
   //   return null;
   // }
-  if (location.pathname === "/about" || location.pathname === "/account" || location.pathname === "/contact" || location.pathname === "/me/update") {
+  if (location.pathname === "/about" || location.pathname === "/account" || location.pathname === "/admin/products" || location.pathname === "/contact" || location.pathname === "/me/update") {
     return null;
   }
   

@@ -31,32 +31,32 @@ const Profile = ({ history }) => {
             <div>
               <div>
                 {" "}
-                <h4>User Id</h4>
-                <p>{String(user._id)}</p>
+                <h4  style={{"font-weight": "bolder"}}>User Id</h4>
+                <p style={{"font-weight": "bolder"}}>{String(user._id)}</p>
               </div>
               <div>
-                <h4>Full Name</h4>
-                <p>{user.name}</p>
+                <h4 style={{"font-weight": "bolder"}}>Full Name</h4>
+                <p style={{"font-weight": "bolder"}}>{user.name}</p>
               </div>
               <div>
-                <h4>Email</h4>
-                <p>{user.email}</p>
+                <h4 style={{"font-weight": "bolder"}}>Email</h4>
+                <p style={{"font-weight": "bolder"}}>{user.email}</p>
               </div>
               <div>
-                <h4>Location</h4>
-                <p>{user.addr}</p>
+                <h4 style={{"font-weight": "bolder"}}>Location</h4>
+                <p style={{"font-weight": "bolder"}}>{user.addr}</p>
               </div>
               <div>
-                <h4>Contact Number</h4>
-                <p>{user.numb}</p>
+                <h4 style={{"font-weight": "bolder"}}>Contact Number</h4>
+                <p style={{"font-weight": "bolder"}}>{user.numb}</p>
               </div>
               {/* <div>
-                <h4>Loaction</h4>
-                <p>{user.loc}</p>
+                <h4 style={{"font-weight": "bolder"}}>Loaction</h4>
+                <p style={{"font-weight": "bolder"}}>{user.loc}</p>
               </div> */}
               <div>
-                <h4>Joined On</h4>
-                <p>{String(user.createdAt).substr(0, 10)}</p>
+                <h4 style={{"font-weight": "bolder"}}>Joined On</h4>
+                <p style={{"font-weight": "bolder"}}>{String(user.createdAt).substr(0, 10)}</p>
               </div>
               <div>
                 {/* <Link to="/orders">My Orders</Link> */}

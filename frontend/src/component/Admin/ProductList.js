@@ -121,7 +121,7 @@ const ProductList = ({ history }) => {
     products.forEach((item) => {
       rows.push({
         id: item._id,
-        // stock: item.Stock,
+
         price: item.price,
         name: item.name,
         availability: item.availability,
@@ -132,11 +132,20 @@ const ProductList = ({ history }) => {
     <Fragment>
       <MetaData title={`ALL PRODUCTS - Admin`} />
 
-      <div className="dashboard">
+      <div className="dashboard row" style={{ "height": "1%" }}>
         <SideBar />
-        <div className="productListContainer">
+        <div className="productListContainer col-md-9" style={{ "height": "0%", "width": "70%" }}>
           <h1 id="productListHeading">ALL PRODUCTS</h1>
-          <p>{String(user._id)}</p>
+          {/* <p> User Id: {String(user._id)}</p> */}
+          <p style={{ margin: "10px 0 5px 0", fontWeight: "bold" }}>
+            User ID:
+          </p>
+          <p style={{ marginBottom: "20px", fontWeight: "bold" }}>{String(user._id)}</p>
+
+          {/* <div className="user-id-container">
+          <label className="user-id-label">User ID:</label>
+          <input type="text" value={user._id} className="user-id-field" />
+        </div> */}
           <DataGrid
             rows={rows}
             columns={columns}

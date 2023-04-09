@@ -35,17 +35,17 @@ function NavScrollExample() {
       </div>
 
 
-      
+
       <div bg="white">
 
         <div className="row py-2 px-xl-5">
           <div className="col-lg-6 d-none d-lg-block">
             <div className="d-inline-flex align-items-center">
-              <a className="text-dark" href style={{"font-weight":"bold", "color":"#333;"}}>FAQs</a>
+              <a className="text-dark" href style={{ "font-weight": "bold", "color": "#333;" }}>FAQs</a>
               <span className="text-muted px-2">|</span>
-              <a className="text-dark" href style={{"font-weight":"bold", "color":"#333;"}}>Help</a>
+              <a className="text-dark" href style={{ "font-weight": "bold", "color": "#333;" }}>Help</a>
               <span className="text-muted px-2">|</span>
-              <a className="text-dark" href style={{"font-weight":"bold", "color":"#333;"}}>Support</a>
+              <a className="text-dark" href style={{ "font-weight": "bold", "color": "#333;" }}>Support</a>
             </div>
           </div>
           <div className="col-lg-6 text-center text-lg-right">
@@ -99,23 +99,26 @@ function NavScrollExample() {
           </div>
 
 
-          <div style={{ "margin-left": "15%" }}>
+          <div >
             <Navbar.Collapse id="navbarScroll">
               <Nav
                 className="me-auto my-2 my-lg-0"
                 style={{ maxHeight: '100px' }}
                 navbarScroll
               >
-                <Nav.Link href="/about" style={{"font-weight":"bold", "color":"#333;"}}>About</Nav.Link>
-                <Nav.Link href="/contact"style={{"font-weight":"bold", "color":"#333;"}}>Contact</Nav.Link>
+                <Nav.Link href="/" style={{ "font-weight": "bold", "color": "#333;" }}>Home</Nav.Link>
+                <Nav.Link href="/about" style={{ "font-weight": "bold", "color": "#333;" }}>About</Nav.Link>
+                <Nav.Link href="/contact" style={{ "font-weight": "bold", "color": "#333;" }}>Contact</Nav.Link>
 
-                <Nav.Link href="/products"style={{"font-weight":"bold", "color":"#333;"}}>Products</Nav.Link>
-                
-                <Button href='/account' className="outline-success" style={{ "background-color": "#652D90", "border": "none" }} >
+
+                <Nav.Link href="/products" style={{ "font-weight": "bold", "color": "#333;" }}>Products</Nav.Link>
+
+              
+
+              </Nav>
+              <Button href='/account' className="outline-success" style={{ "background-color": "#652D90", "border": "none" }} >
                   Profile
                 </Button>
-          
-              </Nav>
 
             </Navbar.Collapse>
           </div>

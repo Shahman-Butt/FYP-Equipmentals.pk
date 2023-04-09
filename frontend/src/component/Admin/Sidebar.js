@@ -1,5 +1,7 @@
 import React from "react";
 import "./sidebar.css";
+import Typography from "@material-ui/core/Typography";
+import { FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
 import logo from "../../images/logo.PNG";
 import { Link } from "react-router-dom";
 import { TreeView, TreeItem } from "@material-ui/lab";
@@ -11,51 +13,55 @@ import ListAltIcon from "@material-ui/icons/ListAlt";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
 import RateReviewIcon from "@material-ui/icons/RateReview";
-
+import Pagination from "react-js-pagination";
+import Slider from "@material-ui/core/Slider";
+const categories = [
+  "Laptop",
+  "Footwear",
+  "Bottom",
+  "Tops",
+  "Attire",
+  "Camera",
+  "SmartPhones",
+];
 const Sidebar = () => {
   return (
-    <div className="sidebar">
-      <Link to="/">
-        <img src={logo} alt="Ecommerce" />
-      </Link>
-      <Link to="/admin/dashboard">
-        <p>
-          <DashboardIcon /> Dashboard
-        </p>
-      </Link>
-      <Link>
-        <TreeView
-          defaultCollapseIcon={<ExpandMoreIcon />}
-          defaultExpandIcon={<ImportExportIcon />}
+    <div class="col-md-3">
+      <div class="list-group" style={{ margin: "0% 10% 0% 10%", padding: "136px 0 0 0" }}>
+        <a
+          href="/"
+          style={{ "font-weight": "bold", background: "#652D90" }}
+          class="list-group-item list-group-item-action active"
         >
-          <TreeItem nodeId="1" label="Products">
-            <Link to="/admin/products">
-              <TreeItem nodeId="2" label="All" icon={<PostAddIcon />} />
-            </Link>
+          Options
+        </a>
+        <Link to={"/admin/dashboard"}
+          class="list-group-item list-group-item-action"
+        // onClick={userProduct}
+        >
+          Statistics
+        </Link>
+        <Link to={"/products"}
+          class="list-group-item list-group-item-action"
+        // onClick={product}
+        >
+          Products{" "}
+        </Link>
+        <Link to={"/admin/users"}
 
-            <Link to="/admin/product">
-              <TreeItem nodeId="3" label="Create" icon={<AddIcon />} />
-            </Link>
-          </TreeItem>
-        </TreeView>
-      </Link>
-      {/* <Link to="/admin/orders">
-        <p>
-          <ListAltIcon />
-          Orders
-        </p>
-      </Link> */}
-      <Link to="/admin/users">
-        <p>
-          <PeopleIcon /> Users
-        </p>
-      </Link>
-      <Link to="/admin/reviews">
-        <p>
-          <RateReviewIcon />
+          class="list-group-item list-group-item-action"
+        >
+          Users
+        </Link>
+
+        <Link to={"/admin/reviews"}
+          class="list-group-item list-group-item-action"
+        // onClick={logoutUser}
+        >
           Reviews
-        </p>
-      </Link>
+        </Link>
+
+      </div>
     </div>
   );
 };
