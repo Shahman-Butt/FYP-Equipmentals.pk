@@ -114,7 +114,7 @@ const Home = ({ user, match }) => {
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title="Equipmentals.pk" />
+          <MetaData title="EquipmentalsPk" />
 
 
 
@@ -122,7 +122,33 @@ const Home = ({ user, match }) => {
             <div className="row border-top px-xl-5">
               <div className="col-lg-3 d-none d-lg-block" >
                 <div class="list-group" style={{ margin: "0% 10% 0% 10%" }}>
+                <div className="bg-transparent" style={{ "marginTop": "25%",  "backgroundColor": "#f5f5f5", "borderRadius": "10px" }}>
+                    <Typography style={{ "marginBottom": "10px", "fontSize": "20px", "fontWeight": "600" }}>Price Range</Typography>
+                    <Slider
+                      value={price}
+                      onChange={priceHandler}
+                      valueLabelDisplay="auto"
+                      aria-labelledby="range-slider"
+                      min={0}
+                      max={25000}
+                      style={{ "color": "#652D90" }}
+                    />
 
+                    <fieldset style={{ "marginTop": "20px" }}>
+                      <Typography style={{ "marginBottom": "10px", "fontSize": "20px", "fontWeight": "600" }}>Ratings</Typography>
+                      <Slider
+                        value={ratings}
+                        onChange={(e, newRating) => {
+                          setRatings(newRating);
+                        }}
+                        aria-labelledby="continuous-slider"
+                        valueLabelDisplay="auto"
+                        min={0}
+                        max={5}
+                        style={{ "color": "#652D90" }}
+                      />
+                    </fieldset>
+                  </div>
                   <FormControl>
                     <InputLabel id="category-dropdown" style={{ "font-weight": "bold", "color": "#333;" }}>Categories</InputLabel>
                     <Select
@@ -138,63 +164,7 @@ const Home = ({ user, match }) => {
                       ))}
                     </Select>
                   </FormControl>
-                  {/* <div className="" style={{"marginTop": "100%"}}>
-                  <Typography>Price</Typography>
-                  <Slider
-                    value={price}
-                    onChange={priceHandler}
-                    valueLabelDisplay="auto"
-                    aria-labelledby="range-slider"
-                    min={0}
-                    max={25000}
-                  />
-
-                  <fieldset>
-                    <Typography component="legend">Ratings Above</Typography>
-                    <Slider
-                      value={ratings}
-                      onChange={(e, newRating) => {
-                        setRatings(newRating);
-                      }}
-                      aria-labelledby="continuous-slider"
-                      valueLabelDisplay="auto"
-                      min={0}
-                      max={5}
-                    />
-                  </fieldset>
-                </div> */}
-
-
-
-
-
-                  <div className="bg-transparent" style={{ "marginTop": "100%", "padding": "20px", "backgroundColor": "#f5f5f5", "borderRadius": "10px" }}>
-                    <Typography  style={{ "marginBottom": "10px", "fontSize": "20px", "fontWeight":"600" }}>Price Range</Typography>
-                    <Slider
-                      value={price}
-                      onChange={priceHandler}
-                      valueLabelDisplay="auto"
-                      aria-labelledby="range-slider"
-                      min={0}
-                      max={25000}
-                      style={{ "color": "#652D90" }}
-                    />
-
-                    <fieldset style={{ "marginTop": "20px" }}>
-                      <Typography  style={{ "marginBottom": "10px" ,"fontSize": "20px", "fontWeight":"600" }}>Ratings</Typography>
-                      <Slider
-                        value={ratings}
-                        onChange={(e, newRating) => {
-                          setRatings(newRating);
-                        }}
-                        aria-labelledby="continuous-slider"
-                        valueLabelDisplay="auto"
-                        min={0}
-                        max={5}
-                        style={{ "color": "#652D90" }}
-                      />
-                    </fieldset>
-                  </div>
+                 
 
                 </div>
               </div>
@@ -223,7 +193,7 @@ const Home = ({ user, match }) => {
                       <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div className="p-3" style={{ maxWidth: '700px' }}>
                           <h4 className="text-light text-uppercase font-weight-medium mb-3">Welcome to </h4>
-                          <h3 className="display-4 text-white font-weight-semi-bold mb-4">Equipmentals.pk</h3>
+                          <h3 className="display-4 text-white font-weight-semi-bold mb-4">EquipmentalsPk</h3>
                           <a href="/products" className="btn btn-light py-2 px-3">Rent Now</a>
                         </div>
                       </div>
@@ -233,7 +203,7 @@ const Home = ({ user, match }) => {
                       <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div className="p-3" style={{ maxWidth: '700px' }}>
                           <h4 className="text-light text-uppercase font-weight-medium mb-3">Welcome to</h4>
-                          <h3 className="display-4 text-white font-weight-semi-bold mb-4">Equipmentals.pk</h3>
+                          <h3 className="display-4 text-white font-weight-semi-bold mb-4">EquipmentalsPk</h3>
                           <a href className="btn btn-light py-2 px-3">Rent Now</a>
                         </div>
                       </div>

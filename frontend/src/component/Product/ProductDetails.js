@@ -125,7 +125,7 @@ const ProductDetails = ({ match }) => {
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title={`${product.name} -- Equipmentals.pk`} />
+          <MetaData title={`${product.name} -- EquipmentalsPk`} />
           <div className="ProductDetails">
             <div>
               <Carousel>

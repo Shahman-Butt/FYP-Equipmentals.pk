@@ -36,10 +36,10 @@ const Footer = () => {
       </div>
 
       <div className="midFooter">
-        <h1>Equipmentals.pk</h1>
+        <h1>EquipmentalsPk</h1>
         <p>High Quality is our first priority</p>
 
-        <p>Copyrights 2021 &copy; Equipmentals.pk</p>
+        <p>Copyrights 2021 &copy; EquipmentalsPk</p>
       </div>
 
       <div className="rightFooter">

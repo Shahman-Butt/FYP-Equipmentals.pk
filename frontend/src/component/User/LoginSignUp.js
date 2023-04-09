@@ -131,7 +131,7 @@ const LoginSignUp = ({ history, location }) => {
               <div className="flex-row d-flex ">
                 <div className="col ">
                   <p style={{ "margin": "15% 0% 25% 5%", "font-weight": "bold" }}>
-                    Welcome to Equipmentals.pk</p>
+                    Welcome to EquipmentalsPk</p>
                 </div>
                 <div className="col">
                   <section style={{ "size": "auto", "margin": "0% -40% 15% 30%" }}>
