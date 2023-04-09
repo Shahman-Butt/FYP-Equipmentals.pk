@@ -7,6 +7,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import React, { useState } from "react";
 import logo from '../../../images/logo.PNG';
 
+import logo2 from '../../../images/logo2.png';
+
 import video from "../../../../src/video.mp4"
 import { useHistory } from "react-router-dom";
 
@@ -75,12 +77,16 @@ function NavScrollExample() {
 
         <Container fluid>
 
-
-          <div style={{ "margin-right": "10%" }}>
+          <div style={{ "margin-right": "10%", "border": "1px solid #ccc",  "box-shadow": "0px 0px 10px rgba(0, 0, 0, 0.1)" }}>
+            <a href="/">
+              <img style={{ "max-width": "100%", "height": "auto" }} src={logo2} />
+            </a>
+          </div>
+          {/* <div style={{ "margin-right": "10%" }}>
             <a href="/">
               <img style={{ "max-width": "55%" }} src={logo} />
             </a>
-          </div>
+          </div> */}
           <div style={{ "width": "40%" }}>
             <Form className="d-flex" onSubmit={searchSubmitHandler} bg="transparent">
               <Form.Control
@@ -113,12 +119,12 @@ function NavScrollExample() {
 
                 <Nav.Link href="/products" style={{ "font-weight": "bold", "color": "#333;" }}>Products</Nav.Link>
 
-              
+
 
               </Nav>
               <Button href='/account' className="outline-success" style={{ "background-color": "#652D90", "border": "none" }} >
-                  Profile
-                </Button>
+                Profile
+              </Button>
 
             </Navbar.Collapse>
           </div>
