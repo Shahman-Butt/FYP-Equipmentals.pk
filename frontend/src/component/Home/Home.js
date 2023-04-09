@@ -114,7 +114,7 @@ const Home = ({ user, match }) => {
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title="ECOMMERCE" />
+          <MetaData title="Equipmentals.pk" />
 
 
 
