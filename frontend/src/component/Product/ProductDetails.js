@@ -9,7 +9,8 @@ import {
 } from "../../actions/productAction";
 import ReviewCard from "./ReviewCard.js";
 // import Calendar from "./ProductCalendar";
-import ProductCalendar from "./ProductCalendar";
+// import ProductCalendar from "./ProductCalendar";
+// import MyCalendar from "./CalendarDates";
 import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
@@ -181,16 +182,17 @@ const ProductDetails = ({ match }) => {
                 Description : <p>{product.description}</p>
               </div>
               <div>
-                <ProductCalendar productId={productId} />
+                {/* <MyCalendar markedDates={product.availableDates} /> */}
+                {/* <ProductCalendar productId={productId} /> */}
 
                 {/* <Calendar key={product._id} /> */}
                 {/* <Calendar></Calendar>{" "} */}
 
                 <div>
-                  {product.calendar && product.calendar[0] ? (
+                  {product.availableDates && product.availableDates[0] ? (
                     <div className="calendar">
-                      {product.calendar &&
-                        product.calendar.map(
+                      {product.availableDates &&
+                        product.availableDates.map(
                           (cal) => (
                             // {
                             <CalendarCard key={cal.date} cal={cal} />
