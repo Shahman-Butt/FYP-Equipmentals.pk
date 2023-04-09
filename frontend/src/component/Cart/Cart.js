@@ -12,6 +12,7 @@ const Cart = ({ history }) => {
   const { cartItems } = useSelector((state) => state.cart);
 
   const increaseQuantity = (id, quantity, stock) => {
+    console.log("test");
     const newQty = quantity + 1;
     if (stock <= quantity) {
       return;
