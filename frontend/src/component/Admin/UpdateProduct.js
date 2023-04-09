@@ -32,6 +32,7 @@ const UpdateProduct = ({ history, match }) => {
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
+  const [availableDates, setAvailableDates] = useState([]);
   const [availability, setAvailabilty] = useState("");
   // const [Stock, setStock] = useState(0);
   const [images, setImages] = useState([]);
@@ -47,6 +48,20 @@ const UpdateProduct = ({ history, match }) => {
     "Camera",
     "SmartPhones",
   ];
+
+  const dateDict = {};
+  // Get current date
+  const currentDate = new Date();
+  // Loop through next 30 days and add to dictionary
+  for (let i = 0; i < 30; i++) {
+    const date = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      currentDate.getDate() + i
+    );
+    console.log("added");
+    dateDict[date.toISOString().slice(0, 10)] = { date, available: false };
+  }
   const available = ["Available", "Not Available"];
   const productId = match.params.id;
 
@@ -59,6 +74,13 @@ const UpdateProduct = ({ history, match }) => {
       setPrice(product.price);
       setCategory(product.category);
       setAvailabilty(product.availability);
+      // setAvailableDates(product.availableDates);
+      console.log(product.availability);
+      // for (let i = 0; i < product.availableDates.length; i++) {
+      //   const currentDate = product.ArrayavailableDates[i].date;
+      //   console.log(currentDate);
+      //   setAvailableDates(currentDate);
+      // }
       // setStock(product.Stock);
       setOldImages(product.images);
     }
@@ -97,6 +119,10 @@ const UpdateProduct = ({ history, match }) => {
     myForm.set("price", price);
     myForm.set("description", description);
     myForm.set("category", category);
+
+    myForm.append("availableDates", JSON.stringify(availableDates));
+
+    myForm.append("availableDates", JSON.stringify(availableDates));
     myForm.set("availability", availability);
     // myForm.set("Stock", Stock);
 
@@ -129,7 +155,7 @@ const UpdateProduct = ({ history, match }) => {
 
   return (
     <Fragment>
-      <MetaData title="Create Product" />
+      <MetaData title="Update Product" />
       <div className="dashboard">
         <SideBar />
         <div className="newProductContainer">
@@ -183,6 +209,30 @@ const UpdateProduct = ({ history, match }) => {
                 {categories.map((cate) => (
                   <option key={cate} value={cate}>
                     {cate}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <AccountTreeIcon />
+
+              <select
+                // value={Object.entries(availableDates).map(([key, value]) =>
+                //   availableDates.date.toDateString()
+                // )}
+                onChange={(e) =>
+                  setAvailableDates(
+                    Array.from(
+                      e.target.selectedOptions,
+                      (option) => option.value
+                    )
+                  )
+                }
+                multiple
+              >
+                {Object.entries(dateDict).map(([key, value]) => (
+                  <option key={key} value={value.date.toDateString()}>
+                    {value.date.toDateString()}
                   </option>
                 ))}
               </select>

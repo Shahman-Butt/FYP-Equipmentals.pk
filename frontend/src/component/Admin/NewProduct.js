@@ -24,6 +24,7 @@ const NewProduct = ({ history }) => {
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
+  const [availableDates, setAvailableDates] = useState([]);
   const [availability, setAvailabilty] = useState("");
   // const [Stock, setStock] = useState(0);
   const [images, setImages] = useState([]);
@@ -38,6 +39,26 @@ const NewProduct = ({ history }) => {
     "Camera",
     "SmartPhones",
   ];
+
+  const dateDict = {};
+  // Get current date
+  const currentDate = new Date();
+  // Loop through next 30 days and add to dictionary
+  for (let i = 0; i < 30; i++) {
+    const date = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      currentDate.getDate() + i
+    );
+    console.log("added");
+    dateDict[date.toISOString().slice(0, 10)] = { date, available: false };
+  }
+
+  // Example of updating availability for a specific date
+  // dateDict["2023-04-10"].available = true;
+
+  console.log(dateDict);
+
   const available = ["Available", "Not Available"];
   useEffect(() => {
     if (error) {
@@ -64,6 +85,11 @@ const NewProduct = ({ history }) => {
     myForm.set("availability", availability);
     // myForm.set("Stock", Stock);
     myForm.set("userId", user._id);
+    // myForm.set("availableDates", availableDates);
+    myForm.append("availableDates", JSON.stringify(availableDates));
+    // pres.forEach((date) => {
+    //   myForm.append("dates", date);
+    // });
 
     images.forEach((image) => {
       myForm.append("images", image);
@@ -147,6 +173,28 @@ const NewProduct = ({ history }) => {
                 {categories.map((cate) => (
                   <option key={cate} value={cate}>
                     {cate}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <AccountTreeIcon />
+
+              <select
+                value={availableDates}
+                onChange={(e) =>
+                  setAvailableDates(
+                    Array.from(
+                      e.target.selectedOptions,
+                      (option) => option.value
+                    )
+                  )
+                }
+                multiple
+              >
+                {Object.entries(dateDict).map(([key, value]) => (
+                  <option key={key} value={value.date.toDateString()}>
+                    {value.date.toDateString()}
                   </option>
                 ))}
               </select>

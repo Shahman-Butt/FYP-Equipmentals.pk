@@ -13,7 +13,7 @@ const productSchema = mongoose.Schema({
     trim: true,
     // default: "Available",
   },
-  // unavailableDates: {
+  // availableDates: {
   //   type: [Date],
   //   default: [],
   // },
@@ -26,6 +26,18 @@ const productSchema = mongoose.Schema({
     ],
     default: [],
   },
+
+  // pre: {
+  //   date: {
+  //     type: Date,
+  //     required: true,
+  //   },
+  //   available: {
+  //     type: Boolean,
+  //     required: true,
+  //     default: true,
+  //   },
+  // },
   name: {
     type: String,
     required: [true, "Please Enter product Name"],
@@ -53,6 +65,13 @@ const productSchema = mongoose.Schema({
       url: {
         type: String,
         required: true,
+      },
+    },
+  ],
+  availableDates: [
+    {
+      date: {
+        type: Date,
       },
     },
   ],

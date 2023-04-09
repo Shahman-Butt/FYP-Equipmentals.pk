@@ -36,7 +36,7 @@ const CheckoutSteps = ({ activeStep }) => {
           >
             <StepLabel
               style={{
-                color: activeStep >= index ? "#652D90" : "rgba(0, 0, 0, 0.649)",
+                color: activeStep >= index ? "tomato" : "rgba(0, 0, 0, 0.649)",
               }}
               icon={item.icon}
             >

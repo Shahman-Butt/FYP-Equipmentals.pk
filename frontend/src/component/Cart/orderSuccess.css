@@ -10,7 +10,7 @@
 }
 .orderSuccess > svg {
   font-size: 7vmax;
-  color: #652D90;
+  color: tomato;
 }
 .orderSuccess > p {
   font-size: 2vmax;

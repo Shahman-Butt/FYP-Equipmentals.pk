@@ -17,21 +17,54 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
     images = req.body.images;
   }
 
-  const imagesLinks = [];
+  let availableDates = [];
 
+  // if (typeof req.body.availableDates === "string") {
+  //   availableDates.push(req.body.availableDates);
+  // } else {
+  //   availableDates = req.body.availableDates;
+  // }
+
+  const imagesLinks = [];
   for (let i = 0; i < images.length; i++) {
     const result = await cloudinary.v2.uploader.upload(images[i], {
       folder: "products",
     });
-
     imagesLinks.push({
       public_id: result.public_id,
       url: result.secure_url,
     });
   }
 
+  console.log(typeof req.body.availableDates);
+  console.log(req.body.availableDates);
+  // availableDates = req.body.availableDates.split(",");
+
+  availableDates = JSON.parse(req.body.availableDates);
+  console.log(typeof availableDates);
+  console.log(availableDates);
+
+  // availableDates = req.body.availableDates.map(
+  //   (dateString) => new Date(dateString)
+  // );
+
+  availableDates = availableDates.map((str) => new Date(str));
+  console.log(availableDates);
+  console.log(typeof availableDates);
+
+  availableDates = availableDates.map((dateString) => ({
+    date: new Date(dateString),
+  }));
+
+  console.log(availableDates);
+
   req.body.images = imagesLinks;
   req.body.user = req.user.id;
+  req.body.availableDates = availableDates;
+  console.log(req.body.availableDates);
+  console.log(req.body.images);
+  console.log(req.body.category);
+  console.log(req.body.user);
 
   const product = await Product.create(req.body);
 
@@ -143,6 +176,25 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHander("Product not found", 404));
   }
 
+  let availableDates = [];
+  console.log(typeof req.body.availableDates);
+  console.log(req.body.availableDates);
+
+  availableDates = JSON.parse(req.body.availableDates);
+  console.log(typeof availableDates);
+  console.log(availableDates);
+
+  availableDates = availableDates.map((str) => new Date(str));
+  console.log(availableDates);
+  console.log(typeof availableDates);
+
+  availableDates = availableDates.map((dateString) => ({
+    date: new Date(dateString),
+  }));
+
+  console.log(availableDates);
+
+  req.body.availableDates = availableDates;
   // Images Start Here
   let images = [];
 

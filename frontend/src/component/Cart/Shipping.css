@@ -63,7 +63,7 @@
 
 .shippingBtn {
   border: none;
-  background-color: #652D90;
+  background-color: tomato;
   color: white;
   font: 300 1vmax "Roboto";
   width: 100%;
@@ -75,7 +75,7 @@
 }
 
 .shippingBtn:hover {
-  background-color: #652D90
+  background-color: rgb(179, 66, 46);
 }
 
 @media screen and (max-width: 600px) {
