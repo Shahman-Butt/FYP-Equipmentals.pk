@@ -139,9 +139,11 @@ const UsersList = ({ history }) => {
     <Fragment>
       <MetaData title={`ALL USERS - Admin`} />
 
-      <div className="dashboard">
+      <div className="dashboard row" style={{ "height": "1%" }}>
+        
         <SideBar />
-        <div className="productListContainer">
+
+        <div className="productListContainer col-md-9  bg-transparent" style={{ "height": "0%", "width": "70%" }}>
           <h1 id="productListHeading">ALL USERS</h1>
 
           <DataGrid
@@ -153,6 +155,8 @@ const UsersList = ({ history }) => {
             autoHeight
           />
         </div>
+
+
       </div>
     </Fragment>
   );

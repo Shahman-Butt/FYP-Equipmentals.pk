@@ -66,41 +66,49 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <MetaData title="Dashboard - Admin Panel" />
-      <Sidebar />
 
-      <div className="dashboardContainer">
-        <Typography component="h1">Dashboard</Typography>
 
-        <div className="dashboardSummary">
-          {/* <div>
+
+      <div className="dashboard row" style={{ "height": "1%" }}>
+        <Sidebar />
+
+        <div className="col-md-9 dashboardContainer bg-transparent" style={{ "height": "0%", "width": "70%" }}>
+          <h1 id="">DashBoard</h1>
+
+          <div className="dashboardSummary">
+            {/* <div>
             <p>
               Total Amount <br /> Rs. {totalAmount}
             </p>
           </div> */}
-          <div className="dashboardSummaryBox2">
-            <Link to="/admin/products">
-              <p>Product</p>
-              <p>{products && products.length}</p>
-            </Link>
-            {/* <Link to="/admin/orders">
+            <div className="dashboardSummaryBox2">
+              <Link to="/admin/products">
+                <p>Product</p>
+                <p>{products && products.length}</p>
+              </Link>
+              {/* <Link to="/admin/orders">
               <p>Orders</p>
               <p>{orders && orders.length}</p>
             </Link> */}
-            <Link to="/admin/users">
-              <p>Users</p>
-              <p>{users && users.length}</p>
-            </Link>
+              <Link to="/admin/users">
+                <p>Users</p>
+                <p>{users && users.length}</p>
+              </Link>
+            </div>
           </div>
-        </div>
-        {/* 
+          {/* 
         <div className="lineChart">
           <Line data={lineState} />
         </div> */}
 
-        {/* <div className="doughnutChart">
+          {/* <div className="doughnutChart">
           <Doughnut data={doughnutState} />
         </div> */}
+        </div>
+
       </div>
+
+      
     </div>
   );
 };

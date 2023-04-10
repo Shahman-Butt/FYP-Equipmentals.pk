@@ -1,0 +1,30 @@
+.product-cautions {
+    margin-top: 50px;
+    
+  }
+  
+  .product-cautions h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .product-cautions ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .product-cautions li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .product-cautions li p {
+    margin-left: 10px;
+  }
+  
+  .product-cautions li svg {
+    color: red;
+  }
+  

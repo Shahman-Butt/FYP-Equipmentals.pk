@@ -131,9 +131,10 @@ const ProductReviews = ({ history }) => {
     <Fragment>
       <MetaData title={`ALL REVIEWS - Admin`} />
 
-      <div className="dashboard">
+      <div className="dashboard row" style={{ "height": "1%" }}>
         <SideBar />
-        <div className="productReviewsContainer">
+
+        <div  className="col-md-9 productReviewsContainer dashboardContainer bg-transparent" style={{ "height": "0%", "width": "70%" }}>
           <form
             className="productReviewsForm"
             onSubmit={productReviewsSubmitHandler}

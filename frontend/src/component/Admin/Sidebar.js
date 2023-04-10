@@ -26,14 +26,14 @@ const categories = [
 ];
 const Sidebar = () => {
   return (
-    <div class="col-md-3">
+    <div class="col-md-3" >
       <div class="list-group" style={{ margin: "0% 10% 0% 10%", padding: "136px 0 0 0" }}>
         <a
-          href="/"
+          href="/admin/products"
           style={{ "font-weight": "bold", background: "#652D90" }}
           class="list-group-item list-group-item-action active"
         >
-          Options
+          All Products
         </a>
         <Link to={"/admin/dashboard"}
           class="list-group-item list-group-item-action"

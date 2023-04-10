@@ -120,9 +120,10 @@ const NewProduct = ({ history }) => {
   return (
     <Fragment>
       <MetaData title="Create Product" />
-      <div className="dashboard">
+      <div className="dashboard row ">
         <SideBar />
-        <div className="newProductContainer">
+
+        <div  className="col-md-9 newProductContainer bg-transparent" style={{ "height": "0%", "width": "70%" }}>
           <form
             className="createProductForm"
             encType="multipart/form-data"

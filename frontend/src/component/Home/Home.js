@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 // import { CgMouse } from "react-icons/all";
 import "./Home.css";
+import Caution from "../layout/Cautions/Caution"
 import ProductCard from "./ProductCard.js";
 import MetaData from "../layout/MetaData";
 import { clearErrors, getProduct } from "../../actions/productAction";
@@ -135,52 +136,7 @@ const Home = ({ user, match }) => {
           <> <div className="container-fluid mb-5">
             <div className="row border-top px-xl-5">
               <div className="col-lg-3 d-none d-lg-block" >
-                <div class="list-group" style={{ margin: "0% 10% 0% 10%" }}>
-                <div className="bg-transparent" style={{ "marginTop": "25%",  "backgroundColor": "#f5f5f5", "borderRadius": "10px" }}>
-                    <Typography style={{ "marginBottom": "10px", "fontSize": "20px", "fontWeight": "600" }}>Price Range</Typography>
-                    <Slider
-                      value={price}
-                      onChange={priceHandler}
-                      valueLabelDisplay="auto"
-                      aria-labelledby="range-slider"
-                      min={0}
-                      max={25000}
-                      style={{ "color": "#652D90" }}
-                    />
-
-                    <fieldset style={{ "marginTop": "20px" }}>
-                      <Typography style={{ "marginBottom": "10px", "fontSize": "20px", "fontWeight": "600" }}>Ratings</Typography>
-                      <Slider
-                        value={ratings}
-                        onChange={(e, newRating) => {
-                          setRatings(newRating);
-                        }}
-                        aria-labelledby="continuous-slider"
-                        valueLabelDisplay="auto"
-                        min={0}
-                        max={5}
-                        style={{ "color": "#652D90" }}
-                      />
-                    </fieldset>
-                  </div>
-                  <FormControl>
-                    <InputLabel id="category-dropdown" style={{ "font-weight": "bold", "color": "#333;" }}>Categories</InputLabel>
-                    <Select
-                      labelId="category-dropdown"
-                      id="category-select"
-                      value={category}
-                      onChange={(e) => setCategory(e.target.value)}
-                    >
-                      {categories.map((category) => (
-                        <MenuItem key={category} value={category}>
-                          {category}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                 
-
-                </div>
+                <Caution />
               </div>
               <div className="col-lg-9">
                 <nav className="navbar navbar-expand-lg bg-transparent navbar-light py-3 py-lg-0 px-0">
@@ -248,13 +204,64 @@ const Home = ({ user, match }) => {
 
 
           <h2 className="homeHeading" style={{ "font-weight": "bold", "color": "#333;" }}>Featured Products</h2>
+          <div className="row">
+            <div className="col-lg-3">
+            <div class="list-group" style={{ margin: "0% 10% 0% 10%" }}>
+                  <div className="bg-transparent" style={{ "marginTop": "25%", "backgroundColor": "#f5f5f5", "borderRadius": "10px" }}>
+                    <Typography style={{ "marginBottom": "10px", "fontSize": "20px", "fontWeight": "600" }}>Price Range</Typography>
+                    <Slider
+                      value={price}
+                      onChange={priceHandler}
+                      valueLabelDisplay="auto"
+                      aria-labelledby="range-slider"
+                      min={0}
+                      max={25000}
+                      style={{ "color": "#652D90" }}
+                    />
 
-          <div className="container" id="container">
-            {products &&
-              products.map((product) => (
-                <ProductCard key={product._id} product={product} />
-              ))}
+                    <fieldset style={{ "marginTop": "20px" }}>
+                      <Typography style={{ "marginBottom": "10px", "fontSize": "20px", "fontWeight": "600" }}>Ratings</Typography>
+                      <Slider
+                        value={ratings}
+                        onChange={(e, newRating) => {
+                          setRatings(newRating);
+                        }}
+                        aria-labelledby="continuous-slider"
+                        valueLabelDisplay="auto"
+                        min={0}
+                        max={5}
+                        style={{ "color": "#652D90" }}
+                      />
+                    </fieldset>
+                  </div>
+                  <FormControl>
+                    <InputLabel id="category-dropdown" style={{ "font-weight": "bold", "color": "#333;" }}>Categories</InputLabel>
+                    <Select
+                      labelId="category-dropdown"
+                      id="category-select"
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                    >
+                      {categories.map((category) => (
+                        <MenuItem key={category} value={category}>
+                          {category}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+
+
+
+                </div>
+            </div>
+            <div className="col-lg-9 container" id="container">
+              {products &&
+                products.map((product) => (
+                  <ProductCard key={product._id} product={product} />
+                ))}
+            </div>
           </div>
+
           <h2 className="productsHeading" style={{ "font-weight": "bold", "color": "#333;" }}>Products</h2>
 
           <div className="products">
