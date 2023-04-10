@@ -14,7 +14,7 @@ const CalendarCard = ({ cal }) => {
       <p>{cal.date} is the date </p>
 
       {/* <p>"{cal.isBooked}" is the booking status</p> */}
-      <Rating {...options} />
+      {/* <Rating {...options} /> */}
       {/* <span className="reviewCardComment">{review.comment}</span> */}
     </div>
   );
