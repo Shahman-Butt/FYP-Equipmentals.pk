@@ -41,11 +41,11 @@ const Sidebar = () => {
         >
           Statistics
         </Link>
-        <Link to={"/products"}
+        <Link to={"/favorites"}
           class="list-group-item list-group-item-action"
         // onClick={product}
         >
-          Products{" "}
+          Favourites{" "}
         </Link>
         <Link to={"/admin/users"}
 

@@ -56,7 +56,7 @@ const UserOptions = ({ user }) => {
     history.push("/account");
   }
   function cart() {
-    history.push("/cart");
+    history.push("/favorites");
   }
   function product() {
     history.push("/admin/product");

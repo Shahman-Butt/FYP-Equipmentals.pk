@@ -31,6 +31,7 @@ const ProductDetails = ({ match }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const productId = match.params.id;
+  // const userId =
   console.log("productId", productId);
   // const { product, loading, error, isAuthenticated } = useSelector(
   //   (state) => state.productDetails
@@ -55,23 +56,13 @@ const ProductDetails = ({ match }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
-  // const increaseQuantity = () => {
-  //   if (product.Stock <= quantity) return;
-
-  //   const qty = quantity + 1;
-  //   setQuantity(qty);
-  // };
-
-  // const decreaseQuantity = () => {
-  //   if (1 >= quantity) return;
-
-  //   const qty = quantity - 1;
-  //   setQuantity(qty);
-  // };
-
-  const addToCartHandler = () => {
+  const addToFavoritesHandler = () => {
+    // dispatch(addItemsToFavorites(match.params.id));
     dispatch(addItemsToCart(match.params.id, quantity));
-    alert.success("Item Added To Cart");
+    alert.success("Item Added To Favorites");
+    setTimeout(() => {
+      window.location.href = '/favorites';
+    }, 1000);
   };
 
   const submitReviewToggle = () => {
@@ -127,7 +118,7 @@ const ProductDetails = ({ match }) => {
       ) : (
         <Fragment>
           <MetaData title={`${product.name} -- ECOMMERCE`} />
-          <div className="ProductDetails">
+          <div className="ProductDetails bg-transparent">
             <div>
               <Carousel>
                 {product.images &&
@@ -159,15 +150,21 @@ const ProductDetails = ({ match }) => {
                 <div className="detailsBlock-3-1">
                   <div className="detailsBlock-3-1-1">
                     {/* <button onClick={decreaseQuantity}>-</button> */}
-                    <input readOnly type="number" value={quantity} />
+                    {/* <input readOnly type="number" value={quantity} /> */}
                     {/* <button onClick={increaseQuantity}>+</button> */}
                   </div>
-                  <button
+                  
+                  <button 
                     disabled={product.Stock < 1 ? true : false}
-                    onClick={addToCartHandler}
+                    onClick={addToFavoritesHandler}
+                  
+                    
                   >
-                    Add to Cart
+                    {/* <script>console.log/("addto fav handler");</script> */}
+                    Add to Favorites
+                    {/* {match.params.id} */}
                   </button>
+                  
                 </div>
 
                 {/* <p>

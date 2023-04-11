@@ -123,7 +123,7 @@ function App(match) {
 
         <Route exact path="/login" component={LoginSignUp} />
 
-        <Route exact path="/cart" component={Cart} />
+        <ProtectedRoute exact path="/favorites" component={Cart} />
 
         {/* <ProtectedRoute exact path="/shipping" component={Shipping} /> */}
 
