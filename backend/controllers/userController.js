@@ -179,6 +179,75 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
   sendToken(user, 200, res);
 });
 
+exports.addItemsToFavorites = catchAsyncErrors(async (req, res, next) => {
+  const { userId, productId } = req.body;
+  try {
+    // Find the user document by user ID
+    const user = await User.findById(userId);
+
+    // Check if the product ID already exists in the favorites array
+    if (Array.isArray(user.favorites) && user.favorites.includes(productId)) {
+      // user.favorites = [];
+      return; // Product ID already exists, do nothing
+    }
+
+    // Add the product ID to the favorites array
+    // user.favorites = [];
+    // user.favorites.push(productId);
+    user.favorites.push(productId);
+
+    // Save the updated user document
+    await user.save();
+
+    console.log(
+      `Product ID ${productId} has been added to user ${userId}'s favorites. ${user.favorites}`
+    );
+  } catch (error) {
+    console.error(error);
+  }
+
+  // const newUserData = {
+  //   name: req.body.name,
+  //   email: req.body.email,
+  //   addr: req.body.addr,
+  //   numb: req.body.numb,
+
+  //   favorites: req.body.favorites.append(id),
+
+  //   // loc: req.body.loc,
+  // };
+
+  // // if (req.body.avatar !== "") {
+  // //   const user = await User.findById(req.user.id);
+
+  // //   const imageId = user.avatar.public_id;
+
+  // //   await cloudinary.v2.uploader.destroy(imageId);
+
+  // //   const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+  // //     folder: "avatars",
+  // //     width: 150,
+  // //     crop: "scale",
+  // //   });
+
+  // //   newUserData.avatar = {
+  // //     public_id: myCloud.public_id,
+  // //     url: myCloud.secure_url,
+  // //   };
+  // // }
+  // console.log("fav controller");
+  // console.log(favorites);
+  // const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+  //   new: true,
+  //   runValidators: true,
+  //   useFindAndModify: false,
+  // });
+
+  // res.status(200).json({
+  //   success: true,
+  // });
+});
+
 // update User Profile
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
   const newUserData = {

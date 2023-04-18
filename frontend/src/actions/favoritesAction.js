@@ -39,22 +39,22 @@ import {
 import axios from "axios";
 
 // Update Profile
-export const addItemsToFavorites = (userData) => async (dispatch) => {
-  try {
-    dispatch({ type: UPDATE_PROFILE_REQUEST });
+// export const addItemsToFavorites = (userData) => async (dispatch) => {
+//   try {
+//     dispatch({ type: UPDATE_PROFILE_REQUEST });
 
-    const config = { headers: { "Content-Type": "multipart/form-data" } };
+//     const config = { headers: { "Content-Type": "multipart/form-data" } };
 
-    const { data } = await axios.put(`/api/v1/me/update`, userData, config);
+//     const { data } = await axios.put(`/api/v1/me/fav`, userData, config);
 
-    dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
-  } catch (error) {
-    dispatch({
-      type: UPDATE_PROFILE_FAIL,
-      payload: error.response.data.message,
-    });
-  }
-};
+//     dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
+//   } catch (error) {
+//     dispatch({
+//       type: UPDATE_PROFILE_FAIL,
+//       payload: error.response.data.message,
+//     });
+//   }
+// };
 
 //   // Update User
 //   export const updateUser = (id, userData) => async (dispatch) => {
