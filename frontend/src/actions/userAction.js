@@ -117,6 +117,24 @@ export const updateProfile = (userData) => async (dispatch) => {
   }
 };
 
+// fav
+export const addItemsToFavorites = (userData) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_PROFILE_REQUEST });
+
+    const config = {
+      headers: { "Content-Type": "application/json" },
+    };
+    const { data } = await axios.put(`/api/v1/me/fav`, userData, config);
+
+    dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_PROFILE_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 // Update Password
 export const updatePassword = (passwords) => async (dispatch) => {
   try {

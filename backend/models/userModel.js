@@ -58,13 +58,17 @@ const userSchema = new mongoose.Schema({
       required: true,
     },
   },
-
+  // Other properties...
   favorites: {
-    productid: {
-      type: mongoose.Schema.ObjectId,
-      ref: "Products",
-    },
+    type: [mongoose.Schema.Types.ObjectId],
+    default: [],
   },
+  // favorites: {
+  //   productid: {
+  //     type: mongoose.Schema.ObjectId,
+  //     ref: "Products",
+  //   },
+  // },
   role: {
     type: String,
     default: "user",

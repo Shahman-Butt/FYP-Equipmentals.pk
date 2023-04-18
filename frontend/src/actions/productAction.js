@@ -77,6 +77,26 @@ export const getAdminProduct = () => async (dispatch) => {
   }
 };
 
+export const getFavorites =
+  (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: ADMIN_PRODUCT_REQUEST });
+
+      const { data } = await axios.get("/api/v1/favorites");
+
+      dispatch({
+        type: ADMIN_PRODUCT_SUCCESS,
+        payload: data.products,
+      });
+    } catch (error) {
+      dispatch({
+        type: ADMIN_PRODUCT_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
+
 // Create Product
 export const createProduct = (productData) => async (dispatch) => {
   try {
@@ -218,6 +238,26 @@ export const deleteReviews = (reviewId, productId) => async (dispatch) => {
 
     const { data } = await axios.delete(
       `/api/v1/reviews?id=${reviewId}&productId=${productId}`
+    );
+
+    dispatch({
+      type: DELETE_REVIEW_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: DELETE_REVIEW_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const deleteFavorites = (userId, productId) => async (dispatch) => {
+  try {
+    dispatch({ type: DELETE_REVIEW_REQUEST });
+
+    const { data } = await axios.delete(
+      `/api/v1/favorites?userId=${userId}&productId=${productId}`
     );
 
     dispatch({

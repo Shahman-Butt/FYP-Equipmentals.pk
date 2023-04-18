@@ -15,6 +15,7 @@ import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
 import { addItemsToCart } from "../../actions/cartAction";
+import { addItemsToFavorites } from "../../actions/userAction";
 import {
   Dialog,
   DialogActions,
@@ -33,6 +34,7 @@ const ProductDetails = ({ match }) => {
   const productId = match.params.id;
   // const userId =
   console.log("productId", productId);
+
   // const { product, loading, error, isAuthenticated } = useSelector(
   //   (state) => state.productDetails
   // );
@@ -51,17 +53,25 @@ const ProductDetails = ({ match }) => {
   };
 
   // const [quantity, setQuantity] = useState(1);
-  const quantity = 1;
+  // const quantity = 1;
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+  const { user, isAuthenticated } = useSelector((state) => state.user);
+  const addToFavoritesHandler = (history) => {
+    const myForm1 = new FormData();
 
-  const addToFavoritesHandler = () => {
-    // dispatch(addItemsToFavorites(match.params.id));
-    dispatch(addItemsToCart(match.params.id, quantity));
+    const userId = user._id;
+    myForm1.set("productId", match.params.id);
+    myForm1.set("userId", userId);
+
+    dispatch(addItemsToFavorites(myForm1));
+
     alert.success("Item Added To Favorites");
+    // alert.success(`Item ${match.params.id} Added To Favorites`);
+
     setTimeout(() => {
-      window.location.href = '/favorites';
+      window.location.href = "/favorites";
     }, 1000);
   };
 
@@ -153,18 +163,15 @@ const ProductDetails = ({ match }) => {
                     {/* <input readOnly type="number" value={quantity} /> */}
                     {/* <button onClick={increaseQuantity}>+</button> */}
                   </div>
-                  
-                  <button 
-                    disabled={product.Stock < 1 ? true : false}
+
+                  <button
+                    // disabled={product.Stock < 1 ? true : false}
                     onClick={addToFavoritesHandler}
-                  
-                    
                   >
                     {/* <script>console.log/("addto fav handler");</script> */}
                     Add to Favorites
                     {/* {match.params.id} */}
                   </button>
-                  
                 </div>
 
                 {/* <p>

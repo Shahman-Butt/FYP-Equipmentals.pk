@@ -9,6 +9,8 @@ const {
   getProductReviews,
   deleteReview,
   getAdminProducts,
+  getFavorites,
+  deleteFavorites,
   getUserProducts,
   getAvailProduct,
   createAvailProduct,
@@ -77,7 +79,10 @@ router
   .route("/reviews")
   .get(getProductReviews)
   .delete(isAuthenticatedUser, deleteReview);
-
+router
+  .route("/favorites")
+  .get(isAuthenticatedUser, getFavorites)
+  .delete(isAuthenticatedUser, deleteFavorites);
 // router
 //   .route("/products/:id/availability")
 //   // .route("/products/:id/availability")

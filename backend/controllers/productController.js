@@ -113,6 +113,7 @@ exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
   if (person.role === "user") {
     const products = await Product.find({ userId: user_id });
     console.log("user side");
+    console.log(products);
     res.status(200).json({
       success: true,
       products,
@@ -125,6 +126,23 @@ exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
       products,
     });
   }
+});
+
+exports.getFavorites = catchAsyncErrors(async (req, res, next) => {
+  const user_id = req.user._id;
+  const person = await User.findOne({ _id: user_id });
+  const productIds = person.favorites.map((favorite) => favorite.toString());
+  console.log("I am here in favs", user_id);
+  console.log("I am user");
+  console.log(productIds);
+  console.log("user side");
+  const products = await Product.find({ _id: { $in: productIds } });
+  // console.log(products);
+
+  res.status(200).json({
+    success: true,
+    products,
+  });
 });
 
 // // Get All Product (User)
@@ -357,6 +375,72 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
       useFindAndModify: false,
     }
   );
+
+  res.status(200).json({
+    success: true,
+  });
+});
+
+// Delete item from favorites
+exports.deleteFavorites = catchAsyncErrors(async (req, res, next) => {
+  const product = await Product.findById(req.query.productId);
+
+  console.log(req.query.userId);
+  const user = await User.findById(req.query.userId);
+
+  console.log(
+    "delete favorites: userId: ",
+    user._id,
+    "and productID: ",
+    product._id
+  );
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      user._id,
+      { $pull: { favorites: product._id } },
+      { new: true }
+    );
+    console.log("User updated successfully:", updatedUser);
+  } catch (error) {
+    console.error("Error updating user:", error);
+  }
+  // if (!product) {
+  //   return next(new ErrorHander("Product not found", 404));
+  // }
+
+  // const reviews = product.reviews.filter(
+  //   (rev) => rev._id.toString() !== req.query.id.toString()
+  // );
+
+  // let avg = 0;
+
+  // reviews.forEach((rev) => {
+  //   avg += rev.rating;
+  // });
+
+  // let ratings = 0;
+
+  // if (reviews.length === 0) {
+  //   ratings = 0;
+  // } else {
+  //   ratings = avg / reviews.length;
+  // }
+
+  // const numOfReviews = reviews.length;
+
+  // await Product.findByIdAndUpdate(
+  //   req.query.productId,
+  //   {
+  //     reviews,
+  //     ratings,
+  //     numOfReviews,
+  //   },
+  //   {
+  //     new: true,
+  //     runValidators: true,
+  //     useFindAndModify: false,
+  //   }
+  // );
 
   res.status(200).json({
     success: true,
