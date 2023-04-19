@@ -11,6 +11,7 @@ const {
   getAdminProducts,
   getFavorites,
   deleteFavorites,
+  premiumProduct,
   getUserProducts,
   getAvailProduct,
   createAvailProduct,
@@ -72,6 +73,10 @@ router.put("/product/:id", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
+router
+  .route("/admin/premiumproduct/:id")
+  .put(isAuthenticatedUser, premiumProduct);
 
 router.route("/review").put(isAuthenticatedUser, createProductReview);
 

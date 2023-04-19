@@ -1,8 +1,10 @@
 import React, { Fragment, useEffect } from "react";
 // import { CgMouse } from "react-icons/all";
 import "./Home.css";
-import Caution from "../layout/Cautions/Caution"
+import Caution from "../layout/Cautions/Caution";
 import ProductCard from "./ProductCard.js";
+
+import PremiumProductCard from "./PremiumProductCard.js";
 import MetaData from "../layout/MetaData";
 import { clearErrors, getProduct } from "../../actions/productAction";
 import { useSelector, useDispatch } from "react-redux";
@@ -33,9 +35,9 @@ import Slider from "@material-ui/core/Slider";
 // import { useAlert } from "react-alert";
 import Typography from "@material-ui/core/Typography";
 import { FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
-import banner1 from '../../images/banner1.jpg';
-import banner2 from '../../images/banner2.jpg';
-import banner3 from '../../images/banner3.jpg';
+import banner1 from "../../images/banner1.jpg";
+import banner2 from "../../images/banner2.jpg";
+import banner3 from "../../images/banner3.jpg";
 
 const categories = [
   "Laptop",
@@ -47,17 +49,14 @@ const categories = [
   "SmartPhones",
 ];
 const Home = ({ user, match }) => {
-
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 25000]);
   const [category, setCategory] = useState("");
   const [ratings, setRatings] = useState(0);
 
-  const {
-    productsCount,
-    resultPerPage,
-    filteredProductsCount,
-  } = useSelector((state) => state.products);
+  const { productsCount, resultPerPage, filteredProductsCount } = useSelector(
+    (state) => state.products
+  );
 
   const keyword = match.params.keyword;
 
@@ -131,138 +130,273 @@ const Home = ({ user, match }) => {
         <Fragment>
           <MetaData title="EquipmentalsPk" />
 
-
-
-          <> <div className="container-fluid mb-5">
-            <div className="row border-top px-xl-5">
-              <div className="col-lg-3 d-none d-lg-block" >
-                <Caution />
-              </div>
-              <div className="col-lg-9">
-                <nav className="navbar navbar-expand-lg bg-transparent navbar-light py-3 py-lg-0 px-0">
-                  <a href className="text-decoration-none d-block d-lg-none">
-                    <h1 className="m-0 display-5 font-weight-semi-bold"><span className="text-primary font-weight-bold border px-3 mr-1"></span></h1>
-                  </a>
-                  <button type="button" className="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span className="navbar-toggler-icon" />
-                  </button>
-                  <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div className="navbar-nav mr-auto py-0">
-                      <a className="nav-item nav-link " onClick={userProduct} style={{ "font-weight": "bold", "color": "#333;" }}>Dashboard</a>
-                      <a className="nav-item nav-link" onClick={product} style={{ "font-weight": "bold", "color": "#333;" }}>Post Product</a>
-                      <a href="/me/update" className="nav-item nav-link" style={{ "font-weight": "bold", "color": "#333;" }}>Update Profile</a>
-                      <a className="nav-item nav-link" onClick={logoutUser} style={{ "font-weight": "bold", "color": "#333;" }}>Logout</a>
+          <>
+            {" "}
+            <div className="container-fluid mb-5">
+              <div className="row border-top px-xl-5">
+                <div className="col-lg-3 d-none d-lg-block">
+                  <Caution />
+                </div>
+                <div className="col-lg-9">
+                  <nav className="navbar navbar-expand-lg bg-transparent navbar-light py-3 py-lg-0 px-0">
+                    <a href className="text-decoration-none d-block d-lg-none">
+                      <h1 className="m-0 display-5 font-weight-semi-bold">
+                        <span className="text-primary font-weight-bold border px-3 mr-1"></span>
+                      </h1>
+                    </a>
+                    <button
+                      type="button"
+                      className="navbar-toggler"
+                      data-toggle="collapse"
+                      data-target="#navbarCollapse"
+                    >
+                      <span className="navbar-toggler-icon" />
+                    </button>
+                    <div
+                      className="collapse navbar-collapse justify-content-between"
+                      id="navbarCollapse"
+                    >
+                      <div className="navbar-nav mr-auto py-0">
+                        <a
+                          className="nav-item nav-link "
+                          onClick={userProduct}
+                          style={{ "font-weight": "bold", color: "#333;" }}
+                        >
+                          Dashboard
+                        </a>
+                        <a
+                          className="nav-item nav-link"
+                          onClick={product}
+                          style={{ "font-weight": "bold", color: "#333;" }}
+                        >
+                          Post Product
+                        </a>
+                        <a
+                          href="/me/update"
+                          className="nav-item nav-link"
+                          style={{ "font-weight": "bold", color: "#333;" }}
+                        >
+                          Update Profile
+                        </a>
+                        <a
+                          className="nav-item nav-link"
+                          onClick={logoutUser}
+                          style={{ "font-weight": "bold", color: "#333;" }}
+                        >
+                          Logout
+                        </a>
+                      </div>
                     </div>
-
-                  </div>
-                </nav>
-                <div id="header-carousel" className="carousel slide" data-ride="carousel">
-                  <div className="carousel-inner">
-                    <div className="carousel-item active" style={{ height: '410px' }}>
-                      <img className="img-fluid" src={banner1} alt="Image" />
-                      <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <div className="p-3" style={{ maxWidth: '700px' }}>
-                          <h4 className="text-light text-uppercase font-weight-medium mb-3">Welcome to </h4>
-                          <h3 className="display-4 text-white font-weight-semi-bold mb-4">EquipmentalsPk</h3>
-                          <a href="/products" className="btn btn-light py-2 px-3">Rent Now</a>
+                  </nav>
+                  <div
+                    id="header-carousel"
+                    className="carousel slide"
+                    data-ride="carousel"
+                  >
+                    <div className="carousel-inner">
+                      <div
+                        className="carousel-item active"
+                        style={{ height: "410px" }}
+                      >
+                        <img className="img-fluid" src={banner1} alt="Image" />
+                        <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                          <div className="p-3" style={{ maxWidth: "700px" }}>
+                            <h4 className="text-light text-uppercase font-weight-medium mb-3">
+                              Welcome to{" "}
+                            </h4>
+                            <h3 className="display-4 text-white font-weight-semi-bold mb-4">
+                              EquipmentalsPk
+                            </h3>
+                            <a
+                              href="/products"
+                              className="btn btn-light py-2 px-3"
+                            >
+                              Rent Now
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className="carousel-item"
+                        style={{ height: "410px" }}
+                      >
+                        <img className="img-fluid" src={banner2} alt="Image" />
+                        <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                          <div className="p-3" style={{ maxWidth: "700px" }}>
+                            <h4 className="text-light text-uppercase font-weight-medium mb-3">
+                              Welcome to
+                            </h4>
+                            <h3 className="display-4 text-white font-weight-semi-bold mb-4">
+                              EquipmentalsPk
+                            </h3>
+                            <a href className="btn btn-light py-2 px-3">
+                              Rent Now
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <div className="carousel-item" style={{ height: '410px' }}>
-                      <img className="img-fluid" src={banner2} alt="Image" />
-                      <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <div className="p-3" style={{ maxWidth: '700px' }}>
-                          <h4 className="text-light text-uppercase font-weight-medium mb-3">Welcome to</h4>
-                          <h3 className="display-4 text-white font-weight-semi-bold mb-4">EquipmentalsPk</h3>
-                          <a href className="btn btn-light py-2 px-3">Rent Now</a>
-                        </div>
+                    <a
+                      className="carousel-control-prev"
+                      href="#header-carousel"
+                      data-slide="prev"
+                    >
+                      <div
+                        className="btn btn-dark"
+                        style={{ width: "45px", height: "45px" }}
+                      >
+                        <span className="carousel-control-prev-icon mb-n2" />
                       </div>
-                    </div>
+                    </a>
+                    <a
+                      className="carousel-control-next"
+                      href="#header-carousel"
+                      data-slide="next"
+                    >
+                      <div
+                        className="btn btn-dark"
+                        style={{ width: "45px", height: "45px" }}
+                      >
+                        <span className="carousel-control-next-icon mb-n2" />
+                      </div>
+                    </a>
                   </div>
-                  <a className="carousel-control-prev" href="#header-carousel" data-slide="prev">
-                    <div className="btn btn-dark" style={{ width: '45px', height: '45px' }}>
-                      <span className="carousel-control-prev-icon mb-n2" />
-                    </div>
-                  </a>
-                  <a className="carousel-control-next" href="#header-carousel" data-slide="next">
-                    <div className="btn btn-dark" style={{ width: '45px', height: '45px' }}>
-                      <span className="carousel-control-next-icon mb-n2" />
-                    </div>
-                  </a>
                 </div>
               </div>
             </div>
-          </div>
-
           </>
 
-
-
-
-
-
-
-
-          <h2 className="homeHeading" style={{ "font-weight": "bold", "color": "#333;" }}>Featured Products</h2>
+          <h2
+            className="homeHeading"
+            style={{ "font-weight": "bold", color: "#333;" }}
+          >
+            Featured Products
+          </h2>
           <div className="row">
             <div className="col-lg-3">
-            <div class="list-group" style={{ margin: "0% 10% 0% 10%" }}>
-                  <div className="bg-transparent" style={{ "marginTop": "25%", "backgroundColor": "#f5f5f5", "borderRadius": "10px" }}>
-                    <Typography style={{ "marginBottom": "10px", "fontSize": "20px", "fontWeight": "600" }}>Price Range</Typography>
-                    <Slider
-                      value={price}
-                      onChange={priceHandler}
-                      valueLabelDisplay="auto"
-                      aria-labelledby="range-slider"
-                      min={0}
-                      max={25000}
-                      style={{ "color": "#652D90" }}
-                    />
+              <div class="list-group" style={{ margin: "0% 10% 0% 10%" }}>
+                <div
+                  className="bg-transparent"
+                  style={{
+                    marginTop: "25%",
+                    backgroundColor: "#f5f5f5",
+                    borderRadius: "10px",
+                  }}
+                >
+                  <Typography
+                    style={{
+                      marginBottom: "10px",
+                      fontSize: "20px",
+                      fontWeight: "600",
+                    }}
+                  >
+                    Price Range
+                  </Typography>
+                  <Slider
+                    value={price}
+                    onChange={priceHandler}
+                    valueLabelDisplay="auto"
+                    aria-labelledby="range-slider"
+                    min={0}
+                    max={25000}
+                    style={{ color: "#652D90" }}
+                  />
 
-                    <fieldset style={{ "marginTop": "20px" }}>
-                      <Typography style={{ "marginBottom": "10px", "fontSize": "20px", "fontWeight": "600" }}>Ratings</Typography>
-                      <Slider
-                        value={ratings}
-                        onChange={(e, newRating) => {
-                          setRatings(newRating);
-                        }}
-                        aria-labelledby="continuous-slider"
-                        valueLabelDisplay="auto"
-                        min={0}
-                        max={5}
-                        style={{ "color": "#652D90" }}
-                      />
-                    </fieldset>
-                  </div>
-                  <FormControl>
-                    <InputLabel id="category-dropdown" style={{ "font-weight": "bold", "color": "#333;" }}>Categories</InputLabel>
-                    <Select
-                      labelId="category-dropdown"
-                      id="category-select"
-                      value={category}
-                      onChange={(e) => setCategory(e.target.value)}
+                  <fieldset style={{ marginTop: "20px" }}>
+                    <Typography
+                      style={{
+                        marginBottom: "10px",
+                        fontSize: "20px",
+                        fontWeight: "600",
+                      }}
                     >
-                      {categories.map((category) => (
-                        <MenuItem key={category} value={category}>
-                          {category}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-
-
-
+                      Ratings
+                    </Typography>
+                    <Slider
+                      value={ratings}
+                      onChange={(e, newRating) => {
+                        setRatings(newRating);
+                      }}
+                      aria-labelledby="continuous-slider"
+                      valueLabelDisplay="auto"
+                      min={0}
+                      max={5}
+                      style={{ color: "#652D90" }}
+                    />
+                  </fieldset>
                 </div>
+                <FormControl>
+                  <InputLabel
+                    id="category-dropdown"
+                    style={{ "font-weight": "bold", color: "#333;" }}
+                  >
+                    Categories
+                  </InputLabel>
+                  <Select
+                    labelId="category-dropdown"
+                    id="category-select"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                  >
+                    {categories.map((category) => (
+                      <MenuItem key={category} value={category}>
+                        {category}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </div>
             </div>
+
             <div className="col-lg-9 container" id="container">
-              {products &&
-                products.map((product) => (
-                  <ProductCard key={product._id} product={product} />
-                ))}
+              <div className="products">
+                {/* {products &&
+                  products.map((product) => {
+                    <p>No Featured Products</p>;
+                    // <PremiumProductCard key={product._id} product={product} />;
+                    // if (product.premium === "Premium") {
+                    //   <ProductCard key={product._id} product={product} />;
+                    // } else {
+                    //   <p>No Featured Products</p>;
+                    // }
+                  })} */}
+
+                {/* {products &&
+                  products
+                    .sort((a, b) => b.payment - a.payment)
+                    .map((product) => (
+                      <PremiumProductCard key={product._id} product={product} />
+                    ))} */}
+
+                {/* {products &&
+                  products
+                    .sort((a, b) => b.payment - a.payment) // sort by payment in descending order
+                    .map(
+                      (product) =>
+                        product.premium === "Premium" && (
+                          <PremiumProductCard
+                            key={product._id}
+                            product={product}
+                          />
+                        )
+                    )} */}
+                {products &&
+                  products
+                    .filter((product) => product.premium === "Premium") // filter out non-premium products
+                    .sort((a, b) => b.payment - a.payment) // sort by payment in descending order
+                    .map((product) => (
+                      <PremiumProductCard key={product._id} product={product} />
+                    ))}
+              </div>
             </div>
           </div>
 
-          <h2 className="productsHeading" style={{ "font-weight": "bold", "color": "#333;" }}>Products</h2>
+          <h2
+            className="productsHeading"
+            style={{ "font-weight": "bold", color: "#333;" }}
+          >
+            Products
+          </h2>
 
           <div className="products">
             {products &&

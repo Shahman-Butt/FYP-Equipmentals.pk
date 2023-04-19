@@ -39,11 +39,11 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   console.log(typeof req.body.availableDates);
   console.log(req.body.availableDates);
   // availableDates = req.body.availableDates.split(",");
-
+  console.log(" #############################");
   availableDates = JSON.parse(req.body.availableDates);
   console.log(typeof availableDates);
   console.log(availableDates);
-
+  console.log(" ###############JSON##############");
   // availableDates = req.body.availableDates.map(
   //   (dateString) => new Date(dateString)
   // );
@@ -51,13 +51,13 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   availableDates = availableDates.map((str) => new Date(str));
   console.log(availableDates);
   console.log(typeof availableDates);
-
+  console.log(" ############## MAP to STR ###############");
   availableDates = availableDates.map((dateString) => ({
     date: new Date(dateString),
   }));
 
   console.log(availableDates);
-
+  console.log(" ############ DATE STR #################");
   req.body.images = imagesLinks;
   req.body.user = req.user.id;
   req.body.availableDates = availableDates;
@@ -197,21 +197,21 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   let availableDates = [];
   console.log(typeof req.body.availableDates);
   console.log(req.body.availableDates);
-
+  console.log(" ###############b  UPDATE ##############");
   availableDates = JSON.parse(req.body.availableDates);
   console.log(typeof availableDates);
   console.log(availableDates);
-
+  console.log(" ############# JSON UPDATE ################");
   availableDates = availableDates.map((str) => new Date(str));
   console.log(availableDates);
   console.log(typeof availableDates);
-
+  console.log(" ############ MAP to STR UPDATE #################");
   availableDates = availableDates.map((dateString) => ({
     date: new Date(dateString),
   }));
 
   console.log(availableDates);
-
+  console.log(" ########### DATE STR UPDATE##################");
   req.body.availableDates = availableDates;
   // Images Start Here
   let images = [];
@@ -242,6 +242,27 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
     }
 
     req.body.images = imagesLinks;
+  }
+
+  product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+    product,
+  });
+});
+
+// Premium Product
+
+exports.premiumProduct = catchAsyncErrors(async (req, res, next) => {
+  let product = await Product.findById(req.params.id);
+
+  if (!product) {
+    return next(new ErrorHander("Product not found", 404));
   }
 
   product = await Product.findByIdAndUpdate(req.params.id, req.body, {

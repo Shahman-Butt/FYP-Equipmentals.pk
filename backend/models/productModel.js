@@ -13,9 +13,23 @@ const productSchema = mongoose.Schema({
     trim: true,
     // default: "Available",
   },
-  // availableDates: {
-  //   type: [Date],
-  //   default: [],
+
+  premium: {
+    type: String,
+    default: "Not Premium",
+  },
+  payment: {
+    type: Number,
+  },
+
+  // premium: {
+  //   type: Boolean,
+  //   default: false,
+  // },
+  // payment: {
+  //   type: Number,
+  //   // required: [true, "Please provide a payment value."],
+  //   min: 0,
   // },
   calendar: {
     type: [
@@ -26,18 +40,6 @@ const productSchema = mongoose.Schema({
     ],
     default: [],
   },
-
-  // pre: {
-  //   date: {
-  //     type: Date,
-  //     required: true,
-  //   },
-  //   available: {
-  //     type: Boolean,
-  //     required: true,
-  //     default: true,
-  //   },
-  // },
   name: {
     type: String,
     required: [true, "Please Enter product Name"],
@@ -79,12 +81,6 @@ const productSchema = mongoose.Schema({
     type: String,
     required: [true, "Please Enter Product Category"],
   },
-  // Stock: {
-  //   type: Number,
-  //   required: [true, "Please Enter product Stock"],
-  //   maxLength: [4, "Stock cannot exceed 4 characters"],
-  //   default: 1,
-  // },
   numOfReviews: {
     type: Number,
     default: 0,
@@ -110,7 +106,6 @@ const productSchema = mongoose.Schema({
       },
     },
   ],
-
   createdAt: {
     type: Date,
     default: Date.now,

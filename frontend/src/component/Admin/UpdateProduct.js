@@ -122,7 +122,6 @@ const UpdateProduct = ({ history, match }) => {
 
     myForm.append("availableDates", JSON.stringify(availableDates));
 
-    myForm.append("availableDates", JSON.stringify(availableDates));
     myForm.set("availability", availability);
     // myForm.set("Stock", Stock);
 
@@ -220,6 +219,7 @@ const UpdateProduct = ({ history, match }) => {
                 // value={Object.entries(availableDates).map(([key, value]) =>
                 //   availableDates.date.toDateString()
                 // )}
+                value={availableDates}
                 onChange={(e) =>
                   setAvailableDates(
                     Array.from(

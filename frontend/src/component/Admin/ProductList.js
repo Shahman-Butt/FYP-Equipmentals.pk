@@ -14,6 +14,8 @@ import { Button } from "@material-ui/core";
 import MetaData from "../layout/MetaData";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+
 import SideBar from "./Sidebar";
 // import { useSelector, useDispatch } from "react-redux";
 import { DELETE_PRODUCT_RESET } from "../../constants/productConstants";
@@ -109,6 +111,12 @@ const ProductList = ({ history }) => {
             >
               <DeleteIcon />
             </Button>
+
+            <Link
+              to={`/admin/premiumproduct/${params.getValue(params.id, "id")}`}
+            >
+              <AttachMoneyIcon />
+            </Link>
           </Fragment>
         );
       },
@@ -132,15 +140,18 @@ const ProductList = ({ history }) => {
     <Fragment>
       <MetaData title={`ALL PRODUCTS - Admin`} />
 
-      <div className="dashboard row" style={{ "height": "1%" }}>
+      <div className="dashboard row" style={{ height: "1%" }}>
         <SideBar />
-        <div className="productListContainer col-md-9" style={{ "height": "0%", "width": "70%" }}>
+        <div
+          className="productListContainer col-md-9"
+          style={{ height: "0%", width: "70%" }}
+        >
           <h1 id="productListHeading">ALL PRODUCTS</h1>
           {/* <p> User Id: {String(user._id)}</p> */}
-          <p style={{ margin: "10px 0 5px 0", fontWeight: "bold" }}>
-            User ID:
+          <p style={{ margin: "10px 0 5px 0", fontWeight: "bold" }}>User ID:</p>
+          <p style={{ marginBottom: "20px", fontWeight: "bold" }}>
+            {String(user._id)}
           </p>
-          <p style={{ marginBottom: "20px", fontWeight: "bold" }}>{String(user._id)}</p>
 
           {/* <div className="user-id-container">
           <label className="user-id-label">User ID:</label>

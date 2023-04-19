@@ -42,6 +42,7 @@ import ProductReviews from "./component/Admin/ProductReviews";
 import Contact from "./component/layout/Contact/Contact";
 import About from "./component/layout/About/About";
 import NotFound from "./component/layout/Not Found/NotFound";
+import PremiumProduct from "./component/Admin/PremiumProduct";
 
 function App(match) {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -170,6 +171,11 @@ function App(match) {
           component={UsersList}
         />
 
+        <ProtectedRoute
+          exact
+          path="/admin/premiumproduct/:id"
+          component={PremiumProduct}
+        />
         <ProtectedRoute
           exact
           path="/admin/user/:id"
