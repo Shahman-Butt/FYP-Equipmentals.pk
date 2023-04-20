@@ -13,6 +13,10 @@ import {
   UPDATE_PRODUCT_SUCCESS,
   UPDATE_PRODUCT_FAIL,
   UPDATE_PRODUCT_RESET,
+  UPDATE_ARCHIVE_REQUEST,
+  UPDATE_ARCHIVE_SUCCESS,
+  UPDATE_ARCHIVE_FAIL,
+  UPDATE_ARCHIVE_RESET,
   DELETE_PRODUCT_REQUEST,
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_FAIL,
@@ -141,6 +145,42 @@ export const productReducer = (state = {}, action) => {
         isDeleted: false,
       };
     case UPDATE_PRODUCT_RESET:
+      return {
+        ...state,
+        isUpdated: false,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
+  }
+};
+
+export const achiveproductReducer = (state = {}, action) => {
+  switch (action.type) {
+    // case DELETE_PRODUCT_REQUEST:
+    case UPDATE_ARCHIVE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case UPDATE_ARCHIVE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isUpdated: action.payload,
+      };
+    case UPDATE_ARCHIVE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case UPDATE_ARCHIVE_RESET:
       return {
         ...state,
         isUpdated: false,

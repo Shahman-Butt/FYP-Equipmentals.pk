@@ -1,6 +1,6 @@
 db.products.insertOne({
   userId: ObjectId("643051bfabb3593304c5b650"),
-  availability: "Available",
+  archive: "Not Archived",
   calendar: [
     { date: new Date("2022-04-07"), isBooked: false },
     { date: new Date("2022-04-08"), isBooked: true },

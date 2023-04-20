@@ -7,11 +7,11 @@ const productSchema = mongoose.Schema({
     ref: "User",
     required: true,
   },
-  availability: {
+  archive: {
     type: String,
-    required: [true, "Please Enter product Availability Status"],
+    required: [true, "Mark it as archive or not archive"],
     trim: true,
-    // default: "Available",
+    default: "Not Archived",
   },
 
   premium: {

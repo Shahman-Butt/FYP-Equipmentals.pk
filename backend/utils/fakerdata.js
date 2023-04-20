@@ -1,5 +1,5 @@
-const faker = require('faker');
-const Product = require('../models/productModel');
+const faker = require("faker");
+const Product = require("../models/productModel");
 
 const createDummyData = async () => {
   const products = [];
@@ -7,7 +7,7 @@ const createDummyData = async () => {
   for (let i = 0; i < 10; i++) {
     const product = {
       userId: faker.datatype.uuid(),
-      availability: faker.random.boolean() ? 'Available' : 'Unavailable',
+      archive: faker.random.boolean() ? "Not Archived" : "Archived",
       calendar: [],
       name: faker.commerce.productName(),
       description: faker.commerce.productDescription(),
@@ -21,7 +21,7 @@ const createDummyData = async () => {
       ],
       availableDates: [
         {
-          date: faker.date.between('2023-01-01', '2023-12-31'),
+          date: faker.date.between("2023-01-01", "2023-12-31"),
         },
       ],
       category: faker.commerce.department(),
@@ -36,5 +36,3 @@ const createDummyData = async () => {
 };
 
 createDummyData();
-
-

@@ -13,6 +13,10 @@ import {
   UPDATE_PRODUCT_REQUEST,
   UPDATE_PRODUCT_SUCCESS,
   UPDATE_PRODUCT_FAIL,
+  UPDATE_ARCHIVE_REQUEST,
+  UPDATE_ARCHIVE_SUCCESS,
+  UPDATE_ARCHIVE_FAIL,
+  UPDATE_ARCHIVE_RESET,
   DELETE_PRODUCT_REQUEST,
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_FAIL,
@@ -97,6 +101,26 @@ export const getFavorites =
     }
   };
 
+export const getArchives =
+  (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: ADMIN_PRODUCT_REQUEST });
+
+      const { data } = await axios.get("/api/v1/archives");
+
+      dispatch({
+        type: ADMIN_PRODUCT_SUCCESS,
+        payload: data.products,
+      });
+    } catch (error) {
+      dispatch({
+        type: ADMIN_PRODUCT_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
+
 // Create Product
 export const createProduct = (productData) => async (dispatch) => {
   try {
@@ -150,6 +174,35 @@ export const updateProduct = (id, productData) => async (dispatch) => {
     });
   }
 };
+
+// Update Archive Status
+export const updateArchiveStatus =
+  (productId, productData) => async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_ARCHIVE_REQUEST });
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+      };
+
+      const { data } = await axios.put(
+        `/api/v1/archives/${productId}`,
+        // `/api/v1/archives/${id}`,
+        productData,
+        config
+      );
+
+      dispatch({
+        type: UPDATE_ARCHIVE_SUCCESS,
+        payload: data.success,
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_ARCHIVE_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
 
 // Delete Product
 export const deleteProduct = (id) => async (dispatch) => {
@@ -304,51 +357,3 @@ export const deleteFavorites = (userId, productId) => async (dispatch) => {
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
 };
-
-// Get Not Available Dates for a Product
-// export const getAvailProduct = (productId) => async (dispatch) => {
-//   try {
-//     dispatch({ type: PRODUCT_DETAILS_REQUEST });
-
-//     const { data } = await axios.get(
-//       `/api/v1/product/${productId}/not-available-dates`
-//     );
-
-//     dispatch({
-//       type: PRODUCT_DETAILS_SUCCESS,
-//       payload: data.product,
-//     });
-//   } catch (error) {
-//     dispatch({
-//       type: PRODUCT_DETAILS_FAIL,
-//       payload: error.response.data.message,
-//     });
-//   }
-// };
-// Add Not Available Dates for a Product
-// export const createAvailProduct =
-//   (productId, notAvailableDates) => async (dispatch) => {
-//     try {
-//       const config = {
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       };
-
-//       const { data } = await axios.put(
-//         `/api/v1/product/${productId}/not-available-dates`,
-//         notAvailableDates,
-//         config
-//       );
-
-//       dispatch({
-//         type: UPDATE_PRODUCT_SUCCESS,
-//         payload: data.success,
-//       });
-//     } catch (error) {
-//       dispatch({
-//         type: UPDATE_PRODUCT_FAIL,
-//         payload: error.response.data.message,
-//       });
-//     }
-//   };

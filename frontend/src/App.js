@@ -21,6 +21,7 @@ import UpdatePassword from "./component/User/UpdatePassword";
 import ForgotPassword from "./component/User/ForgotPassword";
 import ResetPassword from "./component/User/ResetPassword";
 import Cart from "./component/Cart/Cart";
+import Arc from "./component/Cart/Arc";
 // import Shipping from "./component/Cart/Shipping";
 // import ConfirmOrder from "./component/Cart/ConfirmOrder";
 import axios from "axios";
@@ -43,6 +44,7 @@ import Contact from "./component/layout/Contact/Contact";
 import About from "./component/layout/About/About";
 import NotFound from "./component/layout/Not Found/NotFound";
 import PremiumProduct from "./component/Admin/PremiumProduct";
+import UpdateArchive from "./component/Admin/UpdateArchive";
 
 function App(match) {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -126,6 +128,8 @@ function App(match) {
 
         <ProtectedRoute exact path="/favorites" component={Cart} />
 
+        <ProtectedRoute exact path="/archives" component={Arc} />
+
         {/* <ProtectedRoute exact path="/shipping" component={Shipping} /> */}
 
         {/* <ProtectedRoute exact path="/success" component={OrderSuccess} /> */}
@@ -151,7 +155,10 @@ function App(match) {
           path="/admin/product/:id"
           component={UpdateProduct}
         />
-        {/* <ProtectedRoute
+        <ProtectedRoute exact path="/archives/:id" component={UpdateArchive} />
+
+        {/*
+         <ProtectedRoute
           exact
           path="/admin/orders"
           isAdmin={true}

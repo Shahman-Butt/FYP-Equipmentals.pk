@@ -35,16 +35,6 @@ const ProductList = ({ history }) => {
   const deleteProductHandler = (id) => {
     dispatch(deleteProduct(id));
   };
-  // async function toggleAvailability(checked, id) {
-  //   const productId = id; // replace with the actual product ID
-  //   const response = await fetch(`/api/products/${productId}`, {
-  //     method: "PUT",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ availability: checked }),
-  //   });
-  //   const data = await response.json();
-  //   console.log(data);
-  // }
 
   useEffect(() => {
     if (error) {
@@ -76,8 +66,8 @@ const ProductList = ({ history }) => {
       flex: 0.5,
     },
     {
-      field: "availability",
-      headerName: "Availability",
+      field: "archive",
+      headerName: "Archive status",
 
       minWidth: 150,
       flex: 0.5,
@@ -132,7 +122,7 @@ const ProductList = ({ history }) => {
 
         price: item.price,
         name: item.name,
-        availability: item.availability,
+        archive: item.archive,
       });
     });
 

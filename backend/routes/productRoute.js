@@ -10,8 +10,10 @@ const {
   deleteReview,
   getAdminProducts,
   getFavorites,
+  getArchives,
   deleteFavorites,
   premiumProduct,
+  updateArchiveStatus,
   getUserProducts,
   getAvailProduct,
   createAvailProduct,
@@ -47,8 +49,6 @@ router
 
 // router.route("/product/:id").get(isAuthenticatedUser, getProductDetails);
 router.route("/product/:id").get(getProductDetails);
-
-// router.route("/product/:id").put(updateProductDetails);
 
 // Update unavailable dates for a product
 router.put("/product/:id", async (req, res) => {
@@ -88,6 +88,16 @@ router
   .route("/favorites")
   .get(isAuthenticatedUser, getFavorites)
   .delete(isAuthenticatedUser, deleteFavorites);
+
+router.route("/archives").get(isAuthenticatedUser, getArchives);
+router.route("/archives/:id").put(isAuthenticatedUser, updateArchiveStatus);
+// .put(isAuthenticatedUser, editArchives);
+
+// router
+// .route("/admin/archiveproduct/:id")
+// .put(isAuthenticatedUser, updateArchiveStatus);
+// .delete(isAuthenticatedUser, deleteProduct);
+
 // router
 //   .route("/products/:id/availability")
 //   // .route("/products/:id/availability")

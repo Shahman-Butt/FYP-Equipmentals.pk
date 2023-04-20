@@ -80,7 +80,7 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
   const productsCount = await Product.countDocuments();
 
   const apiFeature = new ApiFeatures(
-    Product.find({ availability: "Available" }),
+    Product.find({ archive: "Not Archived" }),
     req.query
   )
     .search()
@@ -103,7 +103,7 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Get All Product (Admin)
+// Get All Product (Admin or User)
 exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
   const user_id = req.user._id;
   console.log("I am here", user_id);
@@ -128,6 +128,7 @@ exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
   }
 });
 
+// get fav
 exports.getFavorites = catchAsyncErrors(async (req, res, next) => {
   const user_id = req.user._id;
   const person = await User.findOne({ _id: user_id });
@@ -145,20 +146,49 @@ exports.getFavorites = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// // Get All Product (User)
-// exports.getUserProducts = catchAsyncErrors(async (req, res, next) => {
-//   console.log("user func 2");
-//   const user_id = req.user._id;
-//   console.log("user_id:", user_id);
-//   const role = await User.find({}, { projection: { role: 1 } });
-
-//   const products = await Product.find({ userId: user_id });
-
-//   res.status(200).json({
-//     success: true,
-//     products,
-//   });
-// });
+// get archived
+exports.getArchives = catchAsyncErrors(async (req, res, next) => {
+  const resultPerPage = 8;
+  const productsCount = await Product.countDocuments();
+  const user_id = req.user._id;
+  let products; // declare the variable outside the if...else block
+  const person = await User.findOne({ _id: user_id });
+  if (person.role === "user") {
+    const apiFeature = new ApiFeatures(
+      Product.find({ userId: user_id, archive: "Archived" }),
+      req.query
+    )
+      .search()
+      .filter();
+    products = await apiFeature.query; // assign value inside the block
+    const filteredProductsCount = products.length;
+    apiFeature.pagination(resultPerPage);
+    res.status(200).json({
+      success: true,
+      products,
+      productsCount,
+      resultPerPage,
+      filteredProductsCount,
+    });
+  } else {
+    const apiFeature = new ApiFeatures(
+      Product.find({ archive: "Archived" }),
+      req.query
+    )
+      .search()
+      .filter();
+    products = await apiFeature.query; // assign value inside the block
+    const filteredProductsCount = products.length;
+    apiFeature.pagination(resultPerPage);
+    res.status(200).json({
+      success: true,
+      products,
+      productsCount,
+      resultPerPage,
+      filteredProductsCount,
+    });
+  }
+});
 
 // Get Product Details
 exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
@@ -242,6 +272,27 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
     }
 
     req.body.images = imagesLinks;
+  }
+
+  product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+    product,
+  });
+});
+
+// Update archive status
+
+exports.updateArchiveStatus = catchAsyncErrors(async (req, res, next) => {
+  let product = await Product.findById(req.params.id);
+
+  if (!product) {
+    return next(new ErrorHander("Product not found", 404));
   }
 
   product = await Product.findByIdAndUpdate(req.params.id, req.body, {
