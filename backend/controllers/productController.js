@@ -328,6 +328,137 @@ exports.premiumProduct = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// Notify me
+// exports.notifyMe = catchAsyncErrors(async (req, res, next) => {
+//   console.log("NOTIFY ME");
+//   const { productId, userId } = req.body;
+
+//   const notify = {
+//     user: req.userId,
+//     // name: req.user.name,
+//     // rating: Number(rating),
+//     // comment,
+//   };
+//   s;
+//   const product = await Product.findById(productId);
+
+//   const isNotified = product.noti.find(
+//     (rev) => rev.user.toString() === req.userId.toString()
+//   );
+
+//   if (isNotified) {
+//     product.noti.forEach((rev) => {
+//       if (
+//         rev.user.toString() === req.userId.toString()
+//         // (rev.rating = rating), (rev.comment = comment)
+//       );
+//     });
+//   } else {
+//     product.noti.push(notify);
+//     // product.numOfReviews = product.reviews.length;
+//   }
+
+//   // let avg = 0;
+
+//   // product.reviews.forEach((rev) => {
+//   //   avg += rev.rating;
+//   // });
+
+//   // product.ratings = avg / product.reviews.length;
+
+//   await product.save({ validateBeforeSave: false });
+
+//   res.status(200).json({
+//     success: true,
+//   });
+// });
+
+// exports.notifyMe = catchAsyncErrors(async (req, res, next) => {
+//   const { productId, userId } = req.body;
+
+//   const notify = {
+//     user: req.userId,
+//   };
+
+//   const product = await Product.findById(req.params.id);
+
+//   const isNotified = product.notify.find(
+//     (rev) => rev.user.toString() === req.userId.toString()
+//   );
+
+//   if (isNotified) {
+//     product.notify.forEach((rev) => {
+//       if (rev.user.toString() === req.userId.toString());
+//     });
+//   } else {
+//     product.notify.push(notify);
+//   }
+
+//   await product.save({ validateBeforeSave: false });
+
+//   res.status(200).json({
+//     success: true,
+//   });
+// });
+
+// exports.notifyMe = catchAsyncErrors(async (req, res, next) => {
+//   console.log("notify me");
+//   const { userId } = req.body;
+
+//   const notify = {
+//     user: userId,
+//   };
+
+//   const product = await Product.findById(req.params.id);
+
+//   const isNotified = product.notify.find(
+//     (rev) => rev.user.toString() === userId.toString()
+//   );
+
+//   if (isNotified) {
+//     product.notify.forEach((rev) => {
+//       if (rev.user.toString() === userId.toString());
+//     });
+//   } else {
+//     product.notify.push(notify);
+//   }
+
+//   await product.save({ validateBeforeSave: false });
+
+//   res.status(200).json({
+//     success: true,
+//   });
+// });
+
+exports.createProductNotification = catchAsyncErrors(async (req, res, next) => {
+  const { info, productId } = req.body;
+
+  const notification = {
+    user: req.user._id,
+    info,
+  };
+
+  const product = await Product.findById(productId);
+
+  const isStored = product.notifyMe.find(
+    (rev) => rev.user.toString() === req.user._id.toString()
+  );
+
+  if (isStored) {
+    product.notifyMe.forEach((rev) => {
+      if (rev.user.toString() === req.user._id.toString()) rev.info = info;
+    });
+  } else {
+    product.notifyMe.push(notification);
+  }
+
+  await product.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    success: true,
+  });
+});
+
 // Delete Product
 
 exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
@@ -352,6 +483,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
 
 // Create New Review or Update the review
 exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
+  console.log("controller");
   const { rating, comment, productId } = req.body;
 
   const review = {

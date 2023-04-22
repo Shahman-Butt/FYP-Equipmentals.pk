@@ -17,6 +17,10 @@ import {
   UPDATE_ARCHIVE_SUCCESS,
   UPDATE_ARCHIVE_FAIL,
   UPDATE_ARCHIVE_RESET,
+  // UPDATE_NOTIFY_REQUEST,
+  // UPDATE_NOTIFY_SUCCESS,
+  // UPDATE_NOTIFY_FAIL,
+  // UPDATE_NOTIFY_RESET,
   DELETE_PRODUCT_REQUEST,
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_FAIL,
@@ -28,6 +32,10 @@ import {
   NEW_REVIEW_SUCCESS,
   NEW_REVIEW_FAIL,
   NEW_REVIEW_RESET,
+  NEW_NOTIFICATION_REQUEST,
+  NEW_NOTIFICATION_SUCCESS,
+  NEW_NOTIFICATION_FAIL,
+  NEW_NOTIFICATION_RESET,
   ALL_REVIEW_REQUEST,
   ALL_REVIEW_SUCCESS,
   ALL_REVIEW_FAIL,
@@ -242,6 +250,39 @@ export const newReviewReducer = (state = {}, action) => {
         error: action.payload,
       };
     case NEW_REVIEW_RESET:
+      return {
+        ...state,
+        success: false,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
+  }
+};
+
+export const newNotificarionReducer = (state = {}, action) => {
+  switch (action.type) {
+    case NEW_NOTIFICATION_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case NEW_NOTIFICATION_SUCCESS:
+      return {
+        loading: false,
+        success: action.payload,
+      };
+    case NEW_NOTIFICATION_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case NEW_NOTIFICATION_RESET:
       return {
         ...state,
         success: false,

@@ -31,15 +31,15 @@ const productSchema = mongoose.Schema({
   //   // required: [true, "Please provide a payment value."],
   //   min: 0,
   // },
-  calendar: {
-    type: [
-      {
-        date: { type: Date },
-        isBooked: { type: Boolean, default: false },
-      },
-    ],
-    default: [],
-  },
+  // calendar: {
+  //   type: [
+  //     {
+  //       date: { type: Date },
+  //       isBooked: { type: Boolean, default: false },
+  //     },
+  //   ],
+  //   default: [],
+  // },
   name: {
     type: String,
     required: [true, "Please Enter product Name"],
@@ -74,6 +74,22 @@ const productSchema = mongoose.Schema({
     {
       date: {
         type: Date,
+      },
+    },
+  ],
+  notifyMe: [
+    {
+      user: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+      },
+      sent: {
+        type: Boolean,
+        default: false,
+      },
+      info: {
+        type: String,
+        required: true,
       },
     },
   ],

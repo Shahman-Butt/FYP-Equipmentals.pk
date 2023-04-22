@@ -6,6 +6,7 @@ const {
   deleteProduct,
   getProductDetails,
   createProductReview,
+  createProductNotification,
   getProductReviews,
   deleteReview,
   getAdminProducts,
@@ -17,6 +18,7 @@ const {
   getUserProducts,
   getAvailProduct,
   createAvailProduct,
+  notifyMe,
 } = require("../controllers/productController");
 const { isAuthenticatedUser } = require("../middleware/auth");
 
@@ -49,6 +51,33 @@ router
 
 // router.route("/product/:id").get(isAuthenticatedUser, getProductDetails);
 router.route("/product/:id").get(getProductDetails);
+// router.put("admin/notify/:id", async (req, res) => {
+//   const { userId } = req.body;
+//   console.log("userId", userId);
+//   const notify = {
+//     user: userId,
+//   };
+
+//   const product = await Product.findById(req.params.id);
+
+//   const isNotified = product.notify.find(
+//     (rev) => rev.user.toString() === userId.toString()
+//   );
+
+//   if (isNotified) {
+//     product.notify.forEach((rev) => {
+//       if (rev.user.toString() === userId.toString());
+//     });
+//   } else {
+//     product.notify.push(notify);
+//   }
+
+//   await product.save({ validateBeforeSave: false });
+
+//   res.status(200).json({
+//     success: true,
+//   });
+// });
 
 // Update unavailable dates for a product
 router.put("/product/:id", async (req, res) => {
@@ -79,6 +108,9 @@ router
   .put(isAuthenticatedUser, premiumProduct);
 
 router.route("/review").put(isAuthenticatedUser, createProductReview);
+router
+  .route("/notification")
+  .put(isAuthenticatedUser, createProductNotification);
 
 router
   .route("/reviews")
