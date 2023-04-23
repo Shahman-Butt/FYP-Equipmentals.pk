@@ -25,7 +25,7 @@ const NewProduct = ({ history }) => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [availableDates, setAvailableDates] = useState([]);
-  const [availability, setAvailabilty] = useState("");
+  const [archive, setArchive] = useState("");
   // const [Stock, setStock] = useState(0);
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
@@ -54,12 +54,9 @@ const NewProduct = ({ history }) => {
     dateDict[date.toISOString().slice(0, 10)] = { date, available: false };
   }
 
-  // Example of updating availability for a specific date
-  // dateDict["2023-04-10"].available = true;
-
   console.log(dateDict);
 
-  const available = ["Available", "Not Available"];
+  const available = ["Not Archived", "Archived"];
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -82,7 +79,7 @@ const NewProduct = ({ history }) => {
     myForm.set("price", price);
     myForm.set("description", description);
     myForm.set("category", category);
-    myForm.set("availability", availability);
+    myForm.set("archive", archive);
     // myForm.set("Stock", Stock);
     myForm.set("userId", user._id);
     // myForm.set("availableDates", availableDates);
@@ -123,7 +120,10 @@ const NewProduct = ({ history }) => {
       <div className="dashboard row ">
         <SideBar />
 
-        <div  className="col-md-9 newProductContainer bg-transparent" style={{ "height": "0%", "width": "70%" }}>
+        <div
+          className="col-md-9 newProductContainer bg-transparent"
+          style={{ height: "0%", width: "70%" }}
+        >
           <form
             className="createProductForm"
             encType="multipart/form-data"
@@ -202,8 +202,8 @@ const NewProduct = ({ history }) => {
             </div>
             <div>
               <StorageIcon />
-              <select onChange={(e) => setAvailabilty(e.target.value)}>
-                <option value="">Choose Availability status</option>
+              <select onChange={(e) => setArchive(e.target.value)}>
+                <option value="">Mark it as archived or not archived</option>
                 {available.map((avail) => (
                   <option key={avail} value={avail}>
                     {avail}

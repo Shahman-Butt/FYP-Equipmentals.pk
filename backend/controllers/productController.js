@@ -39,11 +39,11 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   console.log(typeof req.body.availableDates);
   console.log(req.body.availableDates);
   // availableDates = req.body.availableDates.split(",");
-
+  console.log(" #############################");
   availableDates = JSON.parse(req.body.availableDates);
   console.log(typeof availableDates);
   console.log(availableDates);
-
+  console.log(" ###############JSON##############");
   // availableDates = req.body.availableDates.map(
   //   (dateString) => new Date(dateString)
   // );
@@ -51,13 +51,13 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   availableDates = availableDates.map((str) => new Date(str));
   console.log(availableDates);
   console.log(typeof availableDates);
-
+  console.log(" ############## MAP to STR ###############");
   availableDates = availableDates.map((dateString) => ({
     date: new Date(dateString),
   }));
 
   console.log(availableDates);
-
+  console.log(" ############ DATE STR #################");
   req.body.images = imagesLinks;
   req.body.user = req.user.id;
   req.body.availableDates = availableDates;
@@ -80,7 +80,7 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
   const productsCount = await Product.countDocuments();
 
   const apiFeature = new ApiFeatures(
-    Product.find({ availability: "Available" }),
+    Product.find({ archive: "Not Archived" }),
     req.query
   )
     .search()
@@ -103,7 +103,7 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Get All Product (Admin)
+// Get All Product (Admin or User)
 exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
   const user_id = req.user._id;
   console.log("I am here", user_id);
@@ -128,6 +128,7 @@ exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
   }
 });
 
+// get fav
 exports.getFavorites = catchAsyncErrors(async (req, res, next) => {
   const user_id = req.user._id;
   const person = await User.findOne({ _id: user_id });
@@ -145,20 +146,49 @@ exports.getFavorites = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// // Get All Product (User)
-// exports.getUserProducts = catchAsyncErrors(async (req, res, next) => {
-//   console.log("user func 2");
-//   const user_id = req.user._id;
-//   console.log("user_id:", user_id);
-//   const role = await User.find({}, { projection: { role: 1 } });
-
-//   const products = await Product.find({ userId: user_id });
-
-//   res.status(200).json({
-//     success: true,
-//     products,
-//   });
-// });
+// get archived
+exports.getArchives = catchAsyncErrors(async (req, res, next) => {
+  const resultPerPage = 8;
+  const productsCount = await Product.countDocuments();
+  const user_id = req.user._id;
+  let products; // declare the variable outside the if...else block
+  const person = await User.findOne({ _id: user_id });
+  if (person.role === "user") {
+    const apiFeature = new ApiFeatures(
+      Product.find({ userId: user_id, archive: "Archived" }),
+      req.query
+    )
+      .search()
+      .filter();
+    products = await apiFeature.query; // assign value inside the block
+    const filteredProductsCount = products.length;
+    apiFeature.pagination(resultPerPage);
+    res.status(200).json({
+      success: true,
+      products,
+      productsCount,
+      resultPerPage,
+      filteredProductsCount,
+    });
+  } else {
+    const apiFeature = new ApiFeatures(
+      Product.find({ archive: "Archived" }),
+      req.query
+    )
+      .search()
+      .filter();
+    products = await apiFeature.query; // assign value inside the block
+    const filteredProductsCount = products.length;
+    apiFeature.pagination(resultPerPage);
+    res.status(200).json({
+      success: true,
+      products,
+      productsCount,
+      resultPerPage,
+      filteredProductsCount,
+    });
+  }
+});
 
 // Get Product Details
 exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
@@ -197,21 +227,21 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   let availableDates = [];
   console.log(typeof req.body.availableDates);
   console.log(req.body.availableDates);
-
+  console.log(" ###############b  UPDATE ##############");
   availableDates = JSON.parse(req.body.availableDates);
   console.log(typeof availableDates);
   console.log(availableDates);
-
+  console.log(" ############# JSON UPDATE ################");
   availableDates = availableDates.map((str) => new Date(str));
   console.log(availableDates);
   console.log(typeof availableDates);
-
+  console.log(" ############ MAP to STR UPDATE #################");
   availableDates = availableDates.map((dateString) => ({
     date: new Date(dateString),
   }));
 
   console.log(availableDates);
-
+  console.log(" ########### DATE STR UPDATE##################");
   req.body.availableDates = availableDates;
   // Images Start Here
   let images = [];
@@ -256,6 +286,179 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// Update archive status
+
+exports.updateArchiveStatus = catchAsyncErrors(async (req, res, next) => {
+  let product = await Product.findById(req.params.id);
+
+  if (!product) {
+    return next(new ErrorHander("Product not found", 404));
+  }
+
+  product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+    product,
+  });
+});
+
+// Premium Product
+
+exports.premiumProduct = catchAsyncErrors(async (req, res, next) => {
+  let product = await Product.findById(req.params.id);
+
+  if (!product) {
+    return next(new ErrorHander("Product not found", 404));
+  }
+
+  product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+    product,
+  });
+});
+
+// Notify me
+// exports.notifyMe = catchAsyncErrors(async (req, res, next) => {
+//   console.log("NOTIFY ME");
+//   const { productId, userId } = req.body;
+
+//   const notify = {
+//     user: req.userId,
+//     // name: req.user.name,
+//     // rating: Number(rating),
+//     // comment,
+//   };
+//   s;
+//   const product = await Product.findById(productId);
+
+//   const isNotified = product.noti.find(
+//     (rev) => rev.user.toString() === req.userId.toString()
+//   );
+
+//   if (isNotified) {
+//     product.noti.forEach((rev) => {
+//       if (
+//         rev.user.toString() === req.userId.toString()
+//         // (rev.rating = rating), (rev.comment = comment)
+//       );
+//     });
+//   } else {
+//     product.noti.push(notify);
+//     // product.numOfReviews = product.reviews.length;
+//   }
+
+//   // let avg = 0;
+
+//   // product.reviews.forEach((rev) => {
+//   //   avg += rev.rating;
+//   // });
+
+//   // product.ratings = avg / product.reviews.length;
+
+//   await product.save({ validateBeforeSave: false });
+
+//   res.status(200).json({
+//     success: true,
+//   });
+// });
+
+// exports.notifyMe = catchAsyncErrors(async (req, res, next) => {
+//   const { productId, userId } = req.body;
+
+//   const notify = {
+//     user: req.userId,
+//   };
+
+//   const product = await Product.findById(req.params.id);
+
+//   const isNotified = product.notify.find(
+//     (rev) => rev.user.toString() === req.userId.toString()
+//   );
+
+//   if (isNotified) {
+//     product.notify.forEach((rev) => {
+//       if (rev.user.toString() === req.userId.toString());
+//     });
+//   } else {
+//     product.notify.push(notify);
+//   }
+
+//   await product.save({ validateBeforeSave: false });
+
+//   res.status(200).json({
+//     success: true,
+//   });
+// });
+
+// exports.notifyMe = catchAsyncErrors(async (req, res, next) => {
+//   console.log("notify me");
+//   const { userId } = req.body;
+
+//   const notify = {
+//     user: userId,
+//   };
+
+//   const product = await Product.findById(req.params.id);
+
+//   const isNotified = product.notify.find(
+//     (rev) => rev.user.toString() === userId.toString()
+//   );
+
+//   if (isNotified) {
+//     product.notify.forEach((rev) => {
+//       if (rev.user.toString() === userId.toString());
+//     });
+//   } else {
+//     product.notify.push(notify);
+//   }
+
+//   await product.save({ validateBeforeSave: false });
+
+//   res.status(200).json({
+//     success: true,
+//   });
+// });
+
+exports.createProductNotification = catchAsyncErrors(async (req, res, next) => {
+  const { info, productId } = req.body;
+
+  const notification = {
+    user: req.user._id,
+    info,
+  };
+
+  const product = await Product.findById(productId);
+
+  const isStored = product.notifyMe.find(
+    (rev) => rev.user.toString() === req.user._id.toString()
+  );
+
+  if (isStored) {
+    product.notifyMe.forEach((rev) => {
+      if (rev.user.toString() === req.user._id.toString()) rev.info = info;
+    });
+  } else {
+    product.notifyMe.push(notification);
+  }
+
+  await product.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    success: true,
+  });
+});
+
 // Delete Product
 
 exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
@@ -280,6 +483,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
 
 // Create New Review or Update the review
 exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
+  console.log("controller");
   const { rating, comment, productId } = req.body;
 
   const review = {

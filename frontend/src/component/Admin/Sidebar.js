@@ -26,8 +26,11 @@ const categories = [
 ];
 const Sidebar = () => {
   return (
-    <div class="col-md-3" >
-      <div class="list-group" style={{ margin: "0% 10% 0% 10%", padding: "136px 0 0 0" }}>
+    <div class="col-md-3">
+      <div
+        class="list-group"
+        style={{ margin: "0% 10% 0% 10%", padding: "136px 0 0 0" }}
+      >
         <a
           href="/admin/products"
           style={{ "font-weight": "bold", background: "#652D90" }}
@@ -35,32 +38,37 @@ const Sidebar = () => {
         >
           All Products
         </a>
-        <Link to={"/admin/dashboard"}
+        <Link
+          to={"/admin/dashboard"}
           class="list-group-item list-group-item-action"
-        // onClick={userProduct}
+          // onClick={userProduct}
         >
           Statistics
         </Link>
-        <Link to={"/favorites"}
+        <Link
+          to={"/favorites"}
           class="list-group-item list-group-item-action"
-        // onClick={product}
+          // onClick={product}
         >
-          Favourites{" "}
+          Favorites{" "}
         </Link>
-        <Link to={"/admin/users"}
-
+        <Link to={"/archives"} class="list-group-item list-group-item-action">
+          Archives{" "}
+        </Link>
+        <Link
+          to={"/admin/users"}
           class="list-group-item list-group-item-action"
         >
           Users
         </Link>
 
-        <Link to={"/admin/reviews"}
+        <Link
+          to={"/admin/reviews"}
           class="list-group-item list-group-item-action"
-        // onClick={logoutUser}
+          // onClick={logoutUser}
         >
           Reviews
         </Link>
-
       </div>
     </div>
   );

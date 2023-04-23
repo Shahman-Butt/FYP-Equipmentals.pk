@@ -179,6 +179,7 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
   sendToken(user, 200, res);
 });
 
+// add items to fav
 exports.addItemsToFavorites = catchAsyncErrors(async (req, res, next) => {
   const { userId, productId } = req.body;
   try {
@@ -205,47 +206,6 @@ exports.addItemsToFavorites = catchAsyncErrors(async (req, res, next) => {
   } catch (error) {
     console.error(error);
   }
-
-  // const newUserData = {
-  //   name: req.body.name,
-  //   email: req.body.email,
-  //   addr: req.body.addr,
-  //   numb: req.body.numb,
-
-  //   favorites: req.body.favorites.append(id),
-
-  //   // loc: req.body.loc,
-  // };
-
-  // // if (req.body.avatar !== "") {
-  // //   const user = await User.findById(req.user.id);
-
-  // //   const imageId = user.avatar.public_id;
-
-  // //   await cloudinary.v2.uploader.destroy(imageId);
-
-  // //   const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-  // //     folder: "avatars",
-  // //     width: 150,
-  // //     crop: "scale",
-  // //   });
-
-  // //   newUserData.avatar = {
-  // //     public_id: myCloud.public_id,
-  // //     url: myCloud.secure_url,
-  // //   };
-  // // }
-  // console.log("fav controller");
-  // console.log(favorites);
-  // const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
-  //   new: true,
-  //   runValidators: true,
-  //   useFindAndModify: false,
-  // });
-
-  // res.status(200).json({
-  //   success: true,
-  // });
 });
 
 // update User Profile

@@ -7,36 +7,38 @@ const productSchema = mongoose.Schema({
     ref: "User",
     required: true,
   },
-  availability: {
+  archive: {
     type: String,
-    required: [true, "Please Enter product Availability Status"],
+    required: [true, "Mark it as archive or not archive"],
     trim: true,
-    // default: "Available",
-  },
-  // availableDates: {
-  //   type: [Date],
-  //   default: [],
-  // },
-  calendar: {
-    type: [
-      {
-        date: { type: Date },
-        isBooked: { type: Boolean, default: false },
-      },
-    ],
-    default: [],
+    default: "Not Archived",
   },
 
-  // pre: {
-  //   date: {
-  //     type: Date,
-  //     required: true,
-  //   },
-  //   available: {
-  //     type: Boolean,
-  //     required: true,
-  //     default: true,
-  //   },
+  premium: {
+    type: String,
+    default: "Not Premium",
+  },
+  payment: {
+    type: Number,
+  },
+
+  // premium: {
+  //   type: Boolean,
+  //   default: false,
+  // },
+  // payment: {
+  //   type: Number,
+  //   // required: [true, "Please provide a payment value."],
+  //   min: 0,
+  // },
+  // calendar: {
+  //   type: [
+  //     {
+  //       date: { type: Date },
+  //       isBooked: { type: Boolean, default: false },
+  //     },
+  //   ],
+  //   default: [],
   // },
   name: {
     type: String,
@@ -75,16 +77,26 @@ const productSchema = mongoose.Schema({
       },
     },
   ],
+  notifyMe: [
+    {
+      user: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+      },
+      sent: {
+        type: Boolean,
+        default: false,
+      },
+      info: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
   category: {
     type: String,
     required: [true, "Please Enter Product Category"],
   },
-  // Stock: {
-  //   type: Number,
-  //   required: [true, "Please Enter product Stock"],
-  //   maxLength: [4, "Stock cannot exceed 4 characters"],
-  //   default: 1,
-  // },
   numOfReviews: {
     type: Number,
     default: 0,
@@ -110,7 +122,6 @@ const productSchema = mongoose.Schema({
       },
     },
   ],
-
   createdAt: {
     type: Date,
     default: Date.now,

@@ -14,6 +14,8 @@ import { Button } from "@material-ui/core";
 import MetaData from "../layout/MetaData";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+
 import SideBar from "./Sidebar";
 // import { useSelector, useDispatch } from "react-redux";
 import { DELETE_PRODUCT_RESET } from "../../constants/productConstants";
@@ -33,16 +35,6 @@ const ProductList = ({ history }) => {
   const deleteProductHandler = (id) => {
     dispatch(deleteProduct(id));
   };
-  // async function toggleAvailability(checked, id) {
-  //   const productId = id; // replace with the actual product ID
-  //   const response = await fetch(`/api/products/${productId}`, {
-  //     method: "PUT",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ availability: checked }),
-  //   });
-  //   const data = await response.json();
-  //   console.log(data);
-  // }
 
   useEffect(() => {
     if (error) {
@@ -74,8 +66,8 @@ const ProductList = ({ history }) => {
       flex: 0.5,
     },
     {
-      field: "availability",
-      headerName: "Availability",
+      field: "archive",
+      headerName: "Archive status",
 
       minWidth: 150,
       flex: 0.5,
@@ -109,6 +101,12 @@ const ProductList = ({ history }) => {
             >
               <DeleteIcon />
             </Button>
+
+            <Link
+              to={`/admin/premiumproduct/${params.getValue(params.id, "id")}`}
+            >
+              <AttachMoneyIcon />
+            </Link>
           </Fragment>
         );
       },
@@ -124,7 +122,7 @@ const ProductList = ({ history }) => {
 
         price: item.price,
         name: item.name,
-        availability: item.availability,
+        archive: item.archive,
       });
     });
 
@@ -132,15 +130,18 @@ const ProductList = ({ history }) => {
     <Fragment>
       <MetaData title={`ALL PRODUCTS - Admin`} />
 
-      <div className="dashboard row" style={{ "height": "1%" }}>
+      <div className="dashboard row" style={{ height: "1%" }}>
         <SideBar />
-        <div className="productListContainer col-md-9" style={{ "height": "0%", "width": "70%" }}>
+        <div
+          className="productListContainer col-md-9"
+          style={{ height: "0%", width: "70%" }}
+        >
           <h1 id="productListHeading">ALL PRODUCTS</h1>
           {/* <p> User Id: {String(user._id)}</p> */}
-          <p style={{ margin: "10px 0 5px 0", fontWeight: "bold" }}>
-            User ID:
+          <p style={{ margin: "10px 0 5px 0", fontWeight: "bold" }}>User ID:</p>
+          <p style={{ marginBottom: "20px", fontWeight: "bold" }}>
+            {String(user._id)}
           </p>
-          <p style={{ marginBottom: "20px", fontWeight: "bold" }}>{String(user._id)}</p>
 
           {/* <div className="user-id-container">
           <label className="user-id-label">User ID:</label>

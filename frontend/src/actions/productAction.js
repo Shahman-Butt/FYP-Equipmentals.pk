@@ -13,6 +13,18 @@ import {
   UPDATE_PRODUCT_REQUEST,
   UPDATE_PRODUCT_SUCCESS,
   UPDATE_PRODUCT_FAIL,
+  UPDATE_ARCHIVE_REQUEST,
+  UPDATE_ARCHIVE_SUCCESS,
+  UPDATE_ARCHIVE_FAIL,
+  // UPDATE_NOTIFY_REQUEST,
+  // UPDATE_NOTIFY_SUCCESS,
+  // UPDATE_NOTIFY_FAIL,
+  // UPDATE_NOTIFY_RESET,
+  NEW_NOTIFICATION_REQUEST,
+  NEW_NOTIFICATION_SUCCESS,
+  NEW_NOTIFICATION_FAIL,
+  NEW_NOTIFICATION_RESET,
+  UPDATE_ARCHIVE_RESET,
   DELETE_PRODUCT_REQUEST,
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_FAIL,
@@ -97,6 +109,26 @@ export const getFavorites =
     }
   };
 
+export const getArchives =
+  (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: ADMIN_PRODUCT_REQUEST });
+
+      const { data } = await axios.get("/api/v1/archives");
+
+      dispatch({
+        type: ADMIN_PRODUCT_SUCCESS,
+        payload: data.products,
+      });
+    } catch (error) {
+      dispatch({
+        type: ADMIN_PRODUCT_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
+
 // Create Product
 export const createProduct = (productData) => async (dispatch) => {
   try {
@@ -151,6 +183,35 @@ export const updateProduct = (id, productData) => async (dispatch) => {
   }
 };
 
+// Update Archive Status
+export const updateArchiveStatus =
+  (productId, productData) => async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_ARCHIVE_REQUEST });
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+      };
+
+      const { data } = await axios.put(
+        `/api/v1/archives/${productId}`,
+        // `/api/v1/archives/${id}`,
+        productData,
+        config
+      );
+
+      dispatch({
+        type: UPDATE_ARCHIVE_SUCCESS,
+        payload: data.success,
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_ARCHIVE_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
+
 // Delete Product
 export const deleteProduct = (id) => async (dispatch) => {
   try {
@@ -184,6 +245,206 @@ export const getProductDetails = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_DETAILS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// Premium Product
+export const premiumProduct = (id, productData) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_PRODUCT_REQUEST });
+
+    const config = {
+      headers: { "Content-Type": "application/json" },
+    };
+
+    const { data } = await axios.put(
+      `/api/v1/admin/premiumproduct/${id}`,
+      productData,
+      config
+    );
+
+    dispatch({
+      type: UPDATE_PRODUCT_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_PRODUCT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// notify me
+// export const notifyMe = (id, productData) => async (dispatch) => {
+//   try {
+//     dispatch({ type: UPDATE_NOTIFY_REQUEST });
+
+//     const config = {
+//       headers: { "Content-Type": "application/json" },
+//     };
+
+//     const { data } = await axios.put(
+//       `/api/v1/admin/notify/${id}`,
+//       productData,
+//       config
+//     );
+
+//     dispatch({
+//       type: UPDATE_NOTIFY_SUCCESS,
+//       payload: data.success,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: UPDATE_NOTIFY_FAIL,
+//       payload: error.response.data.message,
+//     });
+//   }
+// };
+
+// export const notifyMe = (id, formData) => async (dispatch) => {
+//   try {
+//     dispatch({ type: UPDATE_NOTIFY_REQUEST });
+
+//     const config = {
+//       headers: { "Content-Type": "multipart/form-data" },
+//     };
+
+//     const { data } = await axios.put(
+//       `/api/v1/admin/notify/${id}`,
+//       formData,
+//       config
+//     );
+
+//     dispatch({
+//       type: UPDATE_NOTIFY_SUCCESS,
+//       payload: data.success,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: UPDATE_NOTIFY_FAIL,
+//       payload: error.response.data.message,
+//     });
+//   }
+// };
+
+// export const notifyMe = (id, productData) => async (dispatch) => {
+//   try {
+//     dispatch({ type: UPDATE_NOTIFY_REQUEST });
+
+//     const config = {
+//       headers: { "Content-Type": "application/json" },
+//     };
+
+//     const { data } = await axios.put(
+//       `/api/v1/admin/notify/${id}`,
+//       productData,
+//       config
+//     );
+
+//     dispatch({
+//       type: UPDATE_NOTIFY_SUCCESS,
+//       payload: data.success,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: UPDATE_NOTIFY_FAIL,
+//       payload: error.response.data.message,
+//     });
+//   }
+// };
+
+// export const notifyMe = (productId, productData) => async (dispatch) => {
+//   try {
+//     dispatch({ type: UPDATE_NOTIFY_REQUEST });
+
+//     const config = {
+//       headers: { "Content-Type": "application/json" },
+//     };
+
+//     const { data } = await axios.put(
+//       `/api/v1/admin/notify/${productId}`,
+//       null,
+//       {
+//         ...config,
+//         data: productData,
+//       }
+//     );
+
+//     dispatch({
+//       type: UPDATE_NOTIFY_SUCCESS,
+//       payload: data.success,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: UPDATE_NOTIFY_FAIL,
+//       payload: error.response.data.message,
+//     });
+//   }
+// };
+
+// export const notifyMe = (userId, productId) => async (dispatch) => {
+//   console.log("pro actions");
+//   try {
+//     dispatch({ type: UPDATE_NOTIFY_REQUEST });
+
+//     const config = {
+//       headers: { "Content-Type": "application/json" },
+//     };
+//     console.log("config");
+
+//     console.log(userId);
+//     console.log(productId);
+//     const { data } = await axios.put(
+//       `admin/notify/${productId}`,
+//       { userId },
+//       config
+//     );
+//     console.log("data");
+
+//     dispatch({
+//       type: UPDATE_NOTIFY_SUCCESS,
+//       payload: data.success,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: UPDATE_NOTIFY_FAIL,
+//       payload: error.response.data.message,
+//     });
+//   }
+// };
+
+export const newNotification = (notificationData) => async (dispatch) => {
+  console.log("new noti");
+  try {
+    dispatch({ type: NEW_NOTIFICATION_REQUEST });
+
+    const config = {
+      headers: { "Content-Type": "application/json" },
+    };
+
+    console.log(config);
+    console.log(notificationData);
+    for (let pair of notificationData.entries()) {
+      console.log(typeof pair[0] + ", ppp   " + typeof pair[1]);
+      console.log(pair[0] + ", [[[[[ " + pair[1]);
+    }
+
+    const { data } = await axios.put(
+      `/api/v1/notification`,
+      notificationData,
+      config
+    );
+
+    dispatch({
+      type: NEW_NOTIFICATION_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: NEW_NOTIFICATION_FAIL,
       payload: error.response.data.message,
     });
   }
@@ -276,51 +537,3 @@ export const deleteFavorites = (userId, productId) => async (dispatch) => {
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
 };
-
-// Get Not Available Dates for a Product
-// export const getAvailProduct = (productId) => async (dispatch) => {
-//   try {
-//     dispatch({ type: PRODUCT_DETAILS_REQUEST });
-
-//     const { data } = await axios.get(
-//       `/api/v1/product/${productId}/not-available-dates`
-//     );
-
-//     dispatch({
-//       type: PRODUCT_DETAILS_SUCCESS,
-//       payload: data.product,
-//     });
-//   } catch (error) {
-//     dispatch({
-//       type: PRODUCT_DETAILS_FAIL,
-//       payload: error.response.data.message,
-//     });
-//   }
-// };
-// Add Not Available Dates for a Product
-// export const createAvailProduct =
-//   (productId, notAvailableDates) => async (dispatch) => {
-//     try {
-//       const config = {
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       };
-
-//       const { data } = await axios.put(
-//         `/api/v1/product/${productId}/not-available-dates`,
-//         notAvailableDates,
-//         config
-//       );
-
-//       dispatch({
-//         type: UPDATE_PRODUCT_SUCCESS,
-//         payload: data.success,
-//       });
-//     } catch (error) {
-//       dispatch({
-//         type: UPDATE_PRODUCT_FAIL,
-//         payload: error.response.data.message,
-//       });
-//     }
-//   };

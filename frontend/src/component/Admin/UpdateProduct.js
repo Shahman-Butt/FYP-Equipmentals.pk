@@ -33,7 +33,7 @@ const UpdateProduct = ({ history, match }) => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [availableDates, setAvailableDates] = useState([]);
-  const [availability, setAvailabilty] = useState("");
+  const [archive, setArchive] = useState("");
   // const [Stock, setStock] = useState(0);
   const [images, setImages] = useState([]);
   const [oldImages, setOldImages] = useState([]);
@@ -62,7 +62,7 @@ const UpdateProduct = ({ history, match }) => {
     console.log("added");
     dateDict[date.toISOString().slice(0, 10)] = { date, available: false };
   }
-  const available = ["Available", "Not Available"];
+  const available = ["Not Archived", "Archived"];
   const productId = match.params.id;
 
   useEffect(() => {
@@ -73,9 +73,9 @@ const UpdateProduct = ({ history, match }) => {
       setDescription(product.description);
       setPrice(product.price);
       setCategory(product.category);
-      setAvailabilty(product.availability);
+      setArchive(product.archive);
       // setAvailableDates(product.availableDates);
-      console.log(product.availability);
+      console.log(product.archive);
       // for (let i = 0; i < product.availableDates.length; i++) {
       //   const currentDate = product.ArrayavailableDates[i].date;
       //   console.log(currentDate);
@@ -122,8 +122,7 @@ const UpdateProduct = ({ history, match }) => {
 
     myForm.append("availableDates", JSON.stringify(availableDates));
 
-    myForm.append("availableDates", JSON.stringify(availableDates));
-    myForm.set("availability", availability);
+    myForm.set("archive", archive);
     // myForm.set("Stock", Stock);
 
     images.forEach((image) => {
@@ -220,6 +219,7 @@ const UpdateProduct = ({ history, match }) => {
                 // value={Object.entries(availableDates).map(([key, value]) =>
                 //   availableDates.date.toDateString()
                 // )}
+                value={availableDates}
                 onChange={(e) =>
                   setAvailableDates(
                     Array.from(
@@ -240,10 +240,10 @@ const UpdateProduct = ({ history, match }) => {
             <div>
               <StorageIcon />
               <select
-                value={availability}
-                onChange={(e) => setAvailabilty(e.target.value)}
+                value={archive}
+                onChange={(e) => setArchive(e.target.value)}
               >
-                <option value="">Choose Availability status</option>
+                <option value="">Mark it as Archived or not Archived</option>
                 {available.map((avail) => (
                   <option key={avail} value={avail}>
                     {avail}
