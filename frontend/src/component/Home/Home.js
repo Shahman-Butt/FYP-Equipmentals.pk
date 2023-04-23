@@ -130,15 +130,15 @@ const Home = ({ user, match }) => {
         <Fragment>
           <MetaData title="EquipmentalsPk" />
 
-
-
-          <> <div className="container-fluid mb-5">
-            <div className="row border-top px-xl-5">
-              <div className="col-lg-3 d-none d-lg-block" >
-                <Caution />
-              </div>
-              <div className="col-lg-9">
-                {/* <nav className="navbar navbar-expand-lg bg-transparent navbar-light py-3 py-lg-0 px-0">
+          <>
+            {" "}
+            <div className="container-fluid mb-5">
+              <div className="row border-top px-xl-5">
+                <div className="col-lg-3 d-none d-lg-block">
+                  <Caution />
+                </div>
+                <div className="col-lg-9">
+                  {/* <nav className="navbar navbar-expand-lg bg-transparent navbar-light py-3 py-lg-0 px-0">
                   <a href className="text-decoration-none d-block d-lg-none">
                     <h1 className="m-0 display-5 font-weight-semi-bold"><span className="text-primary font-weight-bold border px-3 mr-1"></span></h1>
                   </a>
@@ -155,62 +155,83 @@ const Home = ({ user, match }) => {
 
                   </div>
                 </nav> */}
-                <div id="header-carousel" style={{"top":"10%"}} className="carousel slide" data-ride="carousel">
-                  <div className="carousel-inner">
-                    <div className="carousel-item active" style={{ height: '410px' }}>
-                      <img className="img-fluid" src={banner1} alt="Image" />
-                      <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <div className="p-3" style={{ maxWidth: '700px' }}>
-                          <h4 className="text-light text-uppercase font-weight-medium mb-3">Welcome to </h4>
-                          <h3 className="display-4 text-white font-weight-semi-bold mb-4">EquipmentalsPk</h3>
-                          <a href="/products" className="btn btn-light py-2 px-3">Rent Now</a>
-
-                        </div>
-                      </div>
+                  <div
+                    id="header-carousel"
+                    style={{ top: "10%" }}
+                    className="carousel slide"
+                    data-ride="carousel"
+                  >
+                    <div className="carousel-inner">
                       <div
-                        className="carousel-item"
+                        className="carousel-item active"
                         style={{ height: "410px" }}
                       >
-                        <img className="img-fluid" src={banner2} alt="Image" />
+                        <img className="img-fluid" src={banner1} alt="Image" />
                         <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
                           <div className="p-3" style={{ maxWidth: "700px" }}>
                             <h4 className="text-light text-uppercase font-weight-medium mb-3">
-                              Welcome to
+                              Welcome to{" "}
                             </h4>
                             <h3 className="display-4 text-white font-weight-semi-bold mb-4">
                               EquipmentalsPk
                             </h3>
-                            <a href className="btn btn-light py-2 px-3">
+                            <a
+                              href="/products"
+                              className="btn btn-light py-2 px-3"
+                            >
                               Rent Now
                             </a>
                           </div>
                         </div>
+                        <div
+                          className="carousel-item"
+                          style={{ height: "410px" }}
+                        >
+                          <img
+                            className="img-fluid"
+                            src={banner2}
+                            alt="Image"
+                          />
+                          <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                            <div className="p-3" style={{ maxWidth: "700px" }}>
+                              <h4 className="text-light text-uppercase font-weight-medium mb-3">
+                                Welcome to
+                              </h4>
+                              <h3 className="display-4 text-white font-weight-semi-bold mb-4">
+                                EquipmentalsPk
+                              </h3>
+                              <a href className="btn btn-light py-2 px-3">
+                                Rent Now
+                              </a>
+                            </div>
+                          </div>
+                        </div>
                       </div>
+                      <a
+                        className="carousel-control-prev"
+                        href="#header-carousel"
+                        data-slide="prev"
+                      >
+                        <div
+                          className="btn btn-dark"
+                          style={{ width: "45px", height: "45px" }}
+                        >
+                          <span className="carousel-control-prev-icon mb-n2" />
+                        </div>
+                      </a>
+                      <a
+                        className="carousel-control-next"
+                        href="#header-carousel"
+                        data-slide="next"
+                      >
+                        <div
+                          className="btn btn-dark"
+                          style={{ width: "45px", height: "45px" }}
+                        >
+                          <span className="carousel-control-next-icon mb-n2" />
+                        </div>
+                      </a>
                     </div>
-                    <a
-                      className="carousel-control-prev"
-                      href="#header-carousel"
-                      data-slide="prev"
-                    >
-                      <div
-                        className="btn btn-dark"
-                        style={{ width: "45px", height: "45px" }}
-                      >
-                        <span className="carousel-control-prev-icon mb-n2" />
-                      </div>
-                    </a>
-                    <a
-                      className="carousel-control-next"
-                      href="#header-carousel"
-                      data-slide="next"
-                    >
-                      <div
-                        className="btn btn-dark"
-                        style={{ width: "45px", height: "45px" }}
-                      >
-                        <span className="carousel-control-next-icon mb-n2" />
-                      </div>
-                    </a>
                   </div>
                 </div>
               </div>
