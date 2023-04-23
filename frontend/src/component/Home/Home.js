@@ -139,7 +139,7 @@ const Home = ({ user, match }) => {
                 <Caution />
               </div>
               <div className="col-lg-9">
-                <nav className="navbar navbar-expand-lg bg-transparent navbar-light py-3 py-lg-0 px-0">
+                {/* <nav className="navbar navbar-expand-lg bg-transparent navbar-light py-3 py-lg-0 px-0">
                   <a href className="text-decoration-none d-block d-lg-none">
                     <h1 className="m-0 display-5 font-weight-semi-bold"><span className="text-primary font-weight-bold border px-3 mr-1"></span></h1>
                   </a>
@@ -155,8 +155,8 @@ const Home = ({ user, match }) => {
                     </div>
 
                   </div>
-                </nav>
-                <div id="header-carousel" className="carousel slide" data-ride="carousel">
+                </nav> */}
+                <div id="header-carousel" style={{"top":"10%"}} className="carousel slide" data-ride="carousel">
                   <div className="carousel-inner">
                     <div className="carousel-item active" style={{ height: '410px' }}>
                       <img className="img-fluid" src={banner1} alt="Image" />
