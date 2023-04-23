@@ -130,90 +130,41 @@ const Home = ({ user, match }) => {
         <Fragment>
           <MetaData title="EquipmentalsPk" />
 
-          <>
-            {" "}
-            <div className="container-fluid mb-5">
-              <div className="row border-top px-xl-5">
-                <div className="col-lg-3 d-none d-lg-block">
-                  <Caution />
-                </div>
-                <div className="col-lg-9">
-                  <nav className="navbar navbar-expand-lg bg-transparent navbar-light py-3 py-lg-0 px-0">
-                    <a href className="text-decoration-none d-block d-lg-none">
-                      <h1 className="m-0 display-5 font-weight-semi-bold">
-                        <span className="text-primary font-weight-bold border px-3 mr-1"></span>
-                      </h1>
-                    </a>
-                    <button
-                      type="button"
-                      className="navbar-toggler"
-                      data-toggle="collapse"
-                      data-target="#navbarCollapse"
-                    >
-                      <span className="navbar-toggler-icon" />
-                    </button>
-                    <div
-                      className="collapse navbar-collapse justify-content-between"
-                      id="navbarCollapse"
-                    >
-                      <div className="navbar-nav mr-auto py-0">
-                        <a
-                          className="nav-item nav-link "
-                          onClick={userProduct}
-                          style={{ "font-weight": "bold", color: "#333;" }}
-                        >
-                          Dashboard
-                        </a>
-                        <a
-                          className="nav-item nav-link"
-                          onClick={product}
-                          style={{ "font-weight": "bold", color: "#333;" }}
-                        >
-                          Post Product
-                        </a>
-                        <a
-                          href="/me/update"
-                          className="nav-item nav-link"
-                          style={{ "font-weight": "bold", color: "#333;" }}
-                        >
-                          Update Profile
-                        </a>
-                        <a
-                          className="nav-item nav-link"
-                          onClick={logoutUser}
-                          style={{ "font-weight": "bold", color: "#333;" }}
-                        >
-                          Logout
-                        </a>
-                      </div>
+
+
+          <> <div className="container-fluid mb-5">
+            <div className="row border-top px-xl-5">
+              <div className="col-lg-3 d-none d-lg-block" >
+                <Caution />
+              </div>
+              <div className="col-lg-9">
+                {/* <nav className="navbar navbar-expand-lg bg-transparent navbar-light py-3 py-lg-0 px-0">
+                  <a href className="text-decoration-none d-block d-lg-none">
+                    <h1 className="m-0 display-5 font-weight-semi-bold"><span className="text-primary font-weight-bold border px-3 mr-1"></span></h1>
+                  </a>
+                  <button type="button" className="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span className="navbar-toggler-icon" />
+                  </button>
+                  <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div className="navbar-nav mr-auto py-0">
+                      <a className="nav-item nav-link " onClick={userProduct} style={{ "font-weight": "bold", "color": "#333;" }}>Dashboard</a>
+                      <a className="nav-item nav-link" onClick={product} style={{ "font-weight": "bold", "color": "#333;" }}>Post Product</a>
+                      <a href="/me/update" className="nav-item nav-link" style={{ "font-weight": "bold", "color": "#333;" }}>Update Profile</a>
+                      <a className="nav-item nav-link" onClick={logoutUser} style={{ "font-weight": "bold", "color": "#333;" }}>Logout</a>
                     </div>
-                  </nav>
-                  <div
-                    id="header-carousel"
-                    className="carousel slide"
-                    data-ride="carousel"
-                  >
-                    <div className="carousel-inner">
-                      <div
-                        className="carousel-item active"
-                        style={{ height: "410px" }}
-                      >
-                        <img className="img-fluid" src={banner1} alt="Image" />
-                        <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                          <div className="p-3" style={{ maxWidth: "700px" }}>
-                            <h4 className="text-light text-uppercase font-weight-medium mb-3">
-                              Welcome to{" "}
-                            </h4>
-                            <h3 className="display-4 text-white font-weight-semi-bold mb-4">
-                              EquipmentalsPk
-                            </h3>
-                            <a
-                              href="/products"
-                              className="btn btn-light py-2 px-3"
-                            >
-                              Rent Now
-                            </a>
-                          </div>
+
+                  </div>
+                </nav> */}
+                <div id="header-carousel" style={{"top":"10%"}} className="carousel slide" data-ride="carousel">
+                  <div className="carousel-inner">
+                    <div className="carousel-item active" style={{ height: '410px' }}>
+                      <img className="img-fluid" src={banner1} alt="Image" />
+                      <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div className="p-3" style={{ maxWidth: '700px' }}>
+                          <h4 className="text-light text-uppercase font-weight-medium mb-3">Welcome to </h4>
+                          <h3 className="display-4 text-white font-weight-semi-bold mb-4">EquipmentalsPk</h3>
+                          <a href="/products" className="btn btn-light py-2 px-3">Rent Now</a>
+
                         </div>
                       </div>
                       <div
