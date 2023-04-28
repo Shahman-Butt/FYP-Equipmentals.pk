@@ -5,7 +5,8 @@ const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 const cloudinary = require("cloudinary");
-
+const Product = require("../models/productModel");
+const mongoose = require("mongoose");
 // Register a User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
@@ -157,6 +158,200 @@ exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
     user,
   });
 });
+
+// get notifications
+exports.getUserNotifications = catchAsyncErrors(async (req, res, next) => {
+  // const user = await User.findById(req.body);
+  const userId = await User.findById(req.user.id);
+  console.log("notifi controller");
+  try {
+    console.log("try block of not controller");
+    const products = await Product.find({
+      notifyMe: {
+        $elemMatch: { user: userId },
+      },
+    });
+    const notifications = [];
+    for (let i = 0; i < products.length; i++) {
+      const product = products[i];
+      var note1 = "";
+      var note2 = "";
+      const n = [];
+      if (product.notifyMe && product.notifyMe.length > 0) {
+        const p = product._id;
+        const notifi = product.notifyMe[product.notifyMe.length - 1];
+        if (notifi.sent == false) {
+          if (notifi.info) {
+            note1 = note1.concat("Reminder Note: ", notifi.info);
+            n.push(note1);
+          }
+          note2 = note2.concat(product.name, " is available now");
+          console.log(note1);
+          console.log(note2);
+          console.log(p);
+          n.push(note2);
+
+          // product.name, " is available on ",
+        }
+        n.push(p);
+      }
+      notifications.push(n);
+    }
+    console.log("try block of not controller 2");
+
+    console.log("noti ", notifications);
+    res.status(200).json({
+      success: true,
+      notifications,
+      // user,
+    });
+  } catch (err) {
+    console.error(err);
+    throw new Error("Could not get notifications for user");
+  }
+  // const user = await User.findById(req.user.id);
+  // res.status(200).json({
+  //   success: true,
+  //   user,
+  // });
+});
+
+// exports.getUserNotifications = catchAsyncErrors(async (req, res, next) => {
+//   const userId = await User.findById(req.user.id);
+//   console.log("notifi controller");
+
+//   // const userId = req.user.id;
+//   try {
+//     console.log("try block of not controller");
+
+//     // const products = await Product.find(
+//     //   {
+//     //     "notifyMe.user": userId,
+//     //   },
+//     //   {
+//     //     "notifyMe.info": 1,
+//     //     "notifyMe.sent": 1,
+//     //   }
+//     // );
+//     const products = await Product.find({
+//       notifyMe: {
+//         $elemMatch: { user: userId },
+//       },
+//     });
+
+//     const notifications = [];
+
+//     for (let i = 0; i < products.length; i++) {
+//       const product = products[i];
+//       var note = "";
+//       if (product.notifyMe && product.notifyMe.length > 0) {
+//         const notifi = product.notifyMe[product.notifyMe.length - 1];
+//         if (notifi.sent == false) {
+//           if (notifi.info) {
+//             note = note.concat("Reminder Note: ", notifi.info, `/n`);
+//           }
+
+//           // notifi.info
+//           // product.name, " is available on ",
+
+//           const userNotifications = product.notifyMe.filter(
+//             (n) => n.user && n.user.equals(userId)
+//           );
+
+//           notifications.push(...userNotifications);
+//         }
+//       }
+//     }
+
+//     //   console.log(product.notifyMe[product.notifyMe.length - 1].sent);
+//     //   if (product.notifyMe && product.notifyMe.length > 0) {
+//     //     const userNotifications = product.notifyMe.filter(
+//     //       (n) => n.user && n.user.equals(userId)
+//     //     );
+
+//     //     notifications.push(...userNotifications);
+//     //   }
+//     // }
+//     console.log("try block of not controller 2");
+
+//     // console.log(products);
+//     // const user = await User.findById(userId);
+
+//     // const notifications = products.flatMap((product) => {
+//     //   return product.notifyMe.filter((notification) => {
+//     //     return notification.user.equals(userId);
+//     //   });
+//     // });
+
+//     console.log("noti ", notifications);
+//     // res.status(200).json({
+//     //   success: true,
+//     //   notifications,
+//     //   user,
+//     // });
+//   } catch (err) {
+//     console.error(err);
+//     throw new Error("Could not get notifications for user");
+//   }
+
+//   // console.log("notifi controller");
+//   // // data.info
+//   // try {
+//   //   console.log("try block of not controller");
+//   //   // const products = await Product.find(
+//   //   //   {
+//   //   //     notifyMe: {
+//   //   //       $elemMatch: { user: userId },
+//   //   //     },
+//   //   //   }
+//   //   //   // { "notifyMe.info": 1, "notifyMe.sent": 1 }
+//   //   // );
+
+//   //   const products = await Product.aggregate([
+//   //     {
+//   //       $match: { "notifyMe.user": userId },
+//   //     },
+//   //     {
+//   //       // $project: {
+//   //       notifyMe: {
+//   //         // $filter: {
+//   //         //   input: "$notifyMe",
+//   //         //   as: "notify",
+//   //         //   cond: { $eq: ["$$notify.user", userId] },
+//   //         // },
+//   //         // },
+//   //         _id: 0,
+//   //         user: userId,
+//   //         info: "",
+//   //         sent: false,
+//   //       },
+//   //     },
+//   //   ]);
+//   //   // res.status(200).json({
+//   //   //   success: true,
+//   //   //   notifications: products
+//   //   // });
+
+//   //   console.log(products);
+//   //   // return product.notifyMe.filter((n) => n.user.equals(userId));
+//   // } catch (err) {
+//   //   console.log("catch block of not controller");
+//   //   console.error(err);
+//   //   throw new Error("Could not get notifyMe for user");
+//   // }
+
+//   // // res.status(200).json({
+//   // //   success: true,
+//   // //   user,
+//   // // });
+//   const user = await User.findById(req.user.id);
+
+//   // console.log("notifi controller", user);
+//   res.status(200).json({
+//     success: true,
+//     user,
+//   });
+// });
 
 // update User password
 exports.updatePassword = catchAsyncErrors(async (req, res, next) => {

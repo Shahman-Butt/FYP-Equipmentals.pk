@@ -34,6 +34,9 @@ import {
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
   USER_DETAILS_FAIL,
+  NOTIFICATION_DETAILS_REQUEST,
+  NOTIFICATION_DETAILS_SUCCESS,
+  NOTIFICATION_DETAILS_FAIL,
   CLEAR_ERRORS,
 } from "../constants/userConstants";
 import axios from "axios";
@@ -221,6 +224,27 @@ export const getUserDetails = (id) => async (dispatch) => {
   }
 };
 
+export const getUserNotifications = (user) => async (dispatch) => {
+  console.log("noti action");
+  try {
+    dispatch({ type: NOTIFICATION_DETAILS_REQUEST });
+    console.log("noti try action art 1");
+    // console.log(`/api/v1/admin/notifications/${user._id}`);
+
+    const { data } = await axios.get(`/api/v1/me2`);
+    // const { data } = await axios.get(`/api/v1/admin/notifications/${user._id}`);
+    // const { data } = await axios.get(`/api/v1/admin/user/${user._id}`);
+    console.log("noti try action");
+    console.log(data, "data");
+    dispatch({ type: NOTIFICATION_DETAILS_SUCCESS, payload: data.user });
+  } catch (error) {
+    console.log("noti catch action");
+    dispatch({
+      type: NOTIFICATION_DETAILS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 // Update User
 export const updateUser = (id, userData) => async (dispatch) => {
   try {

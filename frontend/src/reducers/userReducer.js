@@ -38,6 +38,9 @@ import {
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
   USER_DETAILS_FAIL,
+  NOTIFICATION_DETAILS_REQUEST,
+  NOTIFICATION_DETAILS_SUCCESS,
+  NOTIFICATION_DETAILS_FAIL,
   CLEAR_ERRORS,
 } from "../constants/userConstants";
 
@@ -253,6 +256,38 @@ export const userDetailsReducer = (state = { user: {} }, action) => {
       };
 
     case USER_DETAILS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const notificationDetailsReducer = (state = { user: {} }, action) => {
+  switch (action.type) {
+    case NOTIFICATION_DETAILS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case NOTIFICATION_DETAILS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        user: action.payload,
+      };
+
+    case NOTIFICATION_DETAILS_FAIL:
       return {
         ...state,
         loading: false,
