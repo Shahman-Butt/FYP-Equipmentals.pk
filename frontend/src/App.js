@@ -73,7 +73,7 @@ function App(match) {
 
   return (
     <Router>
-      <Header />
+      <Header user={user} />
 
       {isAuthenticated && <UserOptions user={user} />}
 
