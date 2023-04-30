@@ -15,14 +15,15 @@ import PeopleIcon from "@material-ui/icons/People";
 import RateReviewIcon from "@material-ui/icons/RateReview";
 import Pagination from "react-js-pagination";
 import Slider from "@material-ui/core/Slider";
+
 const categories = [
-  "Laptop",
-  "Footwear",
-  "Bottom",
-  "Tops",
-  "Attire",
-  "Camera",
-  "SmartPhones",
+  "Beauty and Personal Care",
+  "Electronics",
+  "Home and Kitchen",
+  "Men Clothing",
+  "Tools and Improvements",
+  "Toys",
+  "Women Clothing",
 ];
 const Sidebar = () => {
   return (

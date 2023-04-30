@@ -10,17 +10,17 @@ import { useAlert } from "react-alert";
 import Typography from "@material-ui/core/Typography";
 import MetaData from "../layout/MetaData";
 import { FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
-import banner1 from '../../images/banner1.jpg';
-import banner2 from '../../images/banner2.jpg';
+import banner1 from "../../images/banner1.jpg";
+import banner2 from "../../images/banner2.jpg";
 
 const categories = [
-  "Laptop",
-  "Footwear",
-  "Bottom",
-  "Tops",
-  "Attire",
-  "Camera",
-  "SmartPhones",
+  "Beauty and Personal Care",
+  "Electronics",
+  "Home and Kitchen",
+  "Men Clothing",
+  "Tools and Improvements",
+  "Toys",
+  "Women Clothing",
 ];
 
 const Products = ({ match }) => {
@@ -70,73 +70,77 @@ const Products = ({ match }) => {
       ) : (
         <Fragment>
           <MetaData title="PRODUCTS -- EquipmentalsPk" />
-          <> <div className="container-fluid mb-5">
-        <div className="row border-top px-xl-5">
-          <div className="col-lg-3 d-none d-lg-block" >
-            <div class="list-group" style={{ margin: "0% 10% 0% 10%" }}>
-                
-                <FormControl>
-                  <InputLabel id="category-dropdown" style={{"font-weight":"bold", "color":"#333;"}}>Categories</InputLabel>
-                  <Select
-                    labelId="category-dropdown"
-                    id="category-select"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                  >
-                    {categories.map((category) => (
-                      <MenuItem key={category} value={category}>
-                        {category}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-                <div className="" style={{"marginTop": "100%"}}>
-                  <Typography>Price</Typography>
-                  <Slider
-                    value={price}
-                    onChange={priceHandler}
-                    valueLabelDisplay="auto"
-                    aria-labelledby="range-slider"
-                    min={0}
-                    max={25000}
-                  />
+          <>
+            {" "}
+            <div className="container-fluid mb-5">
+              <div className="row border-top px-xl-5">
+                <div className="col-lg-3 d-none d-lg-block">
+                  <div class="list-group" style={{ margin: "0% 10% 0% 10%" }}>
+                    <FormControl>
+                      <InputLabel
+                        id="category-dropdown"
+                        style={{ "font-weight": "bold", color: "#333;" }}
+                      >
+                        Categories
+                      </InputLabel>
+                      <Select
+                        labelId="category-dropdown"
+                        id="category-select"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                      >
+                        {categories.map((category) => (
+                          <MenuItem key={category} value={category}>
+                            {category}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                    <div className="" style={{ marginTop: "100%" }}>
+                      <Typography>Price</Typography>
+                      <Slider
+                        value={price}
+                        onChange={priceHandler}
+                        valueLabelDisplay="auto"
+                        aria-labelledby="range-slider"
+                        min={0}
+                        max={25000}
+                      />
 
-                  <fieldset>
-                    <Typography component="legend">Ratings Above</Typography>
-                    <Slider
-                      value={ratings}
-                      onChange={(e, newRating) => {
-                        setRatings(newRating);
-                      }}
-                      aria-labelledby="continuous-slider"
-                      valueLabelDisplay="auto"
-                      min={0}
-                      max={5}
-                    />
-                  </fieldset>
+                      <fieldset>
+                        <Typography component="legend">
+                          Ratings Above
+                        </Typography>
+                        <Slider
+                          value={ratings}
+                          onChange={(e, newRating) => {
+                            setRatings(newRating);
+                          }}
+                          aria-labelledby="continuous-slider"
+                          valueLabelDisplay="auto"
+                          min={0}
+                          max={5}
+                        />
+                      </fieldset>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-9 d-none d-lg-block">
+                  <>
+                    <h2 className="productsHeading">Products</h2>
+
+                    <div className="products">
+                      {products &&
+                        products.map((product) => (
+                          <ProductCard key={product._id} product={product} />
+                        ))}
+                    </div>
+                  </>
                 </div>
               </div>
-          </div>
-          <div className="col-lg-9 d-none d-lg-block">
-          <>
-          <h2 className="productsHeading">Products</h2>
+            </div>
+          </>
 
-          <div className="products">
-            {products &&
-              products.map((product) => (
-                <ProductCard key={product._id} product={product} />
-              ))}
-          </div></>
-
-          </div>
-         
-        </div>
-      </div>
-    
-</>
-       
-
-      
           {resultPerPage < count && (
             <div className="paginationBox">
               <Pagination

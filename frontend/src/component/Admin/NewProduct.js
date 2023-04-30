@@ -25,26 +25,26 @@ const NewProduct = ({ history }) => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [availableDates, setAvailableDates] = useState([]);
-  const [archive, setArchive] = useState("");
+  const [archive, setArchive] = useState("Not Archived");
   // const [Stock, setStock] = useState(0);
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
   const categories = [
-    "Laptop",
-    "Footwear",
-    "Bottom",
-    "Tops",
-    "Attire",
-    "Camera",
-    "SmartPhones",
+    "Beauty and Personal Care",
+    "Electronics",
+    "Home and Kitchen",
+    "Men Clothing",
+    "Tools and Improvements",
+    "Toys",
+    "Women Clothing",
   ];
 
   const dateDict = {};
   // Get current date
   const currentDate = new Date();
   // Loop through next 30 days and add to dictionary
-  for (let i = 0; i < 30; i++) {
+  for (let i = 1; i < 31; i++) {
     const date = new Date(
       currentDate.getFullYear(),
       currentDate.getMonth(),
@@ -203,7 +203,7 @@ const NewProduct = ({ history }) => {
             <div>
               <StorageIcon />
               <select onChange={(e) => setArchive(e.target.value)}>
-                <option value="">Mark it as archived or not archived</option>
+                {/* <option value="">Mark it as archived or not archived</option> */}
                 {available.map((avail) => (
                   <option key={avail} value={avail}>
                     {avail}

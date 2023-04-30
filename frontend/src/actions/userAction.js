@@ -236,7 +236,11 @@ export const getUserNotifications = (user) => async (dispatch) => {
     // const { data } = await axios.get(`/api/v1/admin/user/${user._id}`);
     console.log("noti try action");
     console.log(data, "data");
-    dispatch({ type: NOTIFICATION_DETAILS_SUCCESS, payload: data.user });
+
+    dispatch({
+      type: NOTIFICATION_DETAILS_SUCCESS,
+      payload: data.notifications,
+    });
   } catch (error) {
     console.log("noti catch action");
     dispatch({

@@ -40,13 +40,13 @@ import banner2 from "../../images/banner2.jpg";
 import banner3 from "../../images/banner3.jpg";
 
 const categories = [
-  "Laptop",
-  "Footwear",
-  "Bottom",
-  "Tops",
-  "Attire",
-  "Camera",
-  "SmartPhones",
+  "Beauty and Personal Care",
+  "Electronics",
+  "Home and Kitchen",
+  "Men Clothing",
+  "Tools and Improvements",
+  "Toys",
+  "Women Clothing",
 ];
 const Home = ({ user, match }) => {
   const [currentPage, setCurrentPage] = useState(1);

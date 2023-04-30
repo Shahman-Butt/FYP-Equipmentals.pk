@@ -135,10 +135,10 @@
   transition: all 0.5s;
   outline: none;
 }
-.submitReview:hover {
+/* .submitReview:hover {
   background-color: rgb(197, 68, 45);
   transform: scale(1.1);
-}
+} */
 
 .submitDialog {
   display: flex;
@@ -281,4 +281,7 @@
   .reviewCardComment {
     font: 300 5vw cursive;
   }
+}
+.disabled {
+  color: grey;
 }

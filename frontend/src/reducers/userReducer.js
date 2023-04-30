@@ -273,7 +273,10 @@ export const userDetailsReducer = (state = { user: {} }, action) => {
   }
 };
 
-export const notificationDetailsReducer = (state = { user: {} }, action) => {
+export const notificationDetailsReducer = (
+  state = { notifications: {} },
+  action
+) => {
   switch (action.type) {
     case NOTIFICATION_DETAILS_REQUEST:
       return {
@@ -284,7 +287,7 @@ export const notificationDetailsReducer = (state = { user: {} }, action) => {
       return {
         ...state,
         loading: false,
-        user: action.payload,
+        notifications: action.payload,
       };
 
     case NOTIFICATION_DETAILS_FAIL:

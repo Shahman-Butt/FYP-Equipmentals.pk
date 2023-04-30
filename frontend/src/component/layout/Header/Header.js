@@ -11,7 +11,7 @@ import { logout } from "../../../actions/userAction";
 import { useSelector, useDispatch } from "react-redux";
 import { useAlert } from "react-alert";
 
-// import NotificationPanel from "./NotificationPanel.js";
+import NotificationPanel from "./NotificationPanel.js";
 // import logo2 from "../../../images/logo2.png";
 
 import logo2 from "../../../images/logo2.png";
@@ -198,8 +198,10 @@ function NavScrollExample({ user }) {
                 >
                   Contact
                 </Nav.Link>
-                {/* <NotificationPanel userId={userId} /> */}
-                {/* <NotificationPanel user={user} /> */}
+                <Nav.Link>
+                  {/* <NotificationPanel userId={userId} /> */}
+                  <NotificationPanel user={user} />
+                </Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </div>

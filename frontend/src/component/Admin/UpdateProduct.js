@@ -40,20 +40,20 @@ const UpdateProduct = ({ history, match }) => {
   const [imagesPreview, setImagesPreview] = useState([]);
 
   const categories = [
-    "Laptop",
-    "Footwear",
-    "Bottom",
-    "Tops",
-    "Attire",
-    "Camera",
-    "SmartPhones",
+    "Beauty and Personal Care",
+    "Electronics",
+    "Home and Kitchen",
+    "Men Clothing",
+    "Tools and Improvements",
+    "Toys",
+    "Women Clothing",
   ];
 
   const dateDict = {};
   // Get current date
   const currentDate = new Date();
   // Loop through next 30 days and add to dictionary
-  for (let i = 0; i < 30; i++) {
+  for (let i = 1; i < 31; i++) {
     const date = new Date(
       currentDate.getFullYear(),
       currentDate.getMonth(),
@@ -243,7 +243,7 @@ const UpdateProduct = ({ history, match }) => {
                 value={archive}
                 onChange={(e) => setArchive(e.target.value)}
               >
-                <option value="">Mark it as Archived or not Archived</option>
+                {/* <option value="">Mark it as Archived or not Archived</option> */}
                 {available.map((avail) => (
                   <option key={avail} value={avail}>
                     {avail}
