@@ -110,6 +110,7 @@ function NavScrollExample({ user }) {
                 navbarScroll
               >
                 <Nav.Link
+                  className="d-flex align-items-center"
                   as={NavLink}
                   exact
                   to="/"
@@ -117,9 +118,10 @@ function NavScrollExample({ user }) {
                   activeClassName="active-link"
                   onClick={() => handleLinkClick("/")}
                 >
-                  Home
+                  <div className="mx-auto">Home</div>
                 </Nav.Link>
                 <NavDropdown
+                  className="d-flex align-items-center"
                   title="Dashboard"
                   style={{ "font-weight": "bold", color: "#333;" }}
                   id="basic-nav-dropdown"
@@ -152,6 +154,7 @@ function NavScrollExample({ user }) {
                 </Nav.Link> */}
 
                 <NavDropdown
+                  className="d-flex align-items-center"
                   title="Profile"
                   style={{ "font-weight": "bold", color: "#333;" }}
                   id="basic-nav-dropdown"
@@ -181,27 +184,29 @@ function NavScrollExample({ user }) {
                   <NavDropdown.Divider />
                 </NavDropdown>
                 <Nav.Link
+                  className="d-flex align-items-center"
                   as={NavLink}
                   to="/about"
                   style={{ "font-weight": "bold", color: "#333;" }}
                   activeClassName="active-link"
                   onClick={() => handleLinkClick("/about")}
                 >
-                  About
+                  <div className="mx-auto">About</div>
                 </Nav.Link>
                 <Nav.Link
+                  className="d-flex align-items-center"
                   as={NavLink}
                   to="/contact"
                   style={{ "font-weight": "bold", color: "#333;" }}
                   activeClassName="active-link"
                   onClick={() => handleLinkClick("/contact")}
                 >
-                  Contact
+                  <div className="mx-auto">Contact</div>
                 </Nav.Link>
-                <Nav.Link>
-                  {/* <NotificationPanel userId={userId} /> */}
-                  <NotificationPanel user={user} />
-                </Nav.Link>
+                {/* <Nav.Link> */}
+                {/* <NotificationPanel userId={userId} /> */}
+                <NotificationPanel user={user} />
+                {/* </Nav.Link> */}
               </Nav>
             </Navbar.Collapse>
           </div>

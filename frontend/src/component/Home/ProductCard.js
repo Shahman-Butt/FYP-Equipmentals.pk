@@ -11,7 +11,8 @@ const ProductCard = ({ product }) => {
   return (
     <Link className="productCard" to={`/product/${product._id}`}>
       <img src={product.images[0].url} alt={product.name} />
-      <p style={{"font-weight":"bold", "color":"#333;"}}>{product.name}</p>
+
+      <p style={{ "font-weight": "bold", color: "#333;" }}>{product.name}</p>
       <div>
         <Rating {...options} />{" "}
         <span className="productCardSpan">
