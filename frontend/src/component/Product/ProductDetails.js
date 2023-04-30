@@ -57,7 +57,32 @@ const ProductDetails = ({ match }) => {
     readOnly: true,
     precision: 0.5,
   };
+  let pim = "";
+  let imgURL = "";
+  let l = product;
+  console.log("l", l);
 
+  // console.log("l", l.images.length);
+  // console.log("type of l", typeof l);
+  // console.log("obj chk", Object.keys(l).length);
+  // let imgURL = require("../../images/banner2.jpg").default;
+  if (product.im) {
+    console.log("product.im", product.im);
+    pim = product.im;
+    try {
+      imgURL = require(`../../images/${pim}`).default;
+      console.log(pim, "pim");
+      console.log("pim imgurl", imgURL);
+    } catch (error) {
+      console.log(`Failed to load image: ${pim}`, error);
+    }
+    // //  imgURL = require(pim).default;
+    // const i = require(`../../${pim}`).default;
+    // console.log(pim, "pim");
+    // console.log("pim imgurl", i);
+  }
+  console.log("imgURL   ", imgURL);
+  // console.log("product.images", product.images.length);
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
@@ -191,19 +216,23 @@ const ProductDetails = ({ match }) => {
         <Fragment>
           <MetaData title={`${product.name} -- ECOMMERCE`} />
           <div className="ProductDetails bg-transparent">
-            <div>
-              <Carousel>
-                {product.images &&
-                  product.images.map((item, i) => (
-                    <img
-                      className="CarouselImage"
-                      key={i}
-                      src={item.url}
-                      alt={`${i} Slide`}
-                    />
-                  ))}
-              </Carousel>
-            </div>
+            {!product.im ? (
+              <div>
+                <Carousel>
+                  {product.images &&
+                    product.images.map((item, i) => (
+                      <img
+                        className="CarouselImage"
+                        key={i}
+                        src={item.url}
+                        alt={`${i} Slide`}
+                      />
+                    ))}
+                </Carousel>
+              </div>
+            ) : (
+              <img src={imgURL} alt={product.name} />
+            )}
 
             <div>
               <div className="detailsBlock-1">
