@@ -172,30 +172,57 @@ exports.getUserNotifications = catchAsyncErrors(async (req, res, next) => {
       },
     });
     const notifications = [];
+
     for (let i = 0; i < products.length; i++) {
       const product = products[i];
-      var note1 = "";
+      // var note1 = "";
       var note2 = "";
       const n = [];
       if (product.notifyMe && product.notifyMe.length > 0) {
         const p = product._id;
         const notifi = product.notifyMe[product.notifyMe.length - 1];
-        if (notifi.sent == false) {
-          if (notifi.info) {
-            note1 = note1.concat("Reminder Note: ", notifi.info);
-            n.push(note1);
-          }
-          note2 = note2.concat(product.name, " is available now");
-          console.log(note1);
+        if (notifi.sent == true) {
+          // if (notifi.info) {
+          //   note1 = note1.concat("Reminder Note: ", notifi.info);
+          //   n.push(note1);
+          // }
+          // note2 = note2.concat(
+          //   product.name,
+          //   " is available on ",
+          //   product.availableDates
+          // );
+          note2 = note2.concat(
+            product.name,
+            " is available on ",
+            product.availableDates.map((item, index, array) => {
+              const date = new Date(item.date);
+              const dateString = date.toLocaleDateString("en-US", {
+                // year: "numeric",
+                month: "long",
+                day: "numeric",
+              });
+              if (array.length == 1) {
+                return ` ${dateString}`;
+              } else if (index === array.length - 1) {
+                return ` and ${dateString}`;
+              } else if (index === array.length - 2) {
+                return ` ${dateString}`;
+              } else if (index < array.length - 2) {
+                return ` ${dateString} `;
+              } else {
+                return ` ${dateString}`;
+              }
+            })
+          );
+          // console.log(note1);
           console.log(note2);
-          console.log(p);
+          // console.log(p);
           n.push(note2);
 
-          // product.name, " is available on ",
+          n.push(p); // product.name, " is available on ",
+          notifications.push(n);
         }
-        n.push(p);
       }
-      notifications.push(n);
     }
     console.log("try block of not controller 2");
 

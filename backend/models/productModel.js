@@ -9,7 +9,7 @@ const productSchema = mongoose.Schema({
   },
   archive: {
     type: String,
-    required: [true, "Mark it as archive or not archive"],
+    // required: [true, "Mark it as archive or not archive"],
     trim: true,
     default: "Not Archived",
   },

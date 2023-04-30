@@ -21,13 +21,13 @@ import banner1 from "../../images/banner1.jpg";
 import banner2 from "../../images/banner2.jpg";
 
 const categories = [
-  "Laptop",
-  "Footwear",
-  "Bottom",
-  "Tops",
-  "Attire",
-  "Camera",
-  "SmartPhones",
+  "Beauty and Personal Care",
+  "Electronics",
+  "Home and Kitchen",
+  "Men Clothing",
+  "Tools and Improvements",
+  "Toys",
+  "Women Clothing",
 ];
 
 const Arc = ({ match }) => {

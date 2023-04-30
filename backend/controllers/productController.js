@@ -5,7 +5,7 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apifeatures");
 const cloudinary = require("cloudinary");
 const { isAuthenticatedUser } = require("../middleware/auth");
-
+const moment = require("moment-timezone");
 // const { user } = useSelector((state) => state.user);
 // Create Product -- Admin
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
@@ -48,14 +48,22 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   //   (dateString) => new Date(dateString)
   // );
 
-  availableDates = availableDates.map((str) => new Date(str));
-  console.log(availableDates);
-  console.log(typeof availableDates);
+  // availableDates = availableDates.map((str) => new Date(str));
+  // console.log(availableDates);
+  // console.log(typeof availableDates);
   console.log(" ############## MAP to STR ###############");
-  availableDates = availableDates.map((dateString) => ({
-    date: new Date(dateString),
-  }));
+  // availableDates = availableDates.map((dateString) => ({
+  //   date: new Date(dateString),
+  // }));
 
+  availableDates = availableDates.map((dateString) =>
+    moment.tz(dateString, "ddd MMM DD YYYY", "UTC")
+  );
+
+  // Convert Moment.js objects back to Date objects
+  availableDates = availableDates.map((momentObj) => ({
+    date: momentObj.toDate(),
+  }));
   console.log(availableDates);
   console.log(" ############ DATE STR #################");
   req.body.images = imagesLinks;
@@ -227,22 +235,60 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   let availableDates = [];
   console.log(typeof req.body.availableDates);
   console.log(req.body.availableDates);
+
   console.log(" ###############b  UPDATE ##############");
   availableDates = JSON.parse(req.body.availableDates);
   console.log(typeof availableDates);
   console.log(availableDates);
   console.log(" ############# JSON UPDATE ################");
-  availableDates = availableDates.map((str) => new Date(str));
-  console.log(availableDates);
-  console.log(typeof availableDates);
-  console.log(" ############ MAP to STR UPDATE #################");
-  availableDates = availableDates.map((dateString) => ({
-    date: new Date(dateString),
-  }));
+  // availableDates = availableDates.map((str) => new Date(str));
+  // console.log(availableDates);
+  // console.log(typeof availableDates);
+  // console.log(" ############ MAP to STR UPDATE #################");
+  // availableDates = availableDates.map((dateString) => ({
+  //   date: new Date(dateString),
+  // }));
 
+  availableDates = availableDates.map((dateString) =>
+    moment.tz(dateString, "ddd MMM DD YYYY", "UTC")
+  );
+
+  // Convert Moment.js objects back to Date objects
+  availableDates = availableDates.map((momentObj) => ({
+    date: momentObj.toDate(),
+  }));
   console.log(availableDates);
   console.log(" ########### DATE STR UPDATE##################");
   req.body.availableDates = availableDates;
+  // if (availableDates !== "" && product.notifyme !== null) {
+  //   console.log("y");
+  // }
+
+  if (availableDates.length > 0 && product.notifyMe.length > 0) {
+    // update sent to true for each object in notifyme array
+    Product.updateMany(
+      { _id: product._id, "notifyMe.sent": false }, // update only if sent is false
+      { $set: { "notifyMe.$[].sent": true } } // set sent to true for all elements of the notifyMe array
+    ).exec((err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+      }
+    });
+  } else {
+    Product.updateMany(
+      { _id: product._id, "notifyMe.sent": true }, // update only if sent is false
+      { $set: { "notifyMe.$[].sent": false } } // set sent to true for all elements of the notifyMe array
+    ).exec((err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+      }
+    });
+  }
+
   // Images Start Here
   let images = [];
 
@@ -435,7 +481,6 @@ exports.createProductNotification = catchAsyncErrors(async (req, res, next) => {
 
   const notification = {
     user: req.user._id,
-    info,
   };
 
   const product = await Product.findById(productId);
@@ -446,7 +491,7 @@ exports.createProductNotification = catchAsyncErrors(async (req, res, next) => {
 
   if (isStored) {
     product.notifyMe.forEach((rev) => {
-      if (rev.user.toString() === req.user._id.toString()) rev.info = info;
+      if (rev.user.toString() === req.user._id.toString());
     });
   } else {
     product.notifyMe.push(notification);

@@ -425,12 +425,12 @@ export const newNotification = (notificationData) => async (dispatch) => {
       headers: { "Content-Type": "application/json" },
     };
 
-    console.log(config);
-    console.log(notificationData);
-    for (let pair of notificationData.entries()) {
-      console.log(typeof pair[0] + ", ppp   " + typeof pair[1]);
-      console.log(pair[0] + ", [[[[[ " + pair[1]);
-    }
+    // console.log(config);
+    // console.log(notificationData);
+    // for (let pair of notificationData.entries()) {
+    //   console.log(typeof pair[0] + ", ppp   " + typeof pair[1]);
+    //   console.log(pair[0] + ", [[[[[ " + pair[1]);
+    // }
 
     const { data } = await axios.put(
       `/api/v1/notification`,
