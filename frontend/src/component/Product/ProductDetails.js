@@ -1,3 +1,7 @@
+import "../Product/Products.css";
+import ProductCard from "../Home/ProductCard.js";
+import Pagination from "react-js-pagination";
+import { getProduct } from "../../actions/productAction";
 import React, { Fragment, useEffect, useState } from "react";
 import Carousel from "react-material-ui-carousel";
 import "./ProductDetails.css";
@@ -114,6 +118,27 @@ const ProductDetails = ({ match }) => {
 
     console.log(myForm2);
   };
+  // Recommended
+  const { products } = useSelector((state) => state.products);
+  const [currentPage, setCurrentPage] = useState(1);
+  const keyword = match.params.keyword;
+  const { resultPerPage, filteredProductsCount, productsCount } = useSelector(
+    (state) => state.products
+  );
+  let count = filteredProductsCount;
+  const setCurrentPageNo = (e) => {
+    setCurrentPage(e);
+  };
+
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+    dispatch(getProduct(keyword, currentPage));
+  }, [dispatch, keyword, currentPage, alert, error]);
+  // recommended close
+
   useEffect(() => {
     if (user && user.favorites) {
       console.log(user.favorites);
@@ -258,7 +283,42 @@ const ProductDetails = ({ match }) => {
               </button>
             </div>
           </div>
+          {/* Recommended
+           */}
+          <>
+            <h2
+              className="productsHeading"
+              style={{ "font-weight": "bold", color: "#333;" }}
+            >
+              Recommended Products
+            </h2>
 
+            <div className="products">
+              {products &&
+                products.map((product) => (
+                  <ProductCard key={product._id} product={product} />
+                ))}
+            </div>
+
+            {resultPerPage < count && (
+              <div className="paginationBox">
+                <Pagination
+                  activePage={currentPage}
+                  itemsCountPerPage={resultPerPage}
+                  totalItemsCount={productsCount}
+                  onChange={setCurrentPageNo}
+                  nextPageText="Next"
+                  prevPageText="Prev"
+                  firstPageText="1st"
+                  lastPageText="Last"
+                  itemClass="page-item"
+                  linkClass="page-link"
+                  activeClass="pageItemActive"
+                  activeLinkClass="pageLinkActive"
+                />
+              </div>
+            )}
+          </>
           <h3 className="reviewsHeading">REVIEWS</h3>
 
           <Dialog

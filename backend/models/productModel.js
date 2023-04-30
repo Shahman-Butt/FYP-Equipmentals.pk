@@ -58,18 +58,25 @@ const productSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  im: {
+    type: String,
+    required: true,
+    default:
+      "E:myworksem8WTAssignment2 bsFlexStart (1)FlexStartassetsimgportfolioportfolio-2.jpg",
+  },
   images: [
     {
       public_id: {
         type: String,
-        required: true,
+        required: false,
       },
       url: {
         type: String,
-        required: true,
+        required: false,
       },
     },
   ],
+
   availableDates: [
     {
       date: {
