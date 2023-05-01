@@ -79,10 +79,13 @@
   margin: 2vmax;
   transition: all 0.5s;
   padding-bottom: 0.5vmax;
+  height: 400px; 
+  
 }
 
 .productCard > img {
   width: 14vmax;
+  max-height: 250px;
 }
 
 .productCard > div {
@@ -136,6 +139,7 @@
     font: 300 1vmax "Roboto";
   }
 }
+
 
 
 /* custom

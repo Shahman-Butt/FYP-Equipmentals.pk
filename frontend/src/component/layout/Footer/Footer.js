@@ -24,7 +24,7 @@ const Footer = () => {
   // if (location.pathname === "/me/update") {
   //   return null;
   // }
-  if (location.pathname === "/about" || location.pathname === "/account" || location.pathname === "/admin/reviews"|| location.pathname === "/admin/product"|| location.pathname === "/admin/users" || location.pathname === "/admin/products" ||location.pathname === "/admin/dashboard" || location.pathname === "/contact" || location.pathname === "/me/update") {
+  if (location.pathname === "/about" ||  location.pathname === "/account" || location.pathname === "/admin/reviews"|| location.pathname === "/admin/product"|| location.pathname === "/admin/users" || location.pathname === "/admin/products" ||location.pathname === "/admin/dashboard" || location.pathname === "/contact" || location.pathname === "/me/update") {
     return null;
   }
   
@@ -95,40 +95,36 @@ const Footer = () => {
 
 			<div class="footer-left">
 
-				<h3>Company<span>logo</span></h3>
+				<h3>Equipmentals<span>Pk</span></h3>
 
 				<p class="footer-links">
-					<a href="#" class="link-1">Home</a>
+					<a href="/" class="link-1">Home</a>
 					
-					<a href="#">Blog</a>
-				
-					<a href="#">Pricing</a>
-				
-					<a href="#">About</a>
+					<a href="/about">About</a>
 					
-					<a href="#">Faq</a>
+					<a href="/products">Products</a>
 					
-					<a href="#">Contact</a>
+					<a href="/contact">Contact</a>
 				</p>
 
-				<p class="footer-company-name">Company Name © 2015</p>
+				<p class="footer-company-name">EquipmentalsPk © 2023</p>
 			</div>
 
 			<div class="footer-center">
 
 				<div>
 					<i class="fa fa-map-marker"></i>
-					<p><span>444 S. Cedros Ave</span> Solana Beach, California</p>
+					<p><span>University of Engineering</span> and Technology, Lahore</p>
 				</div>
 
 				<div>
 					<i class="fa fa-phone"></i>
-					<p>+1.555.555.5555</p>
+					<p>(042) 99029452</p>
 				</div>
 
 				<div>
 					<i class="fa fa-envelope"></i>
-					<p><a href="mailto:support@company.com">support@company.com</a></p>
+					<p><a href="mailto:support@company.com">EquipmentalsPk@gmail.com</a></p>
 				</div>
 
 			</div>
@@ -137,18 +133,10 @@ const Footer = () => {
 
 				<p class="footer-company-about">
 					<span>About the company</span>
-					Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+					This is our FYP for session 2019 BS Computer Engineering, UET Lahore Campus 
 				</p>
 
-				<div class="footer-icons">
-
-					<a href="#"><i class="fa fa-facebook"></i></a>
-					<a href="#"><i class="fa fa-twitter"></i></a>
-					<a href="#"><i class="fa fa-linkedin"></i></a>
-					<a href="#"><i class="fa fa-github"></i></a>
-
-				</div>
-
+			
 			</div>
 
 		</footer>
