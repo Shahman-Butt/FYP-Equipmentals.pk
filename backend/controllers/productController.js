@@ -36,14 +36,14 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
     });
   }
 
-  console.log(typeof req.body.availableDates);
-  console.log(req.body.availableDates);
+  // console.log(typeof req.body.availableDates);
+  // console.log(req.body.availableDates);
   // availableDates = req.body.availableDates.split(",");
-  console.log(" #############################");
+  // console.log(" #############################");
   availableDates = JSON.parse(req.body.availableDates);
-  console.log(typeof availableDates);
-  console.log(availableDates);
-  console.log(" ###############JSON##############");
+  // console.log(typeof availableDates);
+  // console.log(availableDates);
+  // console.log(" ###############JSON##############");
   // availableDates = req.body.availableDates.map(
   //   (dateString) => new Date(dateString)
   // );
@@ -51,7 +51,7 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   // availableDates = availableDates.map((str) => new Date(str));
   // console.log(availableDates);
   // console.log(typeof availableDates);
-  console.log(" ############## MAP to STR ###############");
+  // console.log(" ############## MAP to STR ###############");
   // availableDates = availableDates.map((dateString) => ({
   //   date: new Date(dateString),
   // }));
@@ -64,15 +64,15 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   availableDates = availableDates.map((momentObj) => ({
     date: momentObj.toDate(),
   }));
-  console.log(availableDates);
-  console.log(" ############ DATE STR #################");
+  // console.log(availableDates);
+  // console.log(" ############ DATE STR #################");
   req.body.images = imagesLinks;
   req.body.user = req.user.id;
   req.body.availableDates = availableDates;
-  console.log(req.body.availableDates);
-  console.log(req.body.images);
-  console.log(req.body.category);
-  console.log(req.body.user);
+  // console.log(req.body.availableDates);
+  // console.log(req.body.images);
+  // console.log(req.body.category);
+  // console.log(req.body.user);
 
   const product = await Product.create(req.body);
 
@@ -111,24 +111,63 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// Get Recommended Products
+exports.getRecommendedProducts = catchAsyncErrors(async (req, res, next) => {
+  const resultPerPage = 8;
+  const productsCount = await Product.countDocuments();
+  console.log("get recommended produccts in controller");
+  const product = await Product.findById(req.params.id);
+  // console.log("product in controller", product);
+  // console.log("cluster in controller");
+  const apiFeature = new ApiFeatures(
+    Product.find({
+      _id: { $ne: product._id },
+      archive: "Not Archived",
+      Cluster: product.Cluster,
+      category: product.category,
+    }),
+    req.query
+  )
+    .search()
+    .filter();
+  // console.log("apiFeature in controller", apiFeature);
+  let products = await apiFeature.query;
+  // console.log("products in controller", products);
+  let filteredProductsCount = products.length;
+
+  apiFeature.pagination(resultPerPage);
+
+  products = await apiFeature.query;
+  // console.log("productsssssssssssss in controller", products.length);
+  // console.log("productsssssssssssss in controller", products);
+
+  res.status(200).json({
+    success: true,
+    products,
+    productsCount,
+    resultPerPage,
+    filteredProductsCount,
+  });
+});
+
 // Get All Product (Admin or User)
 exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
   const user_id = req.user._id;
-  console.log("I am here", user_id);
+  // console.log("I am here", user_id);
 
   const person = await User.findOne({ _id: user_id });
-  console.log("I am ", person.role);
+  // console.log("I am ", person.role);
   if (person.role === "user") {
     const products = await Product.find({ userId: user_id });
-    console.log("user side");
-    console.log(products);
+    // console.log("user side");
+    // console.log(products);
     res.status(200).json({
       success: true,
       products,
     });
   } else {
     const products = await Product.find();
-    console.log("admin side");
+    // console.log("admin side");
     res.status(200).json({
       success: true,
       products,
@@ -141,10 +180,10 @@ exports.getFavorites = catchAsyncErrors(async (req, res, next) => {
   const user_id = req.user._id;
   const person = await User.findOne({ _id: user_id });
   const productIds = person.favorites.map((favorite) => favorite.toString());
-  console.log("I am here in favs", user_id);
-  console.log("I am user");
-  console.log(productIds);
-  console.log("user side");
+  // console.log("I am here in favs", user_id);
+  // console.log("I am user");
+  // console.log(productIds);
+  // console.log("user side");
   const products = await Product.find({ _id: { $in: productIds } });
   // console.log(products);
 
@@ -219,7 +258,7 @@ exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
     product,
   });
 
-  console.log("product deatils in product controller");
+  // console.log("product deatils in product controller");
   // }
 });
 
@@ -233,14 +272,14 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   }
 
   let availableDates = [];
-  console.log(typeof req.body.availableDates);
-  console.log(req.body.availableDates);
+  // console.log(typeof req.body.availableDates);
+  // console.log(req.body.availableDates);
 
-  console.log(" ###############b  UPDATE ##############");
+  // console.log(" ###############b  UPDATE ##############");
   availableDates = JSON.parse(req.body.availableDates);
-  console.log(typeof availableDates);
-  console.log(availableDates);
-  console.log(" ############# JSON UPDATE ################");
+  // console.log(typeof availableDates);
+  // console.log(availableDates);
+  // console.log(" ############# JSON UPDATE ################");
   // availableDates = availableDates.map((str) => new Date(str));
   // console.log(availableDates);
   // console.log(typeof availableDates);
@@ -257,8 +296,8 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   availableDates = availableDates.map((momentObj) => ({
     date: momentObj.toDate(),
   }));
-  console.log(availableDates);
-  console.log(" ########### DATE STR UPDATE##################");
+  // console.log(availableDates);
+  // console.log(" ########### DATE STR UPDATE##################");
   req.body.availableDates = availableDates;
   // if (availableDates !== "" && product.notifyme !== null) {
   //   console.log("y");
@@ -271,9 +310,9 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
       { $set: { "notifyMe.$[].sent": true } } // set sent to true for all elements of the notifyMe array
     ).exec((err, result) => {
       if (err) {
-        console.log(err);
+        // console.log(err);
       } else {
-        console.log(result);
+        // console.log(result);
       }
     });
   } else {
@@ -282,9 +321,9 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
       { $set: { "notifyMe.$[].sent": false } } // set sent to true for all elements of the notifyMe array
     ).exec((err, result) => {
       if (err) {
-        console.log(err);
+        // console.log(err);
       } else {
-        console.log(result);
+        // console.log(result);
       }
     });
   }
@@ -528,7 +567,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
 
 // Create New Review or Update the review
 exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
-  console.log("controller");
+  // console.log("controller");
   const { rating, comment, productId } = req.body;
 
   const review = {
@@ -634,22 +673,22 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
 exports.deleteFavorites = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.query.productId);
 
-  console.log(req.query.userId);
+  // console.log(req.query.userId);
   const user = await User.findById(req.query.userId);
 
-  console.log(
-    "delete favorites: userId: ",
-    user._id,
-    "and productID: ",
-    product._id
-  );
+  // console.log(
+  //   "delete favorites: userId: ",
+  //   user._id,
+  //   "and productID: ",
+  //   product._id
+  // );
   try {
     const updatedUser = await User.findByIdAndUpdate(
       user._id,
       { $pull: { favorites: product._id } },
       { new: true }
     );
-    console.log("User updated successfully:", updatedUser);
+    // console.log("User updated successfully:", updatedUser);
   } catch (error) {
     console.error("Error updating user:", error);
   }

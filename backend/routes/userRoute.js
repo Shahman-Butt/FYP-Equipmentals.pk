@@ -6,6 +6,7 @@ const {
   forgotPassword,
   resetPassword,
   getUserDetails,
+  getOwnerDetails,
   updatePassword,
   updateProfile,
   getAllUser,
@@ -32,7 +33,7 @@ router.route("/logout").get(logout);
 router.route("/me").get(isAuthenticatedUser, getUserDetails);
 
 router.route("/me2").get(isAuthenticatedUser, getUserNotifications);
-
+// router.route("/me3").get(isAuthenticatedUser, getOwnerDetails);
 // router
 //   .route("/admin/notifications/:id")
 //   .get(isAuthenticatedUser, getUserNotifications);
@@ -48,8 +49,9 @@ router
 
 router
   .route("/admin/user/:id")
-  .get(isAuthenticatedUser, authorizeRoles("admin"), getSingleUser)
+  .get(isAuthenticatedUser, getSingleUser)
   .put(isAuthenticatedUser, authorizeRoles("admin"), updateUserRole)
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteUser);
 
+router.route("/admin/user2/:userId").get(isAuthenticatedUser, getOwnerDetails);
 module.exports = router;

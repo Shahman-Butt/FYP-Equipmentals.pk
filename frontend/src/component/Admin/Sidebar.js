@@ -9,6 +9,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import PostAddIcon from "@material-ui/icons/PostAdd";
 import AddIcon from "@material-ui/icons/Add";
 import ImportExportIcon from "@material-ui/icons/ImportExport";
+import { useSelector, useDispatch } from "react-redux";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
@@ -25,7 +26,10 @@ const categories = [
   "Toys",
   "Women Clothing",
 ];
+
 const Sidebar = () => {
+  const { user } = useSelector((state) => state.user);
+  console.log(user.role, "user role");
   return (
     <div class="col-md-3">
       <div
@@ -39,13 +43,16 @@ const Sidebar = () => {
         >
           All Products
         </a>
-        <Link
-          to={"/admin/dashboard"}
-          class="list-group-item list-group-item-action"
-          // onClick={userProduct}
-        >
-          Statistics
-        </Link>
+        {user.role === "admin" && (
+          <Link
+            to={"/admin/dashboard"}
+            class="list-group-item list-group-item-action"
+            // onClick={userProduct}
+          >
+            Statistics
+          </Link>
+        )}
+
         <Link
           to={"/favorites"}
           class="list-group-item list-group-item-action"
@@ -56,20 +63,24 @@ const Sidebar = () => {
         <Link to={"/archives"} class="list-group-item list-group-item-action">
           Archives{" "}
         </Link>
-        <Link
-          to={"/admin/users"}
-          class="list-group-item list-group-item-action"
-        >
-          Users
-        </Link>
+        {user.role === "admin" && (
+          <>
+            <Link
+              to={"/admin/users"}
+              class="list-group-item list-group-item-action"
+            >
+              Users
+            </Link>
 
-        <Link
-          to={"/admin/reviews"}
-          class="list-group-item list-group-item-action"
-          // onClick={logoutUser}
-        >
-          Reviews
-        </Link>
+            <Link
+              to={"/admin/reviews"}
+              class="list-group-item list-group-item-action"
+              // onClick={logoutUser}
+            >
+              Reviews
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );

@@ -49,7 +49,7 @@ const ProductList = ({ history }) => {
 
     if (isDeleted) {
       alert.success("Product Deleted Successfully");
-      history.push("/admin/dashboard");
+      history.push("/admin/products");
       dispatch({ type: DELETE_PRODUCT_RESET });
     }
 
@@ -68,16 +68,20 @@ const ProductList = ({ history }) => {
     {
       field: "archive",
       headerName: "Archive status",
-
+      minWidth: 150,
+      flex: 0.5,
+    },
+    {
+      field: "premium",
+      headerName: "Premium",
       minWidth: 150,
       flex: 0.5,
     },
     {
       field: "price",
       headerName: "Price",
-      type: "number",
       minWidth: 150,
-      flex: 0.3,
+      flex: 0.5,
     },
 
     {
@@ -101,12 +105,18 @@ const ProductList = ({ history }) => {
             >
               <DeleteIcon />
             </Button>
-
-            <Link
-              to={`/admin/premiumproduct/${params.getValue(params.id, "id")}`}
-            >
-              <AttachMoneyIcon />
-            </Link>
+            {user.role === "admin" && (
+              <>
+                <Link
+                  to={`/admin/premiumproduct/${params.getValue(
+                    params.id,
+                    "id"
+                  )}`}
+                >
+                  <AttachMoneyIcon />
+                </Link>
+              </>
+            )}
           </Fragment>
         );
       },
@@ -121,6 +131,7 @@ const ProductList = ({ history }) => {
         id: item._id,
 
         price: item.price,
+        premium: item.premium,
         name: item.name,
         archive: item.archive,
       });
@@ -138,9 +149,9 @@ const ProductList = ({ history }) => {
         >
           <h1 id="productListHeading">ALL PRODUCTS</h1>
           {/* <p> User Id: {String(user._id)}</p> */}
-          <p style={{ margin: "10px 0 5px 0", fontWeight: "bold" }}>User ID:</p>
-          <p style={{ marginBottom: "20px", fontWeight: "bold" }}>
-            {String(user._id)}
+          <p style={{ margin: "10px 0 5px 0", fontWeight: "bold" }}>
+            User Name: &nbsp;
+            {String(user.name)}
           </p>
 
           {/* <div className="user-id-container">

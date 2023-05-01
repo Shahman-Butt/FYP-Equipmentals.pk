@@ -27,7 +27,7 @@ function NavScrollExample({ user }) {
   const handleLinkClick = (link) => {
     setActiveLink(link);
   };
-  console.log("h", user);
+  // console.log("h", user);
   // const role = user.rol;
   // console.log(role, "role");
   const searchSubmitHandler = (e) => {

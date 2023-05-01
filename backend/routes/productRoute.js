@@ -1,6 +1,7 @@
 const express = require("express");
 const {
   getAllProducts,
+  getRecommendedProducts,
   createProduct,
   updateProduct,
   deleteProduct,
@@ -25,6 +26,7 @@ const { isAuthenticatedUser } = require("../middleware/auth");
 const router = express.Router();
 
 router.route("/products").get(getAllProducts);
+router.route("/products1/:id").get(getRecommendedProducts);
 
 router.route("/admin/products").get(isAuthenticatedUser, getAdminProducts);
 
@@ -137,3 +139,76 @@ router.route("/archives/:id").put(isAuthenticatedUser, updateArchiveStatus);
 //   .get(isAuthenticatedUser, getAvailProduct);
 
 module.exports = router;
+
+// const express = require("express");
+// const {
+//   getAllProducts,
+//   getRecommendedProducts,
+//   createProduct,
+//   updateProduct,
+//   deleteProduct,
+//   getProductDetails,
+//   createProductReview,
+//   createProductNotification,
+//   getProductReviews,
+//   deleteReview,
+//   getAdminProducts,
+//   getFavorites,
+//   getArchives,
+//   deleteFavorites,
+//   premiumProduct,
+//   updateArchiveStatus,
+//   getUserProducts,
+//   getAvailProduct,
+//   createAvailProduct,
+//   notifyMe,
+// } = require("../controllers/productController");
+// const { isAuthenticatedUser } = require("../middleware/auth");
+
+// const router = express.Router();
+
+// router.route("/products").get(getAllProducts);
+// router.route("/products1/:id").get(getRecommendedProducts);
+
+// router.route("/admin/products").get(isAuthenticatedUser, getAdminProducts);
+
+// router.route("/admin/product/new").post(isAuthenticatedUser, createProduct);
+
+// router
+//   .route("/admin/product/:id")
+//   .put(isAuthenticatedUser, updateProduct)
+//   .delete(isAuthenticatedUser, deleteProduct);
+
+// router.route("/product/:id").get(getProductDetails);
+
+// router.put("/product/:id", async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const { unavailableDates } = req.body;
+
+//     const product = await Product.findById(id);
+
+//     if (!product) {
+//       return res.status(404).json({ message: "Product not found" });
+//     }
+
+//     product.unavailableDates = unavailableDates;
+//     await product.save();
+
+//     res.status(200).json(product);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: "Internal Server Error" });
+//   }
+// });
+
+// router
+//   .route("/admin/premiumproduct/:id")
+//   .put(isAuthenticatedUser, premiumProduct);
+
+// router.route("/review").put(isAuthenticatedUser, createProductReview);
+// router
+//   .route("/notification")
+//   .put(isAuthenticatedUser, createProductNotification);
+
+// module.exports = router;

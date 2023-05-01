@@ -86,7 +86,7 @@ const UsersList = ({ history }) => {
     {
       field: "role",
       headerName: "Role",
-      type: "number",
+      // type: "number",
       minWidth: 150,
       flex: 0.3,
       cellClassName: (params) => {
@@ -131,6 +131,8 @@ const UsersList = ({ history }) => {
         id: item._id,
         role: item.role,
         email: item.email,
+        addr: item.addr,
+        numb: item.numb,
         name: item.name,
       });
     });
@@ -139,11 +141,13 @@ const UsersList = ({ history }) => {
     <Fragment>
       <MetaData title={`ALL USERS - Admin`} />
 
-      <div className="dashboard row" style={{ "height": "1%" }}>
-        
+      <div className="dashboard row" style={{ height: "1%" }}>
         <SideBar />
 
-        <div className="productListContainer col-md-9  bg-transparent" style={{ "height": "0%", "width": "70%" }}>
+        <div
+          className="productListContainer col-md-9  bg-transparent"
+          style={{ height: "0%", width: "70%" }}
+        >
           <h1 id="productListHeading">ALL USERS</h1>
 
           <DataGrid
@@ -155,8 +159,6 @@ const UsersList = ({ history }) => {
             autoHeight
           />
         </div>
-
-
       </div>
     </Fragment>
   );

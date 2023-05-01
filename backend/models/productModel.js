@@ -50,12 +50,12 @@ const productSchema = mongoose.Schema({
   // },
   name: {
     type: String,
-    required: [true, "Please Enter product Name"],
+    required: [true, "Please Enter Product Name and its Description"],
     trim: true,
   },
   description: {
     type: String,
-    required: [true, "Please Enter product Description"],
+    // required: [true, "Please Enter product Description"],
   },
   price: {
     type: Number,

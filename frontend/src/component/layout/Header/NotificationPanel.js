@@ -40,7 +40,7 @@ const NotificationPanel = ({ user }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const loading = useSelector((state) => state.userNotifications.loading);
   const dispatch = useDispatch();
-  console.log("notifi panel", notifications);
+  // console.log("notifi panel", notifications);
   const handleOpenNotifications = (event) => {
     setAnchorEl(event.currentTarget);
   };

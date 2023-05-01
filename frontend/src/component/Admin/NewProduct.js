@@ -6,7 +6,7 @@ import { useAlert } from "react-alert";
 import { Button } from "@material-ui/core";
 import MetaData from "../layout/MetaData";
 import AccountTreeIcon from "@material-ui/icons/AccountTree";
-import DescriptionIcon from "@material-ui/icons/Description";
+
 import StorageIcon from "@material-ui/icons/Storage";
 import SpellcheckIcon from "@material-ui/icons/Spellcheck";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
@@ -22,7 +22,7 @@ const NewProduct = ({ history }) => {
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
-  const [description, setDescription] = useState("");
+
   const [category, setCategory] = useState("");
   const [availableDates, setAvailableDates] = useState([]);
   const [archive, setArchive] = useState("Not Archived");
@@ -50,11 +50,11 @@ const NewProduct = ({ history }) => {
       currentDate.getMonth(),
       currentDate.getDate() + i
     );
-    console.log("added");
+    // console.log("added");
     dateDict[date.toISOString().slice(0, 10)] = { date, available: false };
   }
 
-  console.log(dateDict);
+  // console.log(dateDict);
 
   const available = ["Not Archived", "Archived"];
   useEffect(() => {
@@ -77,7 +77,7 @@ const NewProduct = ({ history }) => {
 
     myForm.set("name", name);
     myForm.set("price", price);
-    myForm.set("description", description);
+
     myForm.set("category", category);
     myForm.set("archive", archive);
     // myForm.set("Stock", Stock);
@@ -130,20 +130,17 @@ const NewProduct = ({ history }) => {
             onSubmit={createProductSubmitHandler}
           >
             <h1>Create Product</h1>
-            <div>
-              {" "}
-              <h4>User Id</h4>
-              <p>{String(user._id)}</p>
-            </div>
+
             <div>
               <SpellcheckIcon />
-              <input
-                type="text"
-                placeholder="Product Name"
-                required
+              <textarea
+                placeholder="Product Name and Details"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-              />
+                cols="30"
+                rows="1"
+                required
+              ></textarea>
             </div>
             <div>
               <AttachMoneyIcon />
@@ -153,18 +150,6 @@ const NewProduct = ({ history }) => {
                 required
                 onChange={(e) => setPrice(e.target.value)}
               />
-            </div>
-
-            <div>
-              <DescriptionIcon />
-
-              <textarea
-                placeholder="Product Description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                cols="30"
-                rows="1"
-              ></textarea>
             </div>
 
             <div>

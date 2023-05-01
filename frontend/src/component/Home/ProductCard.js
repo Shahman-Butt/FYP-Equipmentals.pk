@@ -9,21 +9,21 @@ const ProductCard = ({ product }) => {
   let imgURL = "";
   // let imgURL = require("../../images/banner2.jpg").default;
   if (product.images.length <= 0 && product.im) {
-    console.log("product.im", product.im);
+    // console.log("product.im", product.im);
     pim = product.im;
     try {
       imgURL = require(`../../images/${pim}`).default;
-      console.log(pim, "pim");
-      console.log("pim imgurl", imgURL);
+      // console.log(pim, "pim");
+      // console.log("pim imgurl", imgURL);
     } catch (error) {
-      console.log(`Failed to load image: ${pim}`, error);
+      // console.log(`Failed to load image: ${pim}`, error);
     }
     // //  imgURL = require(pim).default;
     // const i = require(`../../${pim}`).default;
     // console.log(pim, "pim");
     // console.log("pim imgurl", i);
   }
-  console.log("imgURL   ", imgURL);
+  // console.log("imgURL   ", imgURL);
   const options = {
     value: product.ratings,
     readOnly: true,
@@ -38,7 +38,16 @@ const ProductCard = ({ product }) => {
         <img src={imgURL} alt={product.name} />
       )}
 
-      <p style={{ "font-weight": "bold", color: "#333;",height: "50px", overflow: "hidden" }}>{product.name}</p>
+      <p
+        style={{
+          "font-weight": "bold",
+          color: "#333;",
+          height: "50px",
+          overflow: "hidden",
+        }}
+      >
+        {product.name}
+      </p>
       <div>
         <Rating {...options} />{" "}
         <span className="productCardSpan">

@@ -159,13 +159,32 @@ exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+exports.getOwnerDetails = catchAsyncErrors(async (req, res, next) => {
+  console.log("id check in user controller", req.params.userId);
+
+  const owner = await User.findById(req.params.userId);
+
+  if (!owner) {
+    return next(
+      new ErrorHander(`User does not exist with Id: ${req.params.userId}`)
+    );
+  }
+
+  console.log(owner, "owner in controller");
+  console.log("aaag");
+  res.status(200).json({
+    success: true,
+    owner,
+  });
+});
+
 // get notifications
 exports.getUserNotifications = catchAsyncErrors(async (req, res, next) => {
   // const user = await User.findById(req.body);
   const userId = await User.findById(req.user.id);
-  console.log("notifi controller");
+  // console.log("notifi controller");
   try {
-    console.log("try block of not controller");
+    // console.log("try block of not controller");
     const products = await Product.find({
       notifyMe: {
         $elemMatch: { user: userId },
@@ -215,7 +234,7 @@ exports.getUserNotifications = catchAsyncErrors(async (req, res, next) => {
             })
           );
           // console.log(note1);
-          console.log(note2);
+          // console.log(note2);
           // console.log(p);
           n.push(note2);
 
@@ -224,9 +243,9 @@ exports.getUserNotifications = catchAsyncErrors(async (req, res, next) => {
         }
       }
     }
-    console.log("try block of not controller 2");
+    // console.log("try block of not controller 2");
 
-    console.log("noti ", notifications);
+    // console.log("noti ", notifications);
     res.status(200).json({
       success: true,
       notifications,
