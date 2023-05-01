@@ -38,7 +38,7 @@ const ProductCard = ({ product }) => {
         <img src={imgURL} alt={product.name} />
       )}
 
-      <p style={{ "font-weight": "bold", color: "#333;" }}>{product.name}</p>
+      <p style={{ "font-weight": "bold", color: "#333;",height: "50px", overflow: "hidden" }}>{product.name}</p>
       <div>
         <Rating {...options} />{" "}
         <span className="productCardSpan">

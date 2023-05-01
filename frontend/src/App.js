@@ -204,7 +204,7 @@ function App(match) {
         /> */}
       </Switch>
 
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 }
