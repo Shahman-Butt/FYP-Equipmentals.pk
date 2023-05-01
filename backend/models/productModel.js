@@ -7,6 +7,14 @@ const productSchema = mongoose.Schema({
     ref: "User",
     required: true,
   },
+  payment: {
+    type: Number,
+  },
+  Cluster: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
   archive: {
     type: String,
     // required: [true, "Mark it as archive or not archive"],

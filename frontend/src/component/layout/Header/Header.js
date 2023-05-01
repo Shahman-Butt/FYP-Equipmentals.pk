@@ -20,6 +20,7 @@ import video from "../../../../src/video.mp4";
 import { useHistory } from "react-router-dom";
 
 function NavScrollExample({ user }) {
+  const { isAuthenticated } = useSelector((state) => state.user);
   const [keyword, setKeyword] = useState("");
   const history = useHistory();
   const [activeLink, setActiveLink] = useState("/");
@@ -120,69 +121,75 @@ function NavScrollExample({ user }) {
                 >
                   <div className="mx-auto">Home</div>
                 </Nav.Link>
-                <NavDropdown
-                  className="d-flex align-items-center"
-                  title="Dashboard"
-                  style={{ "font-weight": "bold", color: "#333;" }}
-                  id="basic-nav-dropdown"
-                >
-                  <NavDropdown.Item
-                    href=""
-                    activeClassName="active-link"
-                    onClick={userProduct}
-                  >
-                    Dashboard
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item
-                    href="/products"
-                    activeClassName="active-link"
-                  >
-                    View Products
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item
-                    onClick={product}
-                    activeClassName="active-link"
-                  >
-                    Post Product
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                </NavDropdown>
+                {isAuthenticated ? (
+                  <>
+                    <NavDropdown
+                      className="d-flex align-items-center"
+                      title="Dashboard"
+                      style={{ "font-weight": "bold", color: "#333;" }}
+                      id="basic-nav-dropdown"
+                    >
+                      <NavDropdown.Item
+                        href=""
+                        activeClassName="active-link"
+                        onClick={userProduct}
+                      >
+                        Dashboard
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item
+                        href="/products"
+                        activeClassName="active-link"
+                      >
+                        View Products
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item
+                        onClick={product}
+                        activeClassName="active-link"
+                      >
+                        Post Product
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                    </NavDropdown>
+                    <NavDropdown
+                      className="d-flex align-items-center"
+                      title="Profile"
+                      style={{ "font-weight": "bold", color: "#333;" }}
+                      id="basic-nav-dropdown"
+                    >
+                      <NavDropdown.Item
+                        href="/account"
+                        activeClassName="active-link"
+                        onClick={() => handleLinkClick("/account")}
+                      >
+                        View Profile
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item
+                        href="/me/update"
+                        activeClassName="active-link"
+                        onClick={() => handleLinkClick("/me/update")}
+                      >
+                        Update Profile
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item
+                        onClick={logoutUser}
+                        activeClassName="active-link"
+                      >
+                        Logout
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                    </NavDropdown>
+                  </>
+                ) : (
+                  <></>
+                )}
                 {/* <Nav.Link as={NavLink} to="/products" style={{ "font-weight": "bold", "color": "#333;" }} activeClassName="active-link" onClick={() => handleLinkClick('/products')}>
                   Products
                 </Nav.Link> */}
 
-                <NavDropdown
-                  className="d-flex align-items-center"
-                  title="Profile"
-                  style={{ "font-weight": "bold", color: "#333;" }}
-                  id="basic-nav-dropdown"
-                >
-                  <NavDropdown.Item
-                    href="/account"
-                    activeClassName="active-link"
-                    onClick={() => handleLinkClick("/account")}
-                  >
-                    View Profile
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item
-                    href="/me/update"
-                    activeClassName="active-link"
-                    onClick={() => handleLinkClick("/me/update")}
-                  >
-                    Update Profile
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item
-                    onClick={logoutUser}
-                    activeClassName="active-link"
-                  >
-                    Logout
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                </NavDropdown>
                 <Nav.Link
                   className="d-flex align-items-center"
                   as={NavLink}
@@ -203,10 +210,24 @@ function NavScrollExample({ user }) {
                 >
                   <div className="mx-auto">Contact</div>
                 </Nav.Link>
-                {/* <Nav.Link> */}
-                {/* <NotificationPanel userId={userId} /> */}
-                <NotificationPanel user={user} />
-                {/* </Nav.Link> */}
+                {isAuthenticated ? (
+                  <>
+                    <NotificationPanel user={user} />
+                  </>
+                ) : (
+                  <>
+                    <Nav.Link
+                      className="d-flex align-items-center"
+                      onClick={() => handleLinkClick("/login")}
+                      as={NavLink}
+                      to="/login"
+                      style={{ "font-weight": "bold", color: "#333;" }}
+                      activeClassName="active-link"
+                    >
+                      Login
+                    </Nav.Link>
+                  </>
+                )}
               </Nav>
             </Navbar.Collapse>
           </div>
