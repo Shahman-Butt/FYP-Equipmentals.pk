@@ -1,12 +1,13 @@
 import "../Product/Products.css";
 import ProductCard from "../Home/ProductCard.js";
 import Pagination from "react-js-pagination";
-import { getProduct } from "../../actions/productAction";
+import { getRecommendedProduct } from "../../actions/productAction";
 import React, { Fragment, useEffect, useState } from "react";
 import Carousel from "react-material-ui-carousel";
 import "./ProductDetails.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  getProduct,
   clearErrors,
   getProductDetails,
   newReview,
@@ -20,7 +21,7 @@ import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
 import { addItemsToCart } from "../../actions/cartAction";
-import { addItemsToFavorites } from "../../actions/userAction";
+import { addItemsToFavorites, getOwnerDetails } from "../../actions/userAction";
 import {
   Dialog,
   DialogActions,
@@ -41,15 +42,22 @@ const ProductDetails = ({ match }) => {
   const productId = match.params.id;
   console.log("productId", productId);
 
-  const { product, loading, error } = useSelector(
-    (state) => state.productDetails
-  );
+  const { product, error } = useSelector((state) => state.productDetails);
+  const { loading, setLoading } = useSelector((state) => state.productDetails);
   const { success, error: reviewError } = useSelector(
     (state) => state.newReview
   );
+  // const { owner = {} } = useSelector((state) => state.ownerDetailsReducer);
+  // console.log("ownerrrrrrrrrrrrrr", owner);
+
   // const { succes, error: notificationError } = useSelector(
   //   (state) => state.newNotification
   // );
+  const [owner, setOwner] = useState(null);
+  // const { owner } = useSelector((state) => state.ownerDetailsReducer);
+
+  const state = useSelector((state) => state);
+  console.log(state, "state");
 
   const options = {
     size: "large",
@@ -60,34 +68,34 @@ const ProductDetails = ({ match }) => {
   let pim = "";
   let imgURL = "";
   let l = product;
-  console.log("l", l);
+  // console.log("l", l);
 
   // console.log("l", l.images.length);
   // console.log("type of l", typeof l);
   // console.log("obj chk", Object.keys(l).length);
   // let imgURL = require("../../images/banner2.jpg").default;
   if (product.im) {
-    console.log("product.im", product.im);
+    // console.log("product.im", product.im);
     pim = product.im;
     try {
       imgURL = require(`../../images/${pim}`).default;
-      console.log(pim, "pim");
-      console.log("pim imgurl", imgURL);
+      // console.log(pim, "pim");
+      // console.log("pim imgurl", imgURL);
     } catch (error) {
-      console.log(`Failed to load image: ${pim}`, error);
+      // console.log(`Failed to load image: ${pim}`, error);
     }
     // //  imgURL = require(pim).default;
     // const i = require(`../../${pim}`).default;
     // console.log(pim, "pim");
     // console.log("pim imgurl", i);
   }
-  console.log("imgURL   ", imgURL);
+  // console.log("imgURL   ", imgURL);
   // console.log("product.images", product.images.length);
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const { user, isAuthenticated } = useSelector((state) => state.user);
-
+  console.log("usename", user.name);
   const [buttonText, setButtonText] = useState("Notify Me When Available");
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -131,7 +139,7 @@ const ProductDetails = ({ match }) => {
     dispatch(newReview(myForm));
 
     setOpen(false);
-    console.log(myForm);
+    // console.log(myForm);
   };
 
   const notificationSubmitHandler = () => {
@@ -141,15 +149,19 @@ const ProductDetails = ({ match }) => {
 
     dispatch(newNotification(myForm2));
 
-    console.log(myForm2);
+    // console.log(myForm2);
   };
   // Recommended
   const { products } = useSelector((state) => state.products);
   const [currentPage, setCurrentPage] = useState(1);
   const keyword = match.params.keyword;
+
   const { resultPerPage, filteredProductsCount, productsCount } = useSelector(
     (state) => state.products
   );
+  const Cluster = product.Cluster;
+  const id = product._id;
+  console.log(Cluster, "cluster");
   let count = filteredProductsCount;
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
@@ -160,28 +172,30 @@ const ProductDetails = ({ match }) => {
       alert.error(error);
       dispatch(clearErrors());
     }
-    dispatch(getProduct(keyword, currentPage));
-  }, [dispatch, keyword, currentPage, alert, error]);
+    // dispatch(getProduct(keyword, currentPage));
+    dispatch(getRecommendedProduct(id, Cluster));
+  }, [dispatch, Cluster, keyword, alert, error, productId]);
+
   // recommended close
 
   useEffect(() => {
     if (user && user.favorites) {
-      console.log(user.favorites);
+      // console.log(user.favorites);
       const isFav = user.favorites.some((favorite) => favorite === product._id);
       setIsFavorite(isFav ? true : false);
     }
   }, [user, product]);
 
   useEffect(() => {
-    console.log(
-      "######################################### IMP ######################"
-    );
+    // console.log(
+    //   "######################################### IMP ######################"
+    // );
     if (product && product.notifyMe) {
-      console.log(product.notifyMe, "product.notifyMe");
-      console.log("user ID ########", user._id);
+      // console.log(product.notifyMe, "product.notifyMe");
+      // console.log("user ID ########", user._id);
 
       const isNoti = product.notifyMe.some((noti) => noti.user === user._id);
-      console.log("user noti ########", isNoti);
+      // console.log("user noti ########", isNoti);
       setButtonText(
         isNoti ? "You will be Notified" : "Notify Me When Available"
       );
@@ -208,6 +222,26 @@ const ProductDetails = ({ match }) => {
     dispatch(getProductDetails(match.params.id));
   }, [dispatch, match.params.id, error, alert, reviewError, success]);
 
+  // useEffect(() => {
+  //   if (error) {
+  //     alert.error(error);
+  //     dispatch(clearErrors());
+  //   }
+  //   // dispatch(getProduct(keyword, currentPage));
+  //   console.log(" owner id", product.userId);
+  //   dispatch(getOwnerDetails(product.userId));
+
+  // }, [dispatch, Cluster, keyword, alert, error, productId]);
+  // const [setLoading] = useState(true);
+
+  useEffect(() => {
+    dispatch(getOwnerDetails(product.userId)).then((res) => {
+      setOwner(res.data.owner);
+      setLoading(true);
+    });
+  }, [dispatch, product.userId]);
+
+  console.log(setOwner);
   return (
     <Fragment>
       {loading ? (
@@ -237,7 +271,7 @@ const ProductDetails = ({ match }) => {
             <div>
               <div className="detailsBlock-1">
                 <h2>{product.name}</h2>
-                <p>Product # {product._id}</p>
+                {/* <p>Product # {product._id}</p> */}
               </div>
               <div className="detailsBlock-2">
                 <Rating {...options} />
@@ -278,10 +312,17 @@ const ProductDetails = ({ match }) => {
                   </div>
                 </div>
               </div>
-
-              <div className="detailsBlock-4">
-                Description : <p>{product.description}</p>
-              </div>
+              {owner && (
+                <div>
+                  {" "}
+                  <div className="detailsBlock-4">
+                    Contact : <p>{owner.numb}</p>
+                  </div>
+                  <div className="detailsBlock-4">
+                    Location : <p>{owner.addr}</p>
+                  </div>
+                </div>
+              )}
               <div>
                 <div>
                   {product.availableDates && product.availableDates[0] ? (

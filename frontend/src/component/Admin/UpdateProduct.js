@@ -9,7 +9,7 @@ import { useAlert } from "react-alert";
 import { Button } from "@material-ui/core";
 import MetaData from "../layout/MetaData";
 import AccountTreeIcon from "@material-ui/icons/AccountTree";
-import DescriptionIcon from "@material-ui/icons/Description";
+
 import StorageIcon from "@material-ui/icons/Storage";
 import SpellcheckIcon from "@material-ui/icons/Spellcheck";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
@@ -30,7 +30,7 @@ const UpdateProduct = ({ history, match }) => {
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
-  const [description, setDescription] = useState("");
+
   const [category, setCategory] = useState("");
   const [availableDates, setAvailableDates] = useState([]);
   const [archive, setArchive] = useState("");
@@ -59,7 +59,7 @@ const UpdateProduct = ({ history, match }) => {
       currentDate.getMonth(),
       currentDate.getDate() + i
     );
-    console.log("added");
+    // console.log("added");
     dateDict[date.toISOString().slice(0, 10)] = { date, available: false };
   }
   const available = ["Not Archived", "Archived"];
@@ -70,12 +70,12 @@ const UpdateProduct = ({ history, match }) => {
       dispatch(getProductDetails(productId));
     } else {
       setName(product.name);
-      setDescription(product.description);
+
       setPrice(product.price);
       setCategory(product.category);
       setArchive(product.archive);
       // setAvailableDates(product.availableDates);
-      console.log(product.archive);
+      // console.log(product.archive);
       // for (let i = 0; i < product.availableDates.length; i++) {
       //   const currentDate = product.ArrayavailableDates[i].date;
       //   console.log(currentDate);
@@ -117,7 +117,7 @@ const UpdateProduct = ({ history, match }) => {
 
     myForm.set("name", name);
     myForm.set("price", price);
-    myForm.set("description", description);
+
     myForm.set("category", category);
 
     myForm.append("availableDates", JSON.stringify(availableDates));
@@ -156,9 +156,12 @@ const UpdateProduct = ({ history, match }) => {
     <Fragment>
       <MetaData title="Update Product" />
 
-      <div className="dashboard row" style={{ "height": "1%" }}>
+      <div className="dashboard row" style={{ height: "1%" }}>
         <SideBar />
-        <div className="newProductContainer col-md-9  bg-transparent" style={{ "height": "0%", "width": "70%" }} >
+        <div
+          className="newProductContainer col-md-9  bg-transparent"
+          style={{ height: "0%", width: "70%" }}
+        >
           <form
             className="createProductForm"
             encType="multipart/form-data"
@@ -168,13 +171,14 @@ const UpdateProduct = ({ history, match }) => {
 
             <div>
               <SpellcheckIcon />
-              <input
-                type="text"
-                placeholder="Product Name"
-                required
+              <textarea
+                placeholder="Product Name and Details"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-              />
+                cols="30"
+                rows="1"
+                required
+              ></textarea>
             </div>
             <div>
               <AttachMoneyIcon />
@@ -185,18 +189,6 @@ const UpdateProduct = ({ history, match }) => {
                 onChange={(e) => setPrice(e.target.value)}
                 value={price}
               />
-            </div>
-
-            <div>
-              <DescriptionIcon />
-
-              <textarea
-                placeholder="Product Description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                cols="30"
-                rows="1"
-              ></textarea>
             </div>
 
             <div>

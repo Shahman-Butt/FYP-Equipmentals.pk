@@ -4,7 +4,7 @@ import MetaData from "../layout/MetaData";
 import Loader from "../layout/Loader/Loader";
 import { Link } from "react-router-dom";
 import "./Profile.css";
-import header from "../layout/Header/Header"
+import header from "../layout/Header/Header";
 
 const Profile = ({ history }) => {
   const { user, loading, isAuthenticated } = useSelector((state) => state.user);
@@ -16,7 +16,7 @@ const Profile = ({ history }) => {
   }, [history, isAuthenticated]);
   return (
     <Fragment>
-      <header/>
+      <header />
       {loading ? (
         <Loader />
       ) : (
@@ -29,34 +29,36 @@ const Profile = ({ history }) => {
               <Link to="/me/update">Edit Profile</Link>
             </div>
             <div>
-              <div>
+              {/* <div>
                 {" "}
                 <h4  style={{"font-weight": "bolder"}}>User Id</h4>
                 <p style={{"font-weight": "bolder"}}>{String(user._id)}</p>
+              </div> */}
+              <div>
+                <h4 style={{ "font-weight": "bolder" }}>Full Name</h4>
+                <p style={{ "font-weight": "bolder" }}>{user.name}</p>
               </div>
               <div>
-                <h4 style={{"font-weight": "bolder"}}>Full Name</h4>
-                <p style={{"font-weight": "bolder"}}>{user.name}</p>
+                <h4 style={{ "font-weight": "bolder" }}>Email</h4>
+                <p style={{ "font-weight": "bolder" }}>{user.email}</p>
               </div>
               <div>
-                <h4 style={{"font-weight": "bolder"}}>Email</h4>
-                <p style={{"font-weight": "bolder"}}>{user.email}</p>
+                <h4 style={{ "font-weight": "bolder" }}>Location</h4>
+                <p style={{ "font-weight": "bolder" }}>{user.addr}</p>
               </div>
               <div>
-                <h4 style={{"font-weight": "bolder"}}>Location</h4>
-                <p style={{"font-weight": "bolder"}}>{user.addr}</p>
-              </div>
-              <div>
-                <h4 style={{"font-weight": "bolder"}}>Contact Number</h4>
-                <p style={{"font-weight": "bolder"}}>{user.numb}</p>
+                <h4 style={{ "font-weight": "bolder" }}>Contact Number</h4>
+                <p style={{ "font-weight": "bolder" }}>{user.numb}</p>
               </div>
               {/* <div>
                 <h4 style={{"font-weight": "bolder"}}>Loaction</h4>
                 <p style={{"font-weight": "bolder"}}>{user.loc}</p>
               </div> */}
               <div>
-                <h4 style={{"font-weight": "bolder"}}>Joined On</h4>
-                <p style={{"font-weight": "bolder"}}>{String(user.createdAt).substr(0, 10)}</p>
+                <h4 style={{ "font-weight": "bolder" }}>Joined On</h4>
+                <p style={{ "font-weight": "bolder" }}>
+                  {String(user.createdAt).substr(0, 10)}
+                </p>
               </div>
               <div>
                 {/* <Link to="/orders">My Orders</Link> */}

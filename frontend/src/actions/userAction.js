@@ -34,6 +34,9 @@ import {
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
   USER_DETAILS_FAIL,
+  OWNER_DETAILS_REQUEST,
+  OWNER_DETAILS_SUCCESS,
+  OWNER_DETAILS_FAIL,
   NOTIFICATION_DETAILS_REQUEST,
   NOTIFICATION_DETAILS_SUCCESS,
   NOTIFICATION_DETAILS_FAIL,
@@ -224,25 +227,44 @@ export const getUserDetails = (id) => async (dispatch) => {
   }
 };
 
+export const getOwnerDetails = (id) => async (dispatch) => {
+  console.log("get ownerdetails in action");
+  console.log("Oid in user action", id);
+  try {
+    console.log("get ownerdetails in action try 1");
+    dispatch({ type: OWNER_DETAILS_REQUEST });
+    const { data } = await axios.get(`/api/v1/admin/user2/${id}`);
+    console.log("data in get OWner deatils action", data);
+    dispatch({ type: OWNER_DETAILS_SUCCESS, payload: data.owner });
+    console.log("get ownerdetails in action try 2");
+  } catch (error) {
+    console.log("get ownerdetails in action catch");
+    dispatch({
+      type: OWNER_DETAILS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
 export const getUserNotifications = (user) => async (dispatch) => {
-  console.log("noti action");
+  // console.log("noti action");
   try {
     dispatch({ type: NOTIFICATION_DETAILS_REQUEST });
-    console.log("noti try action art 1");
+    // console.log("noti try action art 1");
     // console.log(`/api/v1/admin/notifications/${user._id}`);
 
     const { data } = await axios.get(`/api/v1/me2`);
     // const { data } = await axios.get(`/api/v1/admin/notifications/${user._id}`);
     // const { data } = await axios.get(`/api/v1/admin/user/${user._id}`);
-    console.log("noti try action");
-    console.log(data, "data");
+    // console.log("noti try action");
+    // console.log(data, "data");
 
     dispatch({
       type: NOTIFICATION_DETAILS_SUCCESS,
       payload: data.notifications,
     });
   } catch (error) {
-    console.log("noti catch action");
+    // console.log("noti catch action");
     dispatch({
       type: NOTIFICATION_DETAILS_FAIL,
       payload: error.response.data.message,

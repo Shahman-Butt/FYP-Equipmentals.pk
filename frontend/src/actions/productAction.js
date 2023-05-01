@@ -4,6 +4,9 @@ import {
   ALL_PRODUCT_FAIL,
   ALL_PRODUCT_REQUEST,
   ALL_PRODUCT_SUCCESS,
+  RECOMMENDED_PRODUCT_FAIL,
+  RECOMMENDED_PRODUCT_REQUEST,
+  RECOMMENDED_PRODUCT_SUCCESS,
   ADMIN_PRODUCT_REQUEST,
   ADMIN_PRODUCT_SUCCESS,
   ADMIN_PRODUCT_FAIL,
@@ -47,6 +50,7 @@ import {
 export const getProduct =
   (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
   async (dispatch) => {
+    console.log("a;; product in action");
     try {
       dispatch({ type: ALL_PRODUCT_REQUEST });
 
@@ -57,6 +61,43 @@ export const getProduct =
       }
 
       const { data } = await axios.get(link);
+
+      dispatch({
+        type: ALL_PRODUCT_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: ALL_PRODUCT_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+export const getRecommendedProduct =
+  (
+    id,
+    Cluster,
+    keyword = "",
+    currentPage = 1,
+    price = [0, 25000],
+    category,
+    ratings = 0
+  ) =>
+  async (dispatch) => {
+    console.log("getRecommendedProduct");
+    try {
+      dispatch({ type: ALL_PRODUCT_REQUEST });
+      console.log("cluster in action", Cluster);
+      // let link = `/api/v1/products1?cluster=${Cluster}&keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+      let link = `/api/v1/products1/${id}`;
+
+      // if (category) {
+      //   link = `/api/v1/products1?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+      // }
+      console.log("getRecommendedProduct try after link");
+      const { data } = await axios.get(link);
+      console.log(data, "data of recommender");
 
       dispatch({
         type: ALL_PRODUCT_SUCCESS,
@@ -417,7 +458,7 @@ export const premiumProduct = (id, productData) => async (dispatch) => {
 // };
 
 export const newNotification = (notificationData) => async (dispatch) => {
-  console.log("new noti");
+  // console.log("new noti");
   try {
     dispatch({ type: NEW_NOTIFICATION_REQUEST });
 

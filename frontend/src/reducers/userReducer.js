@@ -38,6 +38,9 @@ import {
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
   USER_DETAILS_FAIL,
+  OWNER_DETAILS_REQUEST,
+  OWNER_DETAILS_SUCCESS,
+  OWNER_DETAILS_FAIL,
   NOTIFICATION_DETAILS_REQUEST,
   NOTIFICATION_DETAILS_SUCCESS,
   NOTIFICATION_DETAILS_FAIL,
@@ -256,6 +259,38 @@ export const userDetailsReducer = (state = { user: {} }, action) => {
       };
 
     case USER_DETAILS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const ownerDetailsReducer = (state = { owner: {} }, action) => {
+  switch (action.type) {
+    case OWNER_DETAILS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case OWNER_DETAILS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        owner: action.payload,
+      };
+
+    case OWNER_DETAILS_FAIL:
       return {
         ...state,
         loading: false,
