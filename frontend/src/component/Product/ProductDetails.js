@@ -5,6 +5,7 @@ import { getRecommendedProduct } from "../../actions/productAction";
 import React, { Fragment, useEffect, useState } from "react";
 import Carousel from "react-material-ui-carousel";
 import "./ProductDetails.css";
+import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getProduct,
@@ -21,7 +22,7 @@ import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
 import { addItemsToCart } from "../../actions/cartAction";
-import { addItemsToFavorites, getOwnerDetails } from "../../actions/userAction";
+import { addItemsToFavorites } from "../../actions/userAction";
 import {
   Dialog,
   DialogActions,
@@ -34,16 +35,21 @@ import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 import { NEW_NOTIFICATION_RESET } from "../../constants/productConstants";
 import CalendarCard from "./CalendarCard";
 import { notifyMe } from "../../actions/productAction";
-// import { Calendar } from "./ProductCalendar.js";
 
 const ProductDetails = ({ match }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const productId = match.params.id;
-  console.log("productId", productId);
+  const [cont, setCont] = useState(0);
+  const [loca, setLoca] = useState("");
+  // let cont = 0;
+  // let loca = "";
+  // console.log("productId", productId);
 
-  const { product, error } = useSelector((state) => state.productDetails);
-  const { loading, setLoading } = useSelector((state) => state.productDetails);
+  const { product, loading, error } = useSelector(
+    (state) => state.productDetails
+  );
+
   const { success, error: reviewError } = useSelector(
     (state) => state.newReview
   );
@@ -53,7 +59,7 @@ const ProductDetails = ({ match }) => {
   // const { succes, error: notificationError } = useSelector(
   //   (state) => state.newNotification
   // );
-  const [owner, setOwner] = useState(null);
+  // const [owner, setOwner] = useState(null);
   // const { owner } = useSelector((state) => state.ownerDetailsReducer);
 
   const state = useSelector((state) => state);
@@ -67,7 +73,7 @@ const ProductDetails = ({ match }) => {
   };
   let pim = "";
   let imgURL = "";
-  let l = product;
+  // let l = product;
   // console.log("l", l);
 
   // console.log("l", l.images.length);
@@ -80,6 +86,7 @@ const ProductDetails = ({ match }) => {
     try {
       imgURL = require(`../../images/${pim}`).default;
       // console.log(pim, "pim");
+
       // console.log("pim imgurl", imgURL);
     } catch (error) {
       // console.log(`Failed to load image: ${pim}`, error);
@@ -88,17 +95,49 @@ const ProductDetails = ({ match }) => {
     // const i = require(`../../${pim}`).default;
     // console.log(pim, "pim");
     // console.log("pim imgurl", i);
+  } else if (product.images) {
+    // console.log("imgURL   ", imgURL);
+    // console.log("product.images", product.images.length);
+  } else {
+    // console.log("not working");
   }
-  // console.log("imgURL   ", imgURL);
-  // console.log("product.images", product.images.length);
+
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const { user, isAuthenticated } = useSelector((state) => state.user);
-  console.log("usename", user.name);
+  // console.log("usename", user.name);
   const [buttonText, setButtonText] = useState("Notify Me When Available");
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [owner, setOwner] = useState(null);
+  const fetchOwner = async (product) => {
+    // const result = await getOwnerDetails(product.userId);
+    const resu = await axios.get(`/api/v1/admin/user2/${product.userId}`);
+    // console.log(result, "#######result####################");
+    console.log(product.userId, "@@@@@@@@@@@@@@@@@@@@@@$$$$$$%%%%%%%%%%%%%%%");
+    setOwner(await axios.get(`/api/v1/admin/user2/${product.userId}`));
+    console.log("rrrrrrrr1", resu);
+    console.log("rrrrrrrr2", owner);
+    console.log("rrrrrrrr3", setOwner);
+    const t = resu.data.owner.numb;
+    setCont(t);
+    const y = resu.data.owner.addr;
+    setLoca(y);
+    console.log(cont, "this is my cont nnnnnnnnnnnnnnn");
+    console.log(loca, "this is my loca sssssssssssssss");
+
+    // cont = result.data.owner.numb;
+    // loca = result.data.owner.addr;
+    // const loca = result.data.owner.addr;
+    // console.log(loca);
+  };
+
+  // console.log(owner.data.owner.numb, "$$$$$$$$$$$$$$$$$$$$$$$");
+  // console.log(owner.data.owner.addr, "#########################");
+  // console.log(cont, "++++++++++++++++++");
+  // console.log(loca, "))))))))))))");
+
   const addToFavoritesHandler = (history) => {
     if (isFavorite) {
       handleDeleteFavorite(product._id);
@@ -128,7 +167,6 @@ const ProductDetails = ({ match }) => {
     setIsFavorite(false);
     alert.success("Item Removed from Favorites");
   };
-
   const reviewSubmitHandler = () => {
     const myForm = new FormData();
 
@@ -141,7 +179,6 @@ const ProductDetails = ({ match }) => {
     setOpen(false);
     // console.log(myForm);
   };
-
   const notificationSubmitHandler = () => {
     const myForm2 = new FormData();
 
@@ -161,20 +198,22 @@ const ProductDetails = ({ match }) => {
   );
   const Cluster = product.Cluster;
   const id = product._id;
-  console.log(Cluster, "cluster");
+  // console.log(Cluster, "cluster");
   let count = filteredProductsCount;
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
   };
 
   useEffect(() => {
+    fetchOwner(product);
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
+
     // dispatch(getProduct(keyword, currentPage));
     dispatch(getRecommendedProduct(id, Cluster));
-  }, [dispatch, Cluster, keyword, alert, error, productId]);
+  }, [dispatch, product, Cluster, keyword, alert, error, productId]);
 
   // recommended close
 
@@ -228,20 +267,19 @@ const ProductDetails = ({ match }) => {
   //     dispatch(clearErrors());
   //   }
   //   // dispatch(getProduct(keyword, currentPage));
-  //   console.log(" owner id", product.userId);
+  //   // console.log(" owner id", product.userId);
   //   dispatch(getOwnerDetails(product.userId));
-
   // }, [dispatch, Cluster, keyword, alert, error, productId]);
   // const [setLoading] = useState(true);
 
-  useEffect(() => {
-    dispatch(getOwnerDetails(product.userId)).then((res) => {
-      setOwner(res.data.owner);
-      setLoading(true);
-    });
-  }, [dispatch, product.userId]);
+  // useEffect(() => {
+  //   dispatch(getOwnerDetails(product.userId)).then((res) => {
+  //     setOwner(res.data.owner);
+  //     setLoading(true);
+  //   });
+  // }, [dispatch, product.userId]);
 
-  console.log(setOwner);
+  // console.log(setOwner);
   return (
     <Fragment>
       {loading ? (
@@ -281,57 +319,35 @@ const ProductDetails = ({ match }) => {
                 </span>
               </div>
               <div className="detailsBlock-3">
-                <h1>{`Rs. ${product.price}`}</h1>
-                <div className="detailsBlock-3-1">
-                  <div className="">
-                    <button
-                      onClick={addToFavoritesHandler}
-                      style={{
-                        color: "#652D90",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        border: "2px solid transparent",
-                        backgroundColor: "transparent",
-                        cursor: "pointer",
-                      }}
-                    >
-                      {isFavorite ? (
-                        <Favorite
-                          fontSize="large"
-                          style={{ color: "#652D90" }}
-                        />
-                      ) : (
-                        <FavoriteBorder
-                          fontSize="large"
-                          style={{
-                            color: "#652D90",
-                          }}
-                        />
-                      )}
-                    </button>
-                  </div>
-                </div>
+                <h1>{`Rs. ${product.price} per day`}</h1>
               </div>
               {owner && (
                 <div>
                   {" "}
+                  {/* <div className="detailsBlock-3"> */}
                   <div className="detailsBlock-4">
-                    Contact : <p>{owner.numb}</p>
-                  </div>
-                  <div className="detailsBlock-4">
-                    Location : <p>{owner.addr}</p>
+                    <div>
+                      Contact: {cont}
+                      <br></br>Location: {loca}
+                    </div>
                   </div>
                 </div>
               )}
-              <div>
-                <div>
+              <div className="detailsBlock-3">
+                <hr></hr>{" "}
+                <>
                   {product.availableDates && product.availableDates[0] ? (
-                    <div className="calendar">
-                      {product.availableDates &&
-                        product.availableDates.map((cal) => (
-                          <CalendarCard key={cal.date} cal={cal} />
-                        ))}
-                    </div>
+                    <>
+                      <div className="detailsBlock-3">
+                        <h1>Available Dates</h1>{" "}
+                      </div>
+                      <div className="calendar">
+                        {product.availableDates &&
+                          product.availableDates.map((cal) => (
+                            <CalendarCard key={cal.date} cal={cal} />
+                          ))}
+                      </div>
+                    </>
                   ) : (
                     <div>
                       <p className="noCalendar">No Available Dates</p>
@@ -346,11 +362,36 @@ const ProductDetails = ({ match }) => {
                       </button>
                     </div>
                   )}
-                </div>
+                </>
               </div>
-              <button onClick={submitReviewToggle} className="submitReview">
-                Submit Review
-              </button>
+              <span>
+                <button onClick={submitReviewToggle} className="submitReview">
+                  Submit Review
+                </button>
+
+                <button
+                  onClick={addToFavoritesHandler}
+                  style={{
+                    color: "#652D90",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    border: "2px solid transparent",
+                    backgroundColor: "transparent",
+                    cursor: "pointer",
+                  }}
+                >
+                  {isFavorite ? (
+                    <Favorite fontSize="large" style={{ color: "#652D90" }} />
+                  ) : (
+                    <FavoriteBorder
+                      fontSize="large"
+                      style={{
+                        color: "#652D90",
+                      }}
+                    />
+                  )}
+                </button>
+              </span>
             </div>
           </div>
           {/* Recommended

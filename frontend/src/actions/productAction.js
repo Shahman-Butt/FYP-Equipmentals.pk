@@ -50,7 +50,7 @@ import {
 export const getProduct =
   (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
   async (dispatch) => {
-    console.log("a;; product in action");
+    // console.log("a;; product in action");
     try {
       dispatch({ type: ALL_PRODUCT_REQUEST });
 
@@ -88,16 +88,16 @@ export const getRecommendedProduct =
     console.log("getRecommendedProduct");
     try {
       dispatch({ type: ALL_PRODUCT_REQUEST });
-      console.log("cluster in action", Cluster);
+      // console.log("cluster in action", Cluster);
       // let link = `/api/v1/products1?cluster=${Cluster}&keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
       let link = `/api/v1/products1/${id}`;
 
       // if (category) {
       //   link = `/api/v1/products1?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
       // }
-      console.log("getRecommendedProduct try after link");
+      // console.log("getRecommendedProduct try after link");
       const { data } = await axios.get(link);
-      console.log(data, "data of recommender");
+      // console.log(data, "data of recommender");
 
       dispatch({
         type: ALL_PRODUCT_SUCCESS,
@@ -278,7 +278,8 @@ export const getProductDetails = (id) => async (dispatch) => {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
     const { data } = await axios.get(`/api/v1/product/${id}`);
-    console.log("product details in product action");
+    // console.log("product details in product action");
+    // console.log(data, "#####DATA####");
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
       payload: data.product,

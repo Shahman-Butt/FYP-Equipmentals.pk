@@ -171,7 +171,7 @@ exports.getOwnerDetails = catchAsyncErrors(async (req, res, next) => {
   }
 
   console.log(owner, "owner in controller");
-  console.log("aaag");
+  // console.log("aaag");
   res.status(200).json({
     success: true,
     owner,

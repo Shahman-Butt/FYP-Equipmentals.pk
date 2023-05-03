@@ -228,21 +228,24 @@ export const getUserDetails = (id) => async (dispatch) => {
 };
 
 export const getOwnerDetails = (id) => async (dispatch) => {
-  console.log("get ownerdetails in action");
-  console.log("Oid in user action", id);
+  // console.log("get ownerdetails in action");
+  // console.log("Oid in user action", id);
   try {
-    console.log("get ownerdetails in action try 1");
-    dispatch({ type: OWNER_DETAILS_REQUEST });
-    const { data } = await axios.get(`/api/v1/admin/user2/${id}`);
-    console.log("data in get OWner deatils action", data);
-    dispatch({ type: OWNER_DETAILS_SUCCESS, payload: data.owner });
-    console.log("get ownerdetails in action try 2");
+    // console.log("get ownerdetails in action try 1");
+    // dispatch({ type: OWNER_DETAILS_REQUEST });
+    const { data } = await axios.get(
+      `/api/v1/admin/user2/6420ab6298719c360ce1f23a`
+    );
+    return data;
+    // console.log("data in get OWner deatils action", data);
+    // dispatch({ type: OWNER_DETAILS_SUCCESS, payload: data.owner });
+    // console.log("get ownerdetails in action try 2");
   } catch (error) {
     console.log("get ownerdetails in action catch");
-    dispatch({
-      type: OWNER_DETAILS_FAIL,
-      payload: error.response.data.message,
-    });
+    // dispatch({
+    //   type: OWNER_DETAILS_FAIL,
+    //   payload: error.response.data.message,
+    // });
   }
 };
 
