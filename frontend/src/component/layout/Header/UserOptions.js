@@ -60,11 +60,11 @@ const UserOptions = ({ user }) => {
   }
   function product() {
     history.push("/admin/product");
-    console.log("admin func 1");
+    // console.log("admin func 1");
   }
   function userProduct() {
     history.push("/admin/products");
-    console.log("user func 1");
+    // console.log("user func 1");
   }
   function logoutUser() {
     dispatch(logout());

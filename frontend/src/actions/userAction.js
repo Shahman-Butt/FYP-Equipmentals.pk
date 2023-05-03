@@ -241,7 +241,7 @@ export const getOwnerDetails = (id) => async (dispatch) => {
     // dispatch({ type: OWNER_DETAILS_SUCCESS, payload: data.owner });
     // console.log("get ownerdetails in action try 2");
   } catch (error) {
-    console.log("get ownerdetails in action catch");
+    // console.log("get ownerdetails in action catch");
     // dispatch({
     //   type: OWNER_DETAILS_FAIL,
     //   payload: error.response.data.message,

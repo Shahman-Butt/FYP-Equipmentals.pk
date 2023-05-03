@@ -88,11 +88,11 @@ const Home = ({ user, match }) => {
 
   function product() {
     history.push("/admin/product");
-    console.log("admin func 1");
+    // console.log("admin func 1");
   }
   function userProduct() {
     history.push("/admin/products");
-    console.log("user func 1");
+    // console.log("user func 1")
   }
   function logoutUser() {
     dispatch(logout());
@@ -123,7 +123,6 @@ const Home = ({ user, match }) => {
   }, [dispatch, keyword, currentPage, price, category, ratings, alert, error]);
 
   return (
-
     <>
       <Fragment>
         {loading ? (
@@ -140,7 +139,6 @@ const Home = ({ user, match }) => {
                     <Caution />
                   </div>
 
-
                   <div className="col-lg-9">
                     <div
                       id="header-carousel"
@@ -153,7 +151,11 @@ const Home = ({ user, match }) => {
                           className="carousel-item active"
                           style={{ height: "410px" }}
                         >
-                          <img className="img-fluid" src={banner1} alt="Image" />
+                          <img
+                            className="img-fluid"
+                            src={banner1}
+                            alt="Image"
+                          />
                           <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div className="p-3" style={{ maxWidth: "700px" }}>
                               <h4 className="text-light text-uppercase font-weight-medium mb-3">
@@ -170,18 +172,10 @@ const Home = ({ user, match }) => {
                               </a>
                             </div>
                           </div>
-                   
                         </div>
-                  
                       </div>
                     </div>
                   </div>
-
-
-
-
-
-
                 </div>
               </div>
             </>
@@ -305,7 +299,10 @@ const Home = ({ user, match }) => {
                       .filter((product) => product.premium === "Premium") // filter out non-premium products
                       .sort((a, b) => b.payment - a.payment) // sort by payment in descending order
                       .map((product) => (
-                        <PremiumProductCard key={product._id} product={product} />
+                        <PremiumProductCard
+                          key={product._id}
+                          product={product}
+                        />
                       ))}
                 </div>
               </div>
@@ -341,21 +338,15 @@ const Home = ({ user, match }) => {
                   activeClass="pageItemActive"
                   activeLinkClass="pageLinkActive"
                 />
-
               </div>
-
-
             )}
           </Fragment>
-
         )}
       </Fragment>
 
       <Footer />
     </>
-
   );
-
 };
 
 export default Home;

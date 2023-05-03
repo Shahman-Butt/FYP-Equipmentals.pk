@@ -45,11 +45,11 @@ function NavScrollExample({ user }) {
   }
   function userProduct() {
     history.push("/admin/products");
-    console.log("user func 1");
+    // console.log("user func 1");
   }
   function product() {
     history.push("/admin/product");
-    console.log("admin func 1");
+    // console.log("admin func 1");
   }
   const alert = useAlert();
   const dispatch = useDispatch();

@@ -11,7 +11,7 @@ const CalendarCard = ({ cal }) => {
     day: "numeric",
   });
 
-  console.log(formattedDate); // Output: 5/3/2023
+  // console.log(formattedDate); // Output: 5/3/2023
 
   return (
     <>

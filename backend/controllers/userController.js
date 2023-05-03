@@ -160,7 +160,7 @@ exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.getOwnerDetails = catchAsyncErrors(async (req, res, next) => {
-  console.log("id check in user controller", req.params.userId);
+  // console.log("id check in user controller", req.params.userId);
 
   const owner = await User.findById(req.params.userId);
 
@@ -170,7 +170,7 @@ exports.getOwnerDetails = catchAsyncErrors(async (req, res, next) => {
     );
   }
 
-  console.log(owner, "owner in controller");
+  // console.log(owner, "owner in controller");
   // console.log("aaag");
   res.status(200).json({
     success: true,
