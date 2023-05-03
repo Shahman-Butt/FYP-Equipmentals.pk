@@ -7,6 +7,7 @@ import Carousel from "react-material-ui-carousel";
 import "./ProductDetails.css";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
+import Caution from "../layout/Cautions/CautionProductDetail"
 import {
   getProduct,
   clearErrors,
@@ -294,7 +295,11 @@ const ProductDetails = ({ match }) => {
       ) : (
         <Fragment>
           <MetaData title={`${product.name} -- ECOMMERCE`} />
-          <div className="ProductDetails bg-transparent">
+          <div className="row">
+          <div className=" col-lg-3">
+            <Caution/>
+            </div>
+          <div className="ProductDetails bg-transparent col-lg-9">
             {imageCar ? (
               <div>
                 <Carousel>
@@ -401,6 +406,8 @@ const ProductDetails = ({ match }) => {
               </span>
             </div>
           </div>
+          </div>
+          
           {/* Recommended
            */}
           <>

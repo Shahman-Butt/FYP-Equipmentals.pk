@@ -30,7 +30,7 @@ const ProductCard = ({ product }) => {
     precision: 0.5,
   };
   return (
-    <Link className="productCard" to={`/product/${product._id}`}>
+    <Link className="productCard" style={{"textDecoration": "none" , "color": "#652D90"}} to={`/product/${product._id}`}>
       {/* <img src={product.images[0].url} alt={product.name} /> */}
       {product.images.length ? (
         <img src={product.images[0].url} alt={product.name} />
@@ -55,7 +55,7 @@ const ProductCard = ({ product }) => {
           ({product.numOfReviews} Reviews)
         </span>
       </div>
-      <span>{`Rs. ${product.price}`}</span>
+      <span>{`Rs. ${product.price} per day`}</span>
     </Link>
   );
 };

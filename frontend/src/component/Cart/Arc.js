@@ -6,6 +6,7 @@ import {
   updateArchiveStatus,
   getArchives,
 } from "../../actions/productAction";
+import SideBar from "../Admin/Sidebar";
 import Loader from "../layout/Loader/Loader";
 import ProductCard from "../Home/ProductCard";
 import Pagination from "react-js-pagination";
@@ -107,62 +108,13 @@ const Arc = ({ match }) => {
           <>
             {" "}
             <div className="container-fluid mb-5">
-              <div className="row border-top px-xl-5">
-                <div className="col-lg-3 d-none d-lg-block">
-                  <div class="list-group" style={{ margin: "0% 10% 0% 10%" }}>
-                    <FormControl>
-                      <InputLabel
-                        id="category-dropdown"
-                        style={{ "font-weight": "bold", color: "#333;" }}
-                      >
-                        Categories
-                      </InputLabel>
-                      <Select
-                        labelId="category-dropdown"
-                        id="category-select"
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                      >
-                        {categories.map((category) => (
-                          <MenuItem key={category} value={category}>
-                            {category}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                    <div className="" style={{ marginTop: "100%" }}>
-                      <Typography>Price</Typography>
-                      <Slider
-                        value={price}
-                        onChange={priceHandler}
-                        valueLabelDisplay="auto"
-                        aria-labelledby="range-slider"
-                        min={0}
-                        max={25000}
-                      />
-
-                      <fieldset>
-                        <Typography component="legend">
-                          Ratings Above
-                        </Typography>
-                        <Slider
-                          value={ratings}
-                          onChange={(e, newRating) => {
-                            setRatings(newRating);
-                          }}
-                          aria-labelledby="continuous-slider"
-                          valueLabelDisplay="auto"
-                          min={0}
-                          max={5}
-                        />
-                      </fieldset>
-                    </div>
-                  </div>
-                </div>
+              <div className="row border-top px-xl-5" style={{ "height": "1%" }}>
+              <SideBar />
+              
                 <div className="col-lg-9 d-none d-lg-block">
                   <>
                     <h2 className="productsHeading">Archives</h2>
-                    <p> User Id: {String(user._id)}</p>
+                    {/* <p> User Id: {String(user._id)}</p> */}
                     <div className="products">
                       {products &&
                         products.map((product) => (

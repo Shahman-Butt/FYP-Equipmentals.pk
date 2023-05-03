@@ -11,8 +11,7 @@ const ProductCautions = () => {
                         <FaExclamationTriangle size={20} />
                     </div>
                     <div>
-                        <p style={{ marginLeft: "10px" }}>Use strong and unique passwords for each ecommerce account.
-                         </p>
+                        <p style={{ marginLeft: "10px" }}>Read the product reviews and ratings before making a purchase to ensure the product meets your expectations.</p>
                     </div>
                 </div>
                 <div className="d-flex flex-row" >
@@ -20,8 +19,7 @@ const ProductCautions = () => {
                         <FaExclamationTriangle size={20} />
                     </div>
                     <div>
-                        <p style={{ marginLeft: "10px" }}>If you have any doubts or questions about the product, it is always a good idea to contact the seller or the customer support team before making a purchase
-                        </p>
+                        <p style={{ marginLeft: "10px" }}>Be wary of deals that seem too good to be true and always verify the legitimacy of the website and seller.</p>
                     </div>
                 </div>
                 <div className="d-flex flex-row" >
@@ -29,8 +27,7 @@ const ProductCautions = () => {
                         <FaExclamationTriangle size={20} />
                     </div>
                     <div>
-                        <p style={{ marginLeft: "10px" }}> Always check the condition of the product on getting it.
-                        </p>
+                        <p style={{ marginLeft: "10px" }}> Beware of suspiciously low prices or too-good-to-be-true deals.</p>
                     </div>
                 </div>
 

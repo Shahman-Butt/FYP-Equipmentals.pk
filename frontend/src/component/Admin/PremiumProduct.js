@@ -79,9 +79,9 @@ const PremiumProduct = ({ history, match }) => {
   return (
     <Fragment>
       <MetaData title="Premium Product" />
-      <div className="dashboard">
+      <div className="dashboard row" style={{ height: "1%" }}>
         <SideBar />
-        <div className="newProductContainer">
+        <div className="newProductContainer  col-md-9  bg-transparent">
           <form
             className="createProductForm"
             encType="multipart/form-data"
