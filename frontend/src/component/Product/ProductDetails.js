@@ -42,6 +42,8 @@ const ProductDetails = ({ match }) => {
   const productId = match.params.id;
   const [cont, setCont] = useState(0);
   const [loca, setLoca] = useState("");
+  const [ima, setIma] = useState("");
+  const [imageCar, setImageCar] = useState(false);
   // let cont = 0;
   // let loca = "";
   // console.log("productId", productId);
@@ -63,7 +65,7 @@ const ProductDetails = ({ match }) => {
   // const { owner } = useSelector((state) => state.ownerDetailsReducer);
 
   const state = useSelector((state) => state);
-  console.log(state, "state");
+  // console.log(state, "state");
 
   const options = {
     size: "large",
@@ -71,8 +73,7 @@ const ProductDetails = ({ match }) => {
     readOnly: true,
     precision: 0.5,
   };
-  let pim = "";
-  let imgURL = "";
+
   // let l = product;
   // console.log("l", l);
 
@@ -80,27 +81,6 @@ const ProductDetails = ({ match }) => {
   // console.log("type of l", typeof l);
   // console.log("obj chk", Object.keys(l).length);
   // let imgURL = require("../../images/banner2.jpg").default;
-  if (product.im) {
-    // console.log("product.im", product.im);
-    pim = product.im;
-    try {
-      imgURL = require(`../../images/${pim}`).default;
-      // console.log(pim, "pim");
-
-      // console.log("pim imgurl", imgURL);
-    } catch (error) {
-      // console.log(`Failed to load image: ${pim}`, error);
-    }
-    // //  imgURL = require(pim).default;
-    // const i = require(`../../${pim}`).default;
-    // console.log(pim, "pim");
-    // console.log("pim imgurl", i);
-  } else if (product.images) {
-    // console.log("imgURL   ", imgURL);
-    // console.log("product.images", product.images.length);
-  } else {
-    // console.log("not working");
-  }
 
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(0);
@@ -115,28 +95,56 @@ const ProductDetails = ({ match }) => {
     // const result = await getOwnerDetails(product.userId);
     const resu = await axios.get(`/api/v1/admin/user2/${product.userId}`);
     // console.log(result, "#######result####################");
-    console.log(product.userId, "@@@@@@@@@@@@@@@@@@@@@@$$$$$$%%%%%%%%%%%%%%%");
+    // console.log(product.userId, "@@@@@@@@@@@@@@@@@@@@@@$$$$$$%%%%%%%%%%%%%%%");
     setOwner(await axios.get(`/api/v1/admin/user2/${product.userId}`));
-    console.log("rrrrrrrr1", resu);
-    console.log("rrrrrrrr2", owner);
-    console.log("rrrrrrrr3", setOwner);
+    // console.log("rrrrrrrr1", resu);
+    // console.log("rrrrrrrr2", owner);
+    // console.log("rrrrrrrr3", setOwner);
     const t = resu.data.owner.numb;
     setCont(t);
     const y = resu.data.owner.addr;
     setLoca(y);
-    console.log(cont, "this is my cont nnnnnnnnnnnnnnn");
-    console.log(loca, "this is my loca sssssssssssssss");
+    // console.log(cont, "this is my cont nnnnnnnnnnnnnnn");
+    // console.log(loca, "this is my loca sssssssssssssss");
 
     // cont = result.data.owner.numb;
     // loca = result.data.owner.addr;
     // const loca = result.data.owner.addr;
     // console.log(loca);
   };
+  const fetchImage = async (product) => {
+    // console.log("extreme1 product", product);
+    if (product.im) {
+      let r = require(`../../images/61Gd8fvPqqL._AC_UL400_.jpg`).default;
+      setIma(r);
+      // console.log("extreme2r", r);
+      // console.log("extreme2", ima);
+      setImageCar(false);
 
-  // console.log(owner.data.owner.numb, "$$$$$$$$$$$$$$$$$$$$$$$");
-  // console.log(owner.data.owner.addr, "#########################");
-  // console.log(cont, "++++++++++++++++++");
-  // console.log(loca, "))))))))))))");
+      const pim = product.im;
+      // console.log("pimmmmm", pim);
+
+      try {
+        const imgURL = require(`../../images/${pim}`).default;
+        setIma(imgURL);
+        // console.log("extreme3r", imgURL);
+        // console.log("extreme3", ima);
+      } catch (error) {
+        console.log(`Failed to load image: ${pim}`, error);
+        let r = require(`../../images/61Gd8fvPqqL._AC_UL400_.jpg`).default;
+        setIma(r);
+      }
+
+      // //  imgURL = require(pim).default;
+      // const i = require(`../../${pim}`).default;
+      // console.log(pim, "pim");
+      // console.log("pim imgurl", i);
+    } else if (product.images) {
+      setImageCar(true);
+    } else {
+      console.log("not working");
+    }
+  };
 
   const addToFavoritesHandler = (history) => {
     if (isFavorite) {
@@ -206,12 +214,11 @@ const ProductDetails = ({ match }) => {
 
   useEffect(() => {
     fetchOwner(product);
+    fetchImage(product);
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
-
-    // dispatch(getProduct(keyword, currentPage));
     dispatch(getRecommendedProduct(id, Cluster));
   }, [dispatch, product, Cluster, keyword, alert, error, productId]);
 
@@ -288,7 +295,7 @@ const ProductDetails = ({ match }) => {
         <Fragment>
           <MetaData title={`${product.name} -- ECOMMERCE`} />
           <div className="ProductDetails bg-transparent">
-            {!product.im ? (
+            {imageCar ? (
               <div>
                 <Carousel>
                   {product.images &&
@@ -303,7 +310,7 @@ const ProductDetails = ({ match }) => {
                 </Carousel>
               </div>
             ) : (
-              <img src={imgURL} alt={product.name} />
+              <img src={ima} alt={product.name} />
             )}
 
             <div>
