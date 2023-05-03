@@ -57,9 +57,9 @@ function NavScrollExample({ user }) {
   return (
     <>
       <div className="video-container">
-        <video autoPlay muted loop>
+        {/* <video autoPlay muted loop>
           <source src={video} type="video/mp4" />
-        </video>
+        </video> */}
       </div>
 
       <Navbar bg="transparent" expand="lg">
