@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 
 const productSchema = mongoose.Schema({
   userId: {
-    type: mongoose.Schema.ObjectId,
+    // type: mongoose.Schema.ObjectId,
+    type: String,
     ref: "User",
     required: true,
   },
@@ -13,7 +14,7 @@ const productSchema = mongoose.Schema({
   Cluster: {
     type: Number,
     required: true,
-    default: 0,
+    default: 1,
   },
   archive: {
     type: String,

@@ -112,6 +112,82 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
 });
 
 // Get Recommended Products
+// exports.getRecommendedProducts = catchAsyncErrors(async (req, res, next) => {
+//   const resultPerPage = 8;
+//   const productsCount = await Product.countDocuments();
+//   console.log("get recommended produccts in controller");
+//   const product = await Product.findById(req.params.id);
+//   // console.log("product in controller", product);
+//   // console.log("cluster in controller");
+//   const apiFeature = new ApiFeatures(
+//     Product.find({
+//       _id: { $ne: product._id },
+//       archive: "Not Archived",
+//       Cluster: product.Cluster,
+//       category: product.category,
+//     }),
+//     req.query
+//   )
+//     .search()
+//     .filter();
+//   // console.log("apiFeature in controller", apiFeature);
+//   let products = await apiFeature.query;
+//   // console.log("products in controller", products);
+//   let filteredProductsCount = products.length;
+
+//   apiFeature.pagination(resultPerPage);
+
+//   products = await apiFeature.query;
+//   // console.log("productsssssssssssss in controller", products.length);
+//   // console.log("productsssssssssssss in controller", products);
+
+//   res.status(200).json({
+//     success: true,
+//     products,
+//     productsCount,
+//     resultPerPage,
+//     filteredProductsCount,
+//   });
+// });
+// exports.getRecommendedProducts = catchAsyncErrors(async (req, res, next) => {
+//   const resultPerPage = 8;
+//   const productsCount = await Product.countDocuments();
+//   console.log("get recommended produccts in controller");
+//   const product = await Product.findById(req.params.id);
+//   // console.log("product in controller", product);
+//   // console.log("cluster in controller");
+//   const apiFeature = new ApiFeatures(
+//     Product.find({
+//       _id: { $ne: product._id },
+//       archive: "Not Archived",
+//       Cluster: product.Cluster,
+//       category: product.category,
+//     })
+//       .sort({ ratings: -1 }) // Add this line to sort products by rating in descending order
+//       .select("-reviews -createdAt -updatedAt"),
+//     req.query
+//   )
+//     .search()
+//     .filter();
+//   // console.log("apiFeature in controller", apiFeature);
+//   let products = await apiFeature.query;
+//   // console.log("products in controller", products);
+//   let filteredProductsCount = products.length;
+
+//   apiFeature.pagination(resultPerPage);
+
+//   products = await apiFeature.query;
+//   console.log("productsssssssssssss in controller", products.length);
+//   console.log("productsssssssssssss in controller", products);
+
+//   res.status(200).json({
+//     success: true,
+//     products,
+//     productsCount,
+//     resultPerPage,
+//     filteredProductsCount,
+//   });
+// });
 exports.getRecommendedProducts = catchAsyncErrors(async (req, res, next) => {
   const resultPerPage = 8;
   const productsCount = await Product.countDocuments();
@@ -125,21 +201,35 @@ exports.getRecommendedProducts = catchAsyncErrors(async (req, res, next) => {
       archive: "Not Archived",
       Cluster: product.Cluster,
       category: product.category,
-    }),
+    })
+      .sort({ ratings: -1 })
+      .limit(25) // Add this line to sort products by rating in descending order
+      .select("-reviews -createdAt -updatedAt"),
     req.query
   )
     .search()
     .filter();
   // console.log("apiFeature in controller", apiFeature);
   let products = await apiFeature.query;
+
   // console.log("products in controller", products);
   let filteredProductsCount = products.length;
 
   apiFeature.pagination(resultPerPage);
 
   products = await apiFeature.query;
-  // console.log("productsssssssssssss in controller", products.length);
-  // console.log("productsssssssssssss in controller", products);
+  products = shuffleArray(products);
+
+  function shuffleArray(array) {
+    // Fisher-Yates shuffle algorithm
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+  console.log("productsssssssssssss in controller", products.length);
+  console.log("productsssssssssssss in controller", products);
 
   res.status(200).json({
     success: true,
@@ -149,7 +239,6 @@ exports.getRecommendedProducts = catchAsyncErrors(async (req, res, next) => {
     filteredProductsCount,
   });
 });
-
 // Get All Product (Admin or User)
 exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
   const user_id = req.user._id;

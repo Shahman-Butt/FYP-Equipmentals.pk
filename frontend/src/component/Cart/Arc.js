@@ -109,8 +109,8 @@ const Arc = ({ match }) => {
             {" "}
             <div className="container-fluid mb-5">
               <div className="row border-top px-xl-5" style={{ "height": "1%" }}>
-              <SideBar />
-              
+                <SideBar />
+
                 <div className="col-lg-9 d-none d-lg-block">
                   <>
                     <h2 className="productsHeading">Archives</h2>
@@ -131,6 +131,9 @@ const Arc = ({ match }) => {
                             </Link> */}
                             <button
                               onClick={() => handleEditArchive(product._id)}
+                              className="outline-success"
+                              variant="contained"
+                              style={{ "background-color": "#652D90", border: "none" }}
                             >
                               Edit
                             </button>
