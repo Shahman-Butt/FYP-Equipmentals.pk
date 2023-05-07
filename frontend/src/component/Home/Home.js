@@ -135,7 +135,7 @@ const Home = ({ user, match }) => {
               {" "}
               <div className="container-fluid mb-5">
                 <div className="row border-top px-xl-5">
-                  <div className="col-lg-3 d-none d-lg-block">
+                  <div className="col-lg-3  d-lg-block">
                     <Caution />
                   </div>
 

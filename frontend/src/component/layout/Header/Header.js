@@ -56,30 +56,22 @@ function NavScrollExample({ user }) {
 
   return (
     <>
-      <div className="video-container">
-        {/* <video autoPlay muted loop>
-          <source src={video} type="video/mp4" />
-        </video> */}
-      </div>
-
       <Navbar bg="transparent" expand="lg">
-        <Container fluid>
+        <Container display="flex">
           <div
             style={{
-              "margin-right": "10%",
+              width: "30%",
+
               border: "1px solid #ccc",
               "box-shadow": "0px 0px 10px rgba(0, 0, 0, 0.1)",
             }}
           >
             <a href="/">
-              <img
-                style={{ "max-width": "100%", height: "auto" }}
-                src={logo2}
-              />
+              <img style={{ "max-width": "50%", height: "auto" }} src={logo2} />
             </a>
           </div>
 
-          <div style={{ width: "40%" }}>
+          <div style={{ width: "45%" }}>
             <Form
               className="d-flex"
               onSubmit={searchSubmitHandler}
@@ -103,7 +95,18 @@ function NavScrollExample({ user }) {
             </Form>
           </div>
 
-          <div>
+          <div style={{ width: "20%" }}>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarScroll"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
             <Navbar.Collapse id="navbarScroll">
               <Nav
                 className="me-auto my-2 my-lg-0"

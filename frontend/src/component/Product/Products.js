@@ -125,7 +125,7 @@ const Products = ({ match }) => {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-9 d-none d-lg-block">
+                <div className="col-lg-9 d-lg-block">
                   <>
                     <h2 className="productsHeading">Products</h2>
 
