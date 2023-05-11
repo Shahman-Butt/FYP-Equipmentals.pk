@@ -3,7 +3,8 @@
 .banner1{ background-color: #652D90;
 padding: 20px 20px;
 width: 100%;
-position: absolute;
+min-height:100px;
+position: relative;
 }
 .banner1 h2
 { color: white; 
@@ -14,8 +15,9 @@ text-decoration: none;
   border: 0PX solid white;
   width: 100%;
 }
-.new{ background-color: #652D90; border: 1px solid red; text-align: left;}
-
+.new{ background-color: #652D90; border: 0px solid red; text-align: left;}
+.sidediv{ padding: 30px 100px; text-align: center;}
+.mleft{font-size: small; padding: 5%;}
 .aboutSection {
   height: 100vh;
   width: 100vw;
@@ -39,11 +41,11 @@ border: 0px solid green;
 .aboutSectionContainer {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top:auto;
   border: 0px solid rgb(172, 20, 20);
   background-color: rgb(255, 255, 255);
   width: 100%;
-  height: auto;
+  min-height:70%;
   transform: translateX(-50%) translateY(-50%);
   box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.192);
 
@@ -53,7 +55,9 @@ border: 0px solid green;
   padding: 0px 30px 30px 30px;
 }
 @media only screen and (max-width: 600px) {
-	.aboutSectionContainer  {
+	
+  
+  .aboutSectionContainer  {
 border: 0px solid red;
 top: 60%;
 height: auto;
@@ -127,6 +131,11 @@ text-align: center;
 }
 
 @media screen and (max-width: 600px) {
+  .sidediv{ text-align: center;
+
+}
+
+
   .aboutSectionContainer > div {
     display: block;
   }
