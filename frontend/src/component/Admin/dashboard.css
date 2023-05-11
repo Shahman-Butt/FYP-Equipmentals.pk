@@ -22,7 +22,8 @@
 }
 
 .dashboardSummary {
-  margin: 2rem 0;
+  margin: 1rem 0;
+  
 }
 
 .dashboardSummary > div {
@@ -46,8 +47,8 @@
   background-color: rgb(255, 233, 174);
   text-decoration: none;
   padding: 1.5rem;
-  width: 10vmax;
-  height: 10vmax;
+  width: 20vmax;
+  height: 20vmax;
   margin: 2rem;
   border-radius: 100%;
   display: flex;
@@ -57,7 +58,7 @@
 }
 
 .dashboardSummaryBox2 > a:first-child {
-  background-color: rgb(255, 110, 110);
+  background-color:blueviolet;
   color: rgb(255, 255, 255);
 }
 
@@ -77,17 +78,21 @@
 }
 
 @media screen and (max-width: 600px) {
-  .dashboard {
+  .dashboard { border: 0px solid rgb(11, 204, 43);
     grid-template-columns: 1fr;
   }
 
   .dashboardContainer {
     border-left: none;
+    border: 0px solid red;
   }
 
   .dashboardSummary > div > p {
     margin: 0;
+    border: 0px solid red;
   }
+
+  .dashboardSummary{ margin-bottom: 30px; padding: 0px;}
 
   .dashboardSummaryBox2 > a {
     padding: 0.5rem;
@@ -95,3 +100,17 @@
     font: 300 0.9rem "Roboto";
   }
 }
+
+
+
+@media only screen and (max-width: 600px) {
+	.col-md-9  {
+width:100%;
+border: 0px solid green;
+padding: 0px;
+	}
+
+ 
+    
+}
+

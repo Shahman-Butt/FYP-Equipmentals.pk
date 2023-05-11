@@ -91,9 +91,12 @@ const Footer = () => {
   <>
   
   </>
+
+
+
 <footer class="footer-distributed">
 
-			<div class="footer-left">
+			<div class="footer-left" >
 
 				<h3>Equipmentals<span>Pk</span></h3>
 
@@ -111,28 +114,18 @@ const Footer = () => {
 			</div>
 
 			<div class="footer-center">
-
-				<div>
-					<i class="fa fa-map-marker"></i>
-					<p><span>University of Engineering</span> and Technology, Lahore</p>
-				</div>
-
-				<div>
-					<i class="fa fa-phone"></i>
-					<p>(042) 99029452</p>
-				</div>
-
-				<div>
-					<i class="fa fa-envelope"></i>
-					<p><a href="mailto:support@company.com">EquipmentalsPk@gmail.com</a></p>
-				</div>
+      <h5>Contact Details</h5>
+				
+          <li><i class="fas fa-map-marker-alt"></i> University of Engineering </li>
+					<li><i class="fas fa-phone"></i> (042) 99029452 </li>
+          <li><i class="fas fa-envelope"></i> <a href="mailto:support@company.com">EquipmentalsPk@gmail.com</a> </li>
+			
 
 			</div>
 
 			<div class="footer-right">
-
+      <h5>About the company</h5>
 				<p class="footer-company-about">
-					<span>About the company</span>
 					This is our FYP for session 2019 BS Computer Engineering, UET Lahore Campus 
 				</p>
 

@@ -8,9 +8,7 @@ const productSchema = mongoose.Schema({
     ref: "User",
     required: true,
   },
-  payment: {
-    type: Number,
-  },
+
   Cluster: {
     type: Number,
     required: true,
@@ -31,7 +29,6 @@ const productSchema = mongoose.Schema({
     type: Number,
   },
 
-  // premium: {
   //   type: Boolean,
   //   default: false,
   // },

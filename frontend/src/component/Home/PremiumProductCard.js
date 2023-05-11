@@ -3,6 +3,25 @@ import { Link } from "react-router-dom";
 import { Rating } from "@material-ui/lab";
 
 const PremiumProductCard = ({ product }) => {
+  let pim = "";
+  let imgURL = "";
+  // let imgURL = require("../../images/banner2.jpg").default;
+  if (product.images.length <= 0 && product.im) {
+    // console.log("product.im", product.im);
+    pim = product.im;
+    try {
+      imgURL = require(`../../images/${pim}`).default;
+      // console.log(pim, "pim");
+      // console.log("pim imgurl", imgURL);
+    } catch (error) {
+      // console.log(`Failed to load image: ${pim}`, error);
+    }
+    // //  imgURL = require(pim).default;
+    // const i = require(`../../${pim}`).default;
+    // console.log(pim, "pim");
+    // console.log("pim imgurl", i);
+  }
+
   const options = {
     value: product.ratings,
     readOnly: true,
@@ -11,9 +30,25 @@ const PremiumProductCard = ({ product }) => {
   return (
     <>
       {product.premium !== "Not Premium" && product.premium !== null && (
-        <Link className="productCard" to={`/product/${product._id}`}>
-          <img src={product.images[0].url} alt={product.name} />
-          <p style={{ "font-weight": "bold", color: "#333;" }}>
+        <Link
+          className="productCard"
+          style={{ textDecoration: "none", color: "#652D90" }}
+          to={`/product/${product._id}`}
+        >
+          {/* <img src={product.images[0].url} alt={product.name} /> */}
+          {product.images.length ? (
+            <img src={product.images[0].url} alt={product.name} />
+          ) : (
+            <img src={imgURL} alt={product.name} />
+          )}
+          <p
+            style={{
+              "font-weight": "bold",
+              color: "#333;",
+              height: "50px",
+              overflow: "hidden",
+            }}
+          >
             {product.name}
           </p>
           <div>

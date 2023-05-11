@@ -1,4 +1,3 @@
-
 import React, { Fragment, useEffect, useState } from "react";
 import "./Cart.css";
 import SideBar from "../Admin/Sidebar";
@@ -19,7 +18,8 @@ import { FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import banner1 from "../../images/banner1.jpg";
 import banner2 from "../../images/banner2.jpg";
-
+import { FavoriteBorder, Favorite } from "@material-ui/icons";
+import axios from "axios";
 const categories = [
   "Beauty and Personal Care",
   "Electronics",
@@ -40,7 +40,20 @@ const Cart = ({ match }) => {
   const [category, setCategory] = useState("");
 
   const [ratings, setRatings] = useState(0);
+  const [isFavorite, setIsFavorite] = useState(true);
+  const [pro, setPro] = useState([]);
+  const fetchProducts = async () => {
+    const resu = await axios.get("/api/v1/favorites");
+    const products = resu.data.products;
+    setPro(products);
 
+    //  setPro(await axios.get("/api/v1/favorites"));
+    console.log(setPro, "setPro");
+    console.log(products, "products");
+
+    // setPro(pro.data.products);
+  };
+  console.log(pro, "pro");
   const {
     products,
     loading,
@@ -74,8 +87,8 @@ const Cart = ({ match }) => {
       alert.error(error);
       dispatch(clearErrors());
     }
-
-    dispatch(getFavorites(keyword, currentPage, price, category, ratings));
+    fetchProducts();
+    // dispatch(getFavorites(keyword, currentPage, price, category, ratings));
   }, [dispatch, keyword, currentPage, price, category, ratings, alert, error]);
 
   return (
@@ -88,23 +101,51 @@ const Cart = ({ match }) => {
           <>
             {" "}
             <div className="container-fluid mb-5">
-              <div className=" border-top px-xl-5 dashboard row" style={{ "height": "1%" }}>
-              
+              <div
+                className=" border-top px-xl-5 dashboard row"
+                style={{ height: "1%" }}
+              >
                 <SideBar />
-              
-                <div className="col-lg-9 d-none d-lg-block">
+
+                <div className="col-lg-9  d-lg-block">
                   <>
                     <h2 className="productsHeading">Favorites</h2>
                     {/* <p> User Id: {String(user._id)}</p> */}
                     <div className="products">
-                      {products &&
-                        products.map((product) => (
-                          <div>
-                            <ProductCard key={product._id} product={product} />
+                      {pro &&
+                        pro.map((pr) => (
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              alignItems: "center",
+                            }}
+                          >
+                            <ProductCard key={pr._id} product={pr} />
                             <button
-                              onClick={() => handleDeleteFavorite(product._id)}
+                              onClick={() => handleDeleteFavorite(pr._id)}
+                              style={{
+                                color: "#652D90",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                border: "2px solid transparent",
+                                backgroundColor: "transparent",
+                                cursor: "pointer",
+                              }}
                             >
-                              Remove
+                              {isFavorite ? (
+                                <Favorite
+                                  fontSize="large"
+                                  style={{ color: "#652D90" }}
+                                />
+                              ) : (
+                                <FavoriteBorder
+                                  fontSize="large"
+                                  style={{
+                                    color: "#652D90",
+                                  }}
+                                />
+                              )}
                             </button>
                           </div>
                         ))}
