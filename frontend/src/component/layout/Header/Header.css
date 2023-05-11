@@ -18,15 +18,38 @@
  .active-link:hover {
    background-color: #652D90;
    color: white!important;
-  
+   
  }
  
  .nav-link.active-link {
    background-color: #652D90;
    color: white;
  }
+ .me-2{ width: 50% !important; align-items: center !important;}
 
+ .head2{
+
+  border: 0px solid red;
+  width: 100%;
+  align-items: center;
+  /* background-color: aliceblue; */
+  padding: 15px;
  
+
+
+}
+.head2 form{
+
+  border: 0px solid red;
+  margin-left: 30%;
+
+
+
+} 
+.maxau{ padding: 10px;
+  
+  text-align: left;}
+
  .navbar-toggler-icon{  border: 0px solid rgb(171, 25, 201); }
  @media only screen and (max-width: 600px) 
  { .navbar{ border: 0px solid rgb(79, 192, 27);align-items: right; text-align: right;}
@@ -37,7 +60,7 @@
  @media only screen and (max-width: 600px) {
 	.head1 {
 border: 0px solid red;
-    width: 33%;
+    width: 30%;
 	
 	}
 
@@ -46,16 +69,23 @@ border: 0px solid red;
 .head2 {
 
   border: 0px solid red;
-  width: 46%;
+  width: 100%;
+  align-items: center;
+  /* background-color: aliceblue; */
+ 
+
 
 }
+.head2 form{ align-items: center;padding: 10px; margin: 0px !important;}
+.me-2{ width: 100% !important; align-items: center !important;}
+
 
 }
 @media only screen and (max-width: 600px) {
 .head3{
 
   padding-right: 20px;
-  width: 20%;
+  width: 70%;
   border: 0px solid red;
 
 }

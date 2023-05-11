@@ -3,9 +3,10 @@
   height: 0;
   width: 100vw;
   position: fixed;
-  top: 15%;
+  
   left: 0%;
   max-width: 100%;
+  position: relative;
   background-color: white;
 
 }
@@ -72,7 +73,7 @@
 }
 
 .profileContainer > div:last-child > div:last-child {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   width: 60%;
 }
@@ -96,6 +97,7 @@
 @media screen and (max-width: 600px) {
   .profileContainer {
     flex-direction: column;
+    margin-top: 10%;
   }
 
   .profileContainer > div:first-child > h1 {
