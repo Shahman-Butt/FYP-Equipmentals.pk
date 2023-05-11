@@ -12,6 +12,7 @@ const {
   deleteReview,
   getAdminProducts,
   getFavorites,
+  getPremium,
   getArchives,
   deleteFavorites,
   premiumProduct,
@@ -122,6 +123,9 @@ router
   .route("/favorites")
   .get(isAuthenticatedUser, getFavorites)
   .delete(isAuthenticatedUser, deleteFavorites);
+
+router.route("/premium").get(getPremium);
+// .delete(isAuthenticatedUser, deleteFavorites);
 
 router.route("/archives").get(isAuthenticatedUser, getArchives);
 router.route("/archives/:id").put(isAuthenticatedUser, updateArchiveStatus);

@@ -34,7 +34,7 @@ const Sidebar = () => {
     <div class="col-md-3">
       <div
         class="list-group"
-        style={{ margin: "0% 10% 0% 10%", padding: "136px 0 0 0" }}
+        style={{ margin: "0% 10% 0% 10%", padding: "50px 0 0 0" }}
       >
         <a
           href="/admin/products"

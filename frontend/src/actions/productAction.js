@@ -134,17 +134,37 @@ export const getFavorites =
   (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
   async (dispatch) => {
     try {
-      dispatch({ type: ADMIN_PRODUCT_REQUEST });
+      // dispatch({ type: ADMIN_PRODUCT_REQUEST });
 
       const { data } = await axios.get("/api/v1/favorites");
 
       dispatch({
-        type: ADMIN_PRODUCT_SUCCESS,
+        // type: ADMIN_PRODUCT_SUCCESS,
         payload: data.products,
       });
     } catch (error) {
       dispatch({
-        type: ADMIN_PRODUCT_FAIL,
+        // type: ADMIN_PRODUCT_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+export const getPremium =
+  (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
+  async (dispatch) => {
+    try {
+      // dispatch({ type: ADMIN_PRODUCT_REQUEST });
+
+      const { data } = await axios.get("/api/v1/premium");
+
+      dispatch({
+        // type: ADMIN_PRODUCT_SUCCESS,
+        payload: data.products,
+      });
+    } catch (error) {
+      dispatch({
+        // type: ADMIN_PRODUCT_FAIL,
         payload: error.response.data.message,
       });
     }

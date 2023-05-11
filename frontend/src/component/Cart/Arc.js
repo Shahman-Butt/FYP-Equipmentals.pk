@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import "./Cart.css";
+import "../Product/ProductDetails.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
   clearErrors,
@@ -108,34 +109,35 @@ const Arc = ({ match }) => {
           <>
             {" "}
             <div className="container-fluid mb-5">
-              <div className="row border-top px-xl-5" style={{ "height": "1%" }}>
+              <div className="row border-top px-xl-5" style={{ height: "1%" }}>
                 <SideBar />
 
-                <div className="col-lg-9 d-none d-lg-block">
+                <div className="col-lg-9 d-lg-block">
                   <>
                     <h2 className="productsHeading">Archives</h2>
                     {/* <p> User Id: {String(user._id)}</p> */}
                     <div className="products">
                       {products &&
                         products.map((product) => (
-                          <div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              alignItems: "center",
+                            }}
+                          >
                             <ProductCard key={product._id} product={product} />
-                            {/* <Link
-                              to={url}
-                              // {`/admin/product/${match.params.getValue(
-                              //   match.params.id,
-                              //   "id"
-                              // )}`}
-                            >
-                              <EditIcon />
-                            </Link> */}
+
                             <button
                               onClick={() => handleEditArchive(product._id)}
-                              className="outline-success"
+                              className="submitReview"
                               variant="contained"
-                              style={{ "background-color": "#652D90", border: "none" }}
+                              style={{
+                                "background-color": "#652D90",
+                                border: "none",
+                              }}
                             >
-                              Edit
+                              Edit Archive Status
                             </button>
                           </div>
                         ))}

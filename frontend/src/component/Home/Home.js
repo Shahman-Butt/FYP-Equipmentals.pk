@@ -26,6 +26,7 @@ import { logout } from "../../actions/userAction";
 // import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import "../Product/Products.css";
+import axios from "axios";
 // import { seDispatch } from "react-redux";
 // import {  getProduct } from "../../actions/productAction";
 // import Loader from "../layout/Loader/Loader";
@@ -70,49 +71,53 @@ const Home = ({ user, match }) => {
 
   const history = useHistory();
 
-  const options = [
-    { icon: <ListAltIcon />, name: "Orders", func: orders },
-    { icon: <PersonIcon />, name: "Profile", func: account },
-    { icon: <ShoppingCartIcon />, name: "Products", func: product },
-    { icon: <ShoppingCartIcon />, name: "My Products", func: userProduct },
-
-    { icon: <ExitToAppIcon />, name: "Logout", func: logoutUser },
-  ];
-
-  function orders() {
-    history.push("/orders");
-  }
-  function account() {
-    history.push("/account");
-  }
-
-  function product() {
-    history.push("/admin/product");
-    // console.log("admin func 1");
-  }
-  function userProduct() {
-    history.push("/admin/products");
-    // console.log("user func 1")
-  }
-  function logoutUser() {
-    dispatch(logout());
-    alert.success("Logout Successfully");
-    history.push("/login");
-  }
-
   const alert = useAlert();
   const dispatch = useDispatch();
   const { loading, error, products } = useSelector((state) => state.products);
+  const [pro, setPro] = useState([]);
+  const fetchPremium = async () => {
+    const resu = await axios.get("/api/v1/premium");
+    const products = resu.data.products;
+    setPro(products);
+
+    //  setPro(await axios.get("/api/v1/favorites"));
+    console.log(setPro, "setPro");
+    console.log(products, "products");
+
+    // setPro(pro.data.products);
+  };
 
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
+    fetchPremium();
     dispatch(getProduct());
   }, [dispatch, error, alert]);
   let count = filteredProductsCount;
+  // const [owner, setOwner] = useState(null);
+  // const fetchPremium = async (keyword, currentPage, price, category, ratings) => {
+  //   // const result = await getOwnerDetails(product.userId);
+  //   const resu = await axios.get(`/api/v1/admin/user2/${product.userId}`);
+  //   // console.log(result, "#######result####################");
+  //   // console.log(product.userId, "@@@@@@@@@@@@@@@@@@@@@@$$$$$$%%%%%%%%%%%%%%%");
+  //   setOwner(await axios.get(`/api/v1/admin/user2/${product.userId}`));
+  //   // console.log("rrrrrrrr1", resu);
+  //   // console.log("rrrrrrrr2", owner);
+  //   // console.log("rrrrrrrr3", setOwner);
+  //   const t = resu.data.owner.numb;
+  //   setCont(t);
+  //   const y = resu.data.owner.addr;
+  //   setLoca(y);
+  //   // console.log(cont, "this is my cont nnnnnnnnnnnnnnn");
+  //   // console.log(loca, "this is my loca sssssssssssssss");
 
+  //   // cont = result.data.owner.numb;
+  //   // loca = result.data.owner.addr;
+  //   // const loca = result.data.owner.addr;
+  //   // console.log(loca);
+  // };
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -135,7 +140,7 @@ const Home = ({ user, match }) => {
               {" "}
               <div className="container-fluid mb-5">
                 <div className="row border-top px-xl-5">
-                  <div className="col-lg-3 d-none d-lg-block">
+                  <div className="col-lg-3  d-lg-block">
                     <Caution />
                   </div>
 
@@ -264,38 +269,8 @@ const Home = ({ user, match }) => {
 
               <div className="col-lg-9 container" id="container">
                 <div className="products">
-                  {/* {products &&
-                  products.map((product) => {
-                    <p>No Featured Products</p>;
-                    // <PremiumProductCard key={product._id} product={product} />;
-                    // if (product.premium === "Premium") {
-                    //   <ProductCard key={product._id} product={product} />;
-                    // } else {
-                    //   <p>No Featured Products</p>;
-                    // }
-                  })} */}
-
-                  {/* {products &&
-                  products
-                    .sort((a, b) => b.payment - a.payment)
-                    .map((product) => (
-                      <PremiumProductCard key={product._id} product={product} />
-                    ))} */}
-
-                  {/* {products &&
-                  products
-                    .sort((a, b) => b.payment - a.payment) // sort by payment in descending order
-                    .map(
-                      (product) =>
-                        product.premium === "Premium" && (
-                          <PremiumProductCard
-                            key={product._id}
-                            product={product}
-                          />
-                        )
-                    )} */}
-                  {products &&
-                    products
+                  {pro &&
+                    pro
                       .filter((product) => product.premium === "Premium") // filter out non-premium products
                       .sort((a, b) => b.payment - a.payment) // sort by payment in descending order
                       .map((product) => (

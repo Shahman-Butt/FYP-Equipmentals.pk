@@ -15,8 +15,6 @@ import NotificationPanel from "./NotificationPanel.js";
 // import logo2 from "../../../images/logo2.png";
 
 import logo2 from "../../../images/logo2.png";
-
-import video from "../../../../src/video.mp4";
 import { useHistory } from "react-router-dom";
 
 function NavScrollExample({ user }) {
@@ -56,30 +54,17 @@ function NavScrollExample({ user }) {
 
   return (
     <>
-      <div className="video-container">
-        {/* <video autoPlay muted loop>
-          <source src={video} type="video/mp4" />
-        </video> */}
-      </div>
-
       <Navbar bg="transparent" expand="lg">
         <Container fluid>
-          <div
-            style={{
-              "margin-right": "10%",
-              border: "1px solid #ccc",
-              "box-shadow": "0px 0px 10px rgba(0, 0, 0, 0.1)",
-            }}
+          <div className="head1"
+            
           >
             <a href="/">
-              <img
-                style={{ "max-width": "100%", height: "auto" }}
-                src={logo2}
-              />
+              <img style={{ "max-width": "100%", height: "auto" }} src={logo2} />
             </a>
           </div>
 
-          <div style={{ width: "40%" }}>
+          <div className="head2">
             <Form
               className="d-flex"
               onSubmit={searchSubmitHandler}
@@ -103,7 +88,18 @@ function NavScrollExample({ user }) {
             </Form>
           </div>
 
-          <div>
+          <div className="head3">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarScroll"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
             <Navbar.Collapse id="navbarScroll">
               <Nav
                 className="me-auto my-2 my-lg-0"
@@ -115,7 +111,7 @@ function NavScrollExample({ user }) {
                   as={NavLink}
                   exact
                   to="/"
-                  style={{ "font-weight": "bold", color: "#333;" }}
+                  style={{ "font-weight": "bold" }}
                   activeClassName="active-link"
                   onClick={() => handleLinkClick("/")}
                 >
@@ -200,16 +196,8 @@ function NavScrollExample({ user }) {
                 >
                   <div className="mx-auto">About</div>
                 </Nav.Link>
-                <Nav.Link
-                  className="d-flex align-items-center"
-                  as={NavLink}
-                  to="/contact"
-                  style={{ "font-weight": "bold", color: "#333;" }}
-                  activeClassName="active-link"
-                  onClick={() => handleLinkClick("/contact")}
-                >
-                  <div className="mx-auto">Contact</div>
-                </Nav.Link>
+              
+              
                 {isAuthenticated ? (
                   <>
                     <NotificationPanel user={user} />

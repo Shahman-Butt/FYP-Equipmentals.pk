@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
-
+import "../Header/NotificationPanel.css";
 import {
   Badge,
   IconButton,
@@ -88,7 +88,7 @@ const NotificationPanel = ({ user }) => {
       >
         {loading && (
           <MenuItem>
-            <CircularProgress size={20} />
+            <CircularProgress />
           </MenuItem>
         )}
         {!loading && notifications.length === 0 && (
@@ -98,12 +98,13 @@ const NotificationPanel = ({ user }) => {
           notifications.length > 0 &&
           notifications.map((notification) => (
             <div>
-              <MenuItem
+              <div
+                className="notify"
                 key={notification[1]}
                 onClick={() => handleOpenDetails(notification[1])}
               >
-                <Typography variant="body2">{notification[0]}</Typography>
-              </MenuItem>
+                <p variant="body2">{notification[0]}</p>
+              </div>
             </div>
           ))}
       </Menu>

@@ -141,11 +141,11 @@ const ProductList = ({ history }) => {
     <Fragment>
       <MetaData title={`ALL PRODUCTS - Admin`} />
 
-      <div className="dashboard row" style={{ height: "1%" }}>
+      <div className="dashboard row" style={{ height: "1%", }}>
         <SideBar />
         <div
           className="productListContainer col-md-9"
-          style={{ height: "0%", width: "70%" }}
+          style={{ height: "0%"}}
         >
           <h1 id="productListHeading">ALL PRODUCTS</h1>
           {/* <p> User Id: {String(user._id)}</p> */}

@@ -269,16 +269,45 @@ exports.getFavorites = catchAsyncErrors(async (req, res, next) => {
   const user_id = req.user._id;
   const person = await User.findOne({ _id: user_id });
   const productIds = person.favorites.map((favorite) => favorite.toString());
-  // console.log("I am here in favs", user_id);
-  // console.log("I am user");
-  // console.log(productIds);
-  // console.log("user side");
+  console.log("I am here in favs", user_id);
+  console.log("I am user");
+  console.log(productIds);
+  console.log("user side");
   const products = await Product.find({ _id: { $in: productIds } });
   // console.log(products);
 
   res.status(200).json({
     success: true,
     products,
+  });
+});
+
+exports.getPremium = catchAsyncErrors(async (req, res, next) => {
+  const resultPerPage = 8;
+  const productsCount = await Product.countDocuments();
+
+  const apiFeature = new ApiFeatures(
+    Product.find({ archive: "Not Archived", premium: "Premium" }),
+    req.query
+  )
+    .search()
+    .filter();
+
+  let products = await apiFeature.query;
+
+  let filteredProductsCount = products.length;
+
+  apiFeature.pagination(resultPerPage);
+
+  products = await apiFeature.query;
+
+  console.log("products", products);
+  res.status(200).json({
+    success: true,
+    products,
+    productsCount,
+    resultPerPage,
+    filteredProductsCount,
   });
 });
 

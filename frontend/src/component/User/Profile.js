@@ -4,11 +4,18 @@ import MetaData from "../layout/MetaData";
 import Loader from "../layout/Loader/Loader";
 import { Link } from "react-router-dom";
 import "./Profile.css";
+import "../Product/ProductDetails.css";
 import header from "../layout/Header/Header";
 
 const Profile = ({ history }) => {
   const { user, loading, isAuthenticated } = useSelector((state) => state.user);
 
+  const handleClick = () => {
+    history.push("/password/update");
+  };
+  const handleClick2 = () => {
+    history.push("/me/update");
+  };
   useEffect(() => {
     if (isAuthenticated === false) {
       history.push("/login");
@@ -26,7 +33,21 @@ const Profile = ({ history }) => {
             <div>
               {/* <h1>My Profile</h1> */}
               <img src={user.avatar.url} alt={user.name} />
-              <Link to="/me/update">Edit Profile</Link>
+
+              <button
+                onClick={handleClick2}
+                className="btn submitReview"
+                style={{
+                  backgroundColor: "#652D90",
+                  color: "#fff",
+                  border: "none",
+                  padding: "10px 20px",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                }}
+              >
+                Edit Profile
+              </button>
             </div>
             <div>
               {/* <div>
@@ -61,8 +82,20 @@ const Profile = ({ history }) => {
                 </p>
               </div>
               <div>
-                {/* <Link to="/orders">My Orders</Link> */}
-                <Link to="/password/update">Change Password</Link>
+                <button
+                  onClick={handleClick}
+                  className="btn submitReview"
+                  style={{
+                    backgroundColor: "#652D90",
+                    color: "#fff",
+                    border: "none",
+                    padding: "10px 20px",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                  }}
+                >
+                  Change Password
+                </button>
               </div>
             </div>
           </div>

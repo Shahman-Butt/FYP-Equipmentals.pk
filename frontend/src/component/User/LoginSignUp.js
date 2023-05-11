@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import FaceIcon from "@material-ui/icons/Face";
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import AddIcCallIcon from '@material-ui/icons/AddIcCall';
+import LocationOnIcon from "@material-ui/icons/LocationOn";
+import AddIcCallIcon from "@material-ui/icons/AddIcCall";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, login, register } from "../../actions/userAction";
 import { useAlert } from "react-alert";
-import logo from '../../images/logo.PNG';
+import logo from "../../images/logo.PNG";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 const LoginSignUp = ({ history, location }) => {
@@ -120,9 +120,11 @@ const LoginSignUp = ({ history, location }) => {
         <Fragment>
           <div className="LoginSignUpContainer">
             <div className="LoginSignUpBox">
-
               <div>
-                <div style={{ "padding": "5%", "font-weight": "bold" }} className="login_signUp_toggle">
+                <div
+                  style={{ padding: "5%", "font-weight": "bold" }}
+                  className="login_signUp_toggle"
+                >
                   <p onClick={(e) => switchTabs(e, "login")}>LOGIN</p>
                   <p onClick={(e) => switchTabs(e, "register")}>REGISTER</p>
                 </div>
@@ -130,21 +132,21 @@ const LoginSignUp = ({ history, location }) => {
               </div>
               <div className="flex-row d-flex ">
                 <div className="col ">
-                  <p style={{ "margin": "15% 0% 25% 5%", "font-weight": "bold" }}>
-                    Welcome to EquipmentalsPk</p>
+                  <p style={{ margin: "15% 0% 25% 5%", "font-weight": "bold" }}>
+                    Welcome to EquipmentalsPk
+                  </p>
                 </div>
                 <div className="col">
-                  <section style={{ "size": "auto", "margin": "0% -40% 15% 30%" }}>
+                  <section style={{ size: "auto", margin: "0% -40% 15% 30%" }}>
                     <img style={{ "max-width": "55%" }} src={logo} />
                   </section>
                 </div>
-
-
               </div>
               <form className="loginForm" ref={loginTab} onSubmit={loginSubmit}>
                 <div>
-                  <label style={{ "font-weight": "bold" }}>Enter your username or email address</label>
-
+                  <label style={{ "font-weight": "bold" }}>
+                    Enter your username or email address
+                  </label>
                 </div>
                 <div className="loginEmail">
                   <MailOutlineIcon />
@@ -156,10 +158,10 @@ const LoginSignUp = ({ history, location }) => {
                     onChange={(e) => setLoginEmail(e.target.value)}
                   />
                 </div>
-                <div >
-
-                  <label style={{ "font-weight": "bold" }} >Enter your Password</label>
-
+                <div>
+                  <label style={{ "font-weight": "bold" }}>
+                    Enter your Password
+                  </label>
                 </div>
                 <div className="loginPassword">
                   <LockOpenIcon />
@@ -171,7 +173,7 @@ const LoginSignUp = ({ history, location }) => {
                     onChange={(e) => setLoginPassword(e.target.value)}
                   />
                 </div>
-                <Link to="/password/forgot">Forget Password ?</Link>
+                {/* <Link to="/password/forgot">Forget Password ?</Link> */}
                 <input type="submit" value="Login" className="loginBtn" />
               </form>
               <form
@@ -224,7 +226,7 @@ const LoginSignUp = ({ history, location }) => {
                     onChange={registerDataChange}
                   />
                 </div>
-             
+
                 <div className="signUpPassword">
                   <LockOpenIcon />
                   <input

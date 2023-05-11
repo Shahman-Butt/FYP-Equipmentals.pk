@@ -1,3 +1,21 @@
+
+
+.banner1{ background-color: #652D90;
+padding: 20px 20px;
+width: 100%;
+position: absolute;
+}
+.banner1 h2
+{ color: white; 
+  text-align: center;
+  font-weight: bold;
+  font-size: xx-large;
+text-decoration: none;
+  border: 0PX solid white;
+  width: 100%;
+}
+.new{ background-color: #652D90; border: 1px solid red; text-align: left;}
+
 .aboutSection {
   height: 100vh;
   width: 100vw;
@@ -5,8 +23,10 @@
   /* background-color: white; */
   display: grid;
   grid-template-columns: 4fr 4fr;
-  position: fixed;
+  position: relative;
+border: 0px solid green;
 }
+
 
 .aboutSectionGradient {
   background-image: linear-gradient(
@@ -19,18 +39,29 @@
 .aboutSectionContainer {
   position: absolute;
   left: 50%;
-  top: 35%;
+  top: 50%;
+  border: 0px solid rgb(172, 20, 20);
   background-color: rgb(255, 255, 255);
-  width: 80%;
-  height: 75%;
+  width: 100%;
+  height: auto;
   transform: translateX(-50%) translateY(-50%);
   box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.192);
 
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0px 30px 30px 30px;
 }
-
+@media only screen and (max-width: 600px) {
+	.aboutSectionContainer  {
+border: 0px solid red;
+top: 60%;
+height: auto;
+padding-bottom:80px;
+text-align: center;
+	
+	}
+}
 .aboutSectionContainer > h1 {
   font: 400 3vmax "Roboto";
   color: #652D90;
@@ -63,7 +94,7 @@
 .aboutSectionContainer > div > div > span {
   font: 100 1vmax "Roboto";
   color: rgba(0, 0, 0, 0.616);
-  text-align: center;
+  text-align: left;
   width: 80%;
 }
 
@@ -71,6 +102,12 @@
   border-left: 1px solid rgba(0, 0, 0, 0.116);
 }
 
+
+.aboutSectionContainer2 h4 ul li {
+  text-decoration: none;
+  text-align: left;
+  list-style: none;
+}
 .aboutSectionContainer2 > h2 {
   color: rgba(0, 0, 0, 0.623);
   font: 100 2vmax "Roboto";

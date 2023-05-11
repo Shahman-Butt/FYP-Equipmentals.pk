@@ -122,7 +122,7 @@ const NewProduct = ({ history }) => {
 
         <div
           className="col-md-9 newProductContainer bg-transparent"
-          style={{ height: "0%", width: "70%" }}
+          style={{ height: "0%", }}
         >
           <form
             className="createProductForm"

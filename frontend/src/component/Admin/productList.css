@@ -53,4 +53,7 @@
   .productListTable div {
     font: 300 4vw "Roboto";
   }
+ .col-md-9{ width: 100% !important;}
+
+
 }

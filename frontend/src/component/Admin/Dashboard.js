@@ -69,18 +69,16 @@ const Dashboard = () => {
 
 
 
-      <div className="dashboard row" style={{ "height": "1%" }}>
+      <div className="dashboard row">
         <Sidebar />
 
-        <div className="col-md-9 dashboardContainer bg-transparent" style={{ "height": "0%", "width": "70%" }}>
-          <h1 id="">DashBoard</h1>
+        <div className="col-md-9 dashboardContainer bg-transparent">
+          
 
           <div className="dashboardSummary">
-            {/* <div>
-            <p>
-              Total Amount <br /> Rs. {totalAmount}
-            </p>
-          </div> */}
+          <div>
+            <h1>DashBoard</h1>
+          </div>
             <div className="dashboardSummaryBox2">
               <Link to="/admin/products">
                 <p>Product</p>
@@ -110,6 +108,9 @@ const Dashboard = () => {
 
       
     </div>
+
+
+
   );
 };
 
