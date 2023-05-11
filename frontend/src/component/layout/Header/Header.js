@@ -56,36 +56,13 @@ function NavScrollExample({ user }) {
     <>
       <Navbar bg="transparent" expand="lg">
         <Container fluid>
-          <div className="head1"
-            
-          >
+          <div className="head1">
             <a href="/">
-              <img style={{ "max-width": "100%", height: "auto" }} src={logo2} />
-            </a>
-          </div>
-
-          <div className="head2">
-            <Form
-              className="d-flex"
-              onSubmit={searchSubmitHandler}
-              bg="transparent"
-            >
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-                value={keyword}
-                onChange={(e) => setKeyword(e.target.value)}
+              <img
+                style={{ "max-width": "100%", height: "auto" }}
+                src={logo2}
               />
-              <Button
-                className="outline-success"
-                style={{ "background-color": "#652D90", border: "none" }}
-                type="submit"
-              >
-                Search
-              </Button>
-            </Form>
+            </a>
           </div>
 
           <div className="head3">
@@ -103,11 +80,11 @@ function NavScrollExample({ user }) {
             <Navbar.Collapse id="navbarScroll">
               <Nav
                 className="me-auto my-2 my-lg-0"
-                style={{ maxHeight: "100px" }}
+                style={{ maxHeight: "auto" }}
                 navbarScroll
               >
                 <Nav.Link
-                  className="d-flex align-items-center"
+                  className="d-flex align-items-top"
                   as={NavLink}
                   exact
                   to="/"
@@ -115,12 +92,12 @@ function NavScrollExample({ user }) {
                   activeClassName="active-link"
                   onClick={() => handleLinkClick("/")}
                 >
-                  <div className="mx-auto">Home</div>
+                  <div className="maxau">Home</div>
                 </Nav.Link>
                 {isAuthenticated ? (
                   <>
                     <NavDropdown
-                      className="d-flex align-items-center"
+                      className="d-flex align-items-top maxau"
                       title="Dashboard"
                       style={{ "font-weight": "bold", color: "#333;" }}
                       id="basic-nav-dropdown"
@@ -149,7 +126,7 @@ function NavScrollExample({ user }) {
                       <NavDropdown.Divider />
                     </NavDropdown>
                     <NavDropdown
-                      className="d-flex align-items-center"
+                      className="d-flex align-items-top maxau"
                       title="Profile"
                       style={{ "font-weight": "bold", color: "#333;" }}
                       id="basic-nav-dropdown"
@@ -187,17 +164,20 @@ function NavScrollExample({ user }) {
                 </Nav.Link> */}
 
                 <Nav.Link
-                  className="d-flex align-items-center"
+                  className="d-flex align-items-top"
                   as={NavLink}
                   to="/about"
-                  style={{ "font-weight": "bold", color: "#333;" }}
+                  style={{
+                    "font-weight": "bold",
+                    color: "#333;",
+                    "text-align": "left",
+                  }}
                   activeClassName="active-link"
                   onClick={() => handleLinkClick("/about")}
                 >
-                  <div className="mx-auto">About</div>
+                  <div className="maxau">About</div>
                 </Nav.Link>
-              
-              
+
                 {isAuthenticated ? (
                   <>
                     <NotificationPanel user={user} />
@@ -205,7 +185,7 @@ function NavScrollExample({ user }) {
                 ) : (
                   <>
                     <Nav.Link
-                      className="d-flex align-items-center"
+                      className="d-flex align-items-center maxau"
                       onClick={() => handleLinkClick("/login")}
                       as={NavLink}
                       to="/login"
@@ -221,6 +201,36 @@ function NavScrollExample({ user }) {
           </div>
         </Container>
       </Navbar>
+
+      <>
+        <div className="head2">
+          <center>
+            {" "}
+            <Form
+              className="d-flex"
+              onSubmit={searchSubmitHandler}
+              bg="transparent"
+            >
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                className="me-2"
+                aria-label="Search"
+                align-item="center"
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+              />
+              <Button
+                className="outline-success"
+                style={{ "background-color": "#652D90", border: "none" }}
+                type="submit"
+              >
+                Search
+              </Button>
+            </Form>
+          </center>
+        </div>
+      </>
     </>
   );
 }

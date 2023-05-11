@@ -6,8 +6,8 @@
   justify-content: center;
   align-items: center;
   background-color:#fff;
-  position: fixed;
-  top: 20%;
+  position:relative;
+  
   left: 0;
   border: 0px solid red;
 }
@@ -15,10 +15,10 @@
 @media only screen and (max-width: 600px) {
   .updateProfileContainer {
   
-    top: 10%;
+    top: 5%;
   
   }}
-.updatep { background-color: #652D90;}
+.updatep { background-color: #652D90; margin-top: 20px;}
 .updatep h2{text-align: center;
 color: white;
 padding:10px
@@ -40,7 +40,7 @@ padding:10px
 @media only screen and (max-width: 600px) {
   .updateProfileContainer {
   
-  padding: 50px;
+  padding: 20px;
   
   }}
 
