@@ -8,7 +8,7 @@
 Equipmentals.pk (EquipSense) is a comprehensive full-stack e-commerce and equipment rental platform built with the MERN stack (MongoDB, Express.js, React, Node.js). Designed as a Final Year Project (FYP), it provides a seamless user experience for browsing, managing, and purchasing/renting premium equipment. The platform integrates secure authentication, an **ML-driven recommendation engine**, payment processing, customized admin dashboards, and responsive front-end components to deliver a modern web application.
 
 ## 🎯 Key Features
-- **Machine Learning Recommendation Engine**: AI-driven product suggestions tailored to users based on browsing and rental behavior.
+- **Algorithmic Recommendation Engine**: Content-based filtering system that suggests relevant equipment by mapping product clusters, categories, high ratings, and utilizing a Fisher-Yates shuffle algorithm to ensure diverse discoveries for users.
 - **User Authentication & Authorization**: Secure login, registration, password recovery, and role-based access control (Admin/User) using JSON Web Tokens (JWT).
 - **Product Management**: Complete CRUD operations for equipment, including advanced search, filtering, pagination, and multi-image uploads.
 - **Interactive Admin Dashboard**: Centralized control panel for managing users, products, orders, and viewing platform analytics with real-time charts.
@@ -116,7 +116,7 @@ The frontend application will load locally on `http://localhost:3000`.
 ```
 
 ## 🧠 Key Algorithms / Technical Concepts
-- **ML Recommendation System**: Intelligent algorithmic filtering to surface relevant items, increasing platform engagement.
+- **Content-Based Recommendation Engine**: An algorithmic pipeline that recommends related equipment. It dynamically queries based on matching data `Clusters` and `Categories`, sorts by top user `ratings`, limits results for performance, and applies a true **Fisher-Yates shuffle algorithm** to ensure randomized variety on every page load.
 - **Custom Error Handling**: Utilizes orchestrated error handling middleware for unified response formats globally, capturing unhandled promise rejections seamlessly.
 - **Redux State Management Framework**: Advanced implementation of reducers and actions enforcing monotonic flow of UI state, specifically addressing shopping carts and persisting logic.
 - **Bcrypt Password Hashing & JWT**: Secure storage of user credentials using highly secure hash salting methodologies and secure cookie-based session verification.
