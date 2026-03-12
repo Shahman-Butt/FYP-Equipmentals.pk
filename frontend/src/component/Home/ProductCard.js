@@ -30,32 +30,23 @@ const ProductCard = ({ product }) => {
     precision: 0.5,
   };
   return (
-    <Link className="productCard" style={{"textDecoration": "none" , "color": "#652D90"}} to={`/product/${product._id}`}>
-      {/* <img src={product.images[0].url} alt={product.name} /> */}
-      {product.images.length ? (
-        <img src={product.images[0].url} alt={product.name} />
-      ) : (
-        <img src={imgURL} alt={product.name} />
-      )}
-
-      <p
-        style={{
-          "font-weight": "bold",
-          color: "#333;",
-          height: "50px",
-          overflow: "hidden",
-        }}
-      >
-        {product.name}
-      </p>
-      <div>
-        <Rating {...options} />{" "}
-        <span className="productCardSpan">
-          {" "}
-          ({product.numOfReviews} Reviews)
-        </span>
+    <Link className="modern-product-card" to={`/product/${product._id}`}>
+      <div className="product-image-container">
+        {product.images.length ? (
+          <img src={product.images[0].url} alt={product.name} />
+        ) : (
+          <img src={imgURL} alt={product.name} />
+        )}
       </div>
-      <span>{`Rs. ${product.price} per day`}</span>
+
+      <div className="product-details">
+        <h3 className="product-name">{product.name}</h3>
+        <div className="product-rating">
+          <Rating {...options} />
+          <span className="reviews-count">({product.numOfReviews} Reviews)</span>
+        </div>
+        <span className="product-price">{`Rs. ${product.price} / day`}</span>
+      </div>
     </Link>
   );
 };

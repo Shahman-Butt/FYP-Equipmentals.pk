@@ -1,77 +1,170 @@
+.modern-footer {
+  background-color: var(--secondary-color);
+  color: #d1d5db;
+  padding-top: 4rem;
+  font-family: var(--font-primary, "Inter", sans-serif);
+  border-top: 5px solid var(--primary-color);
+}
 
+.footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
 
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
 
+/* Brand Column */
+.brand-col .footer-logo img {
+  height: 45px;
+  margin-bottom: 1.5rem;
+  filter: brightness(0) invert(1);
+}
 
+.footer-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  color: #9ca3af;
+}
 
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
 
-footer {
-  
-  padding:100px;
-  background-color: #652D90;
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
   color: white;
-  align-items: center;
+  transition: var(--transition-fast);
 }
 
-.leftFooter {
-  width: 20%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.leftFooter > h4 {
-  font-family: "Roboto";
-  font-size: 1vmax;
-}
-.leftFooter > p {
-  text-align: center;
-  font-size: 1.2vmax;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-}
-.leftFooter > img {
-  width: 10vmax;
-  margin: 1vmax;
-  cursor: pointer;
+.social-links a:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-3px);
+  color: white;
 }
 
-.midFooter {
-  width: 60%;
-
-  text-align: center;
+/* Common Links Columns */
+.footer-heading {
+  color: white;
+  font-size: 1.15rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 0.5rem;
 }
 
-.midFooter > h1 {
-  font-size: 4vmax;
-  font-family: "Roboto";
-  color: black;
-}
-.midFooter > p {
-  max-width: 60%;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  margin: 1vmax auto;
+.footer-heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 30px;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
 }
 
-.rightFooter {
-  width: 20%;
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.footer-links li {
+  margin-bottom: 0.8rem;
 }
-.rightFooter > h4 {
-  font-family: "Roboto";
-  font-size: 1.4vmax;
-  text-decoration: underline;
-}
-.rightFooter > a {
+
+.footer-links a {
+  color: #9ca3af;
   text-decoration: none;
-  font-size: 1.3vmax;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  color: white;
-  transition: all 0.5s;
-  margin: 0.5vmax;
+  transition: var(--transition-fast);
+  font-size: 0.95rem;
+  display: inline-block;
 }
 
-.rightFooter > a:hover {
-  color: #eb4034;
+.footer-links a:hover {
+  color: var(--primary-color);
+  transform: translateX(5px);
+}
+
+/* Contact Column */
+.footer-contact-info {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-contact-info li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: #9ca3af;
+}
+
+.footer-contact-info i {
+  color: var(--primary-color);
+  margin-right: 1rem;
+  margin-top: 4px;
+  font-size: 1.1rem;
+}
+
+.footer-contact-info a {
+  color: #9ca3af;
+  transition: var(--transition-fast);
+}
+
+.footer-contact-info a:hover {
+  color: var(--primary-color);
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  background-color: #0b0f19;
+  padding: 1.5rem 0;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.footer-bottom .container-fluid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+/* Responsive Support */
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .footer-bottom .container-fluid {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
 }

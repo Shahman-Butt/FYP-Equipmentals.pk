@@ -1,9 +1,14 @@
-# 🛠️ Equipmentals.pk - Full-Stack E-Commerce Platform
+# EquipSense: ML-Powered Full-Stack E-Commerce Platform
+
+<p align="center">
+  <img src="assets/hero-demo.png" alt="Equipmentals Homepage UI" style="border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); width: 100%; max-width: 900px;" />
+</p>
 
 ## 📖 Project Description
-Equipmentals.pk is a comprehensive full-stack e-commerce and equipment rental platform built with the MERN stack (MongoDB, Express.js, React, Node.js). Designed as a Final Year Project (FYP), it provides a seamless user experience for browsing, managing, and purchasing/renting premium equipment. The platform integrates secure authentication, payment processing, customized admin dashboards, and responsive front-end components to deliver a modern web application.
+Equipmentals.pk (EquipSense) is a comprehensive full-stack e-commerce and equipment rental platform built with the MERN stack (MongoDB, Express.js, React, Node.js). Designed as a Final Year Project (FYP), it provides a seamless user experience for browsing, managing, and purchasing/renting premium equipment. The platform integrates secure authentication, an **ML-driven recommendation engine**, payment processing, customized admin dashboards, and responsive front-end components to deliver a modern web application.
 
 ## 🎯 Key Features
+- **Machine Learning Recommendation Engine**: AI-driven product suggestions tailored to users based on browsing and rental behavior.
 - **User Authentication & Authorization**: Secure login, registration, password recovery, and role-based access control (Admin/User) using JSON Web Tokens (JWT).
 - **Product Management**: Complete CRUD operations for equipment, including advanced search, filtering, pagination, and multi-image uploads.
 - **Interactive Admin Dashboard**: Centralized control panel for managing users, products, orders, and viewing platform analytics with real-time charts.
@@ -111,16 +116,15 @@ The frontend application will load locally on `http://localhost:3000`.
 ```
 
 ## 🧠 Key Algorithms / Technical Concepts
+- **ML Recommendation System**: Intelligent algorithmic filtering to surface relevant items, increasing platform engagement.
 - **Custom Error Handling**: Utilizes orchestrated error handling middleware for unified response formats globally, capturing unhandled promise rejections seamlessly.
 - **Redux State Management Framework**: Advanced implementation of reducers and actions enforcing monotonic flow of UI state, specifically addressing shopping carts and persisting logic.
 - **Bcrypt Password Hashing & JWT**: Secure storage of user credentials using highly secure hash salting methodologies and secure cookie-based session verification.
 - **Pagination & Advanced API Searching**: Highly scalable database querying utilizing custom API classes for dynamic search filtering, sorting, and pagination scaling seamlessly with increasing data.
 
-## 🖼️ Example Output or Screenshots
+## 🖼️ Example Screens
 
-> *(Note: To add actual screenshots, upload images to the repository and link them here.)*
-
-- **Homepage UI**: Displays premium design layout and highlighted product categories.
+- **Homepage UI**: Displays the modern hero section, sleek navigation, and premium design layout.
 - **Admin Dashboard**: Visualizes orders, products, and overall platform metrics with integrated interactive graphs.
 - **Secure Checkout Flow**: Incorporates Stripe checkout securely collecting customer payment intents.
 

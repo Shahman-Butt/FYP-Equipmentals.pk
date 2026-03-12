@@ -128,89 +128,42 @@ const Home = ({ user, match }) => {
   }, [dispatch, keyword, currentPage, price, category, ratings, alert, error]);
 
   return (
-    <>
-      <Fragment>
-        {loading ? (
+    <Fragment>
+      {loading ? (
           <Loader />
         ) : (
           <Fragment>
             <MetaData title="EquipmentalsPk" />
 
-            <>
-              {" "}
-              <div className="container-fluid mb-5">
-                <div className="row border-top px-xl-5">
-                  <div className="col-lg-3  d-lg-block">
-                    <Caution />
-                  </div>
-
-                  <div className="col-lg-9">
-                    <div
-                      id="header-carousel"
-                      style={{ top: "10%" }}
-                      className="carousel slide"
-                      data-ride="carousel"
-                    >
-                      <div className="carousel-inner">
-                        <div
-                          className="carousel-item active"
-                          style={{ height: "410px" }}
-                        >
-                          <img
-                            className="img-fluid"
-                            src={banner1}
-                            alt="Image"
-                          />
-                          <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                            <div className="p-3" style={{ maxWidth: "700px" }}>
-                              <h4 className="text-light text-uppercase font-weight-medium mb-3">
-                                Welcome to{" "}
-                              </h4>
-                              <h3 className="display-4 text-white font-weight-semi-bold mb-4">
-                                EquipmentalsPk
-                              </h3>
-                              <a
-                                href="/products"
-                                className="btn btn-light py-2 px-3"
-                              >
-                                Rent Now
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+            <div className="container-fluid mb-5 px-xl-5">
+              <div className="row">
+                <div className="col-12">
+                  <div
+                    className="hero-section"
+                    style={{ backgroundImage: `url(${banner1})` }}
+                  >
+                    <div className="hero-overlay"></div>
+                    <div className="hero-content">
+                      <span className="hero-subtitle">Premium Equipment Rentals</span>
+                      <h1 className="hero-title">
+                        Equip Your Next Big Project
+                      </h1>
+                      <a href="/products" className="hero-btn">
+                        Explore Catalog
+                      </a>
                     </div>
                   </div>
                 </div>
               </div>
-            </>
+            </div>
 
-            <h2
-              className="homeHeading"
-              style={{ "font-weight": "bold", color: "#333;" }}
-            >
-              Featured Products
-            </h2>
-            <div className="row">
+            <h2 className="section-title">Featured Products</h2>
+            <div className="row px-xl-5">
               <div className="col-lg-3">
-                <div class="list-group" style={{ margin: "0% 10% 0% 10%" }}>
-                  <div
-                    className="bg-transparent"
-                    style={{
-                      marginTop: "25%",
-                      backgroundColor: "#f5f5f5",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    <Typography
-                      style={{
-                        marginBottom: "10px",
-                        fontSize: "20px",
-                        fontWeight: "600",
-                      }}
-                    >
-                      Price Range
-                    </Typography>
+                <div className="filter-sidebar">
+                  <Typography style={{ marginBottom: "10px", fontSize: "16px", fontWeight: "600" }}>
+                    Price Range
+                  </Typography>
                     <Slider
                       value={price}
                       onChange={priceHandler}
@@ -244,10 +197,10 @@ const Home = ({ user, match }) => {
                       />
                     </fieldset>
                   </div>
-                  <FormControl>
+                  <FormControl fullWidth style={{ marginTop: "15px" }}>
                     <InputLabel
                       id="category-dropdown"
-                      style={{ "font-weight": "bold", color: "#333;" }}
+                      style={{ "font-weight": "bold", color: "#333" }}
                     >
                       Categories
                     </InputLabel>
@@ -265,10 +218,9 @@ const Home = ({ user, match }) => {
                     </Select>
                   </FormControl>
                 </div>
-              </div>
 
-              <div className="col-lg-9 container" id="container">
-                <div className="products">
+              <div className="col-lg-9">
+                <div className="products-grid">
                   {pro &&
                     pro
                       .filter((product) => product.premium === "Premium") // filter out non-premium products
@@ -283,14 +235,9 @@ const Home = ({ user, match }) => {
               </div>
             </div>
 
-            <h2
-              className="productsHeading"
-              style={{ "font-weight": "bold", color: "#333;" }}
-            >
-              Products
-            </h2>
+            <h2 className="section-title">All Products</h2>
 
-            <div className="products">
+            <div className="products-grid px-xl-5">
               {products &&
                 products.map((product) => (
                   <ProductCard key={product._id} product={product} />
@@ -317,10 +264,8 @@ const Home = ({ user, match }) => {
             )}
           </Fragment>
         )}
-      </Fragment>
-
       <Footer />
-    </>
+    </Fragment>
   );
 };
 

@@ -1,94 +1,111 @@
-
-/* .btn-outline-success {
-  border-color: #652D90 !important;
+.main-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 0.5rem 0;
+  transition: var(--transition-normal);
 }
 
-.btn-outline-success:hover {
-  border-color: #652D90 !important;
-  color: #652D90 !important;
-} */
-/******* Bootstrap Theming ********/
-/*!
- * Bootstrap v4.5.3 (https://getbootstrap.com/)
- * Copyright 2011-2020 The Bootstrap Authors
- * Copyright 2011-2020 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
- .active-link,
- .active-link:hover {
-   background-color: #652D90;
-   color: white!important;
-   
- }
- 
- .nav-link.active-link {
-   background-color: #652D90;
-   color: white;
- }
- .me-2{ width: 50% !important; align-items: center !important;}
+.main-header .navbar-brand img {
+  height: 40px;
+  object-fit: contain;
+}
 
- .head2{
+.main-header .nav-link {
+  color: var(--text-main) !important;
+  font-weight: 500 !important;
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem !important;
+  margin: 0 0.25rem;
+  border-radius: var(--radius-md);
+  transition: var(--transition-fast);
+}
 
-  border: 0px solid red;
-  width: 100%;
+.main-header .nav-link:hover,
+.main-header .nav-link.active-link {
+  color: var(--primary-color) !important;
+  background-color: var(--bg-color);
+}
+
+.main-header .nav-item .dropdown-toggle {
+  color: var(--text-main) !important;
+  font-weight: 500 !important;
+}
+
+.header-search-form {
+  position: relative;
+  display: flex;
   align-items: center;
-  /* background-color: aliceblue; */
-  padding: 15px;
- 
-
-
-}
-.head2 form{
-
-  border: 0px solid red;
-  margin-left: 30%;
-
-
-
-} 
-.maxau{ padding: 10px;
-  
-  text-align: left;}
-
- .navbar-toggler-icon{  border: 0px solid rgb(171, 25, 201); }
- @media only screen and (max-width: 600px) 
- { .navbar{ border: 0px solid rgb(79, 192, 27);align-items: right; text-align: right;}
- }
-
-
-
- @media only screen and (max-width: 600px) {
-	.head1 {
-border: 0px solid red;
-    width: 30%;
-	
-	}
-
-}
-@media only screen and (max-width: 600px) {
-.head2 {
-
-  border: 0px solid red;
   width: 100%;
-  align-items: center;
-  /* background-color: aliceblue; */
- 
-
-
-}
-.head2 form{ align-items: center;padding: 10px; margin: 0px !important;}
-.me-2{ width: 100% !important; align-items: center !important;}
-
-
-}
-@media only screen and (max-width: 600px) {
-.head3{
-
-  padding-right: 20px;
-  width: 70%;
-  border: 0px solid red;
-
+  max-width: 400px;
+  margin: 0 auto;
 }
 
+.header-search-input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  font-size: 0.9rem;
+  transition: var(--transition-normal);
+  background-color: var(--bg-color);
+  color: var(--text-main);
 }
- 
+
+.header-search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(101, 45, 144, 0.1);
+  background-color: var(--card-bg);
+}
+
+.header-search-btn {
+  position: absolute;
+  right: 4px;
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: var(--radius-xl) !important;
+  padding: 0.4rem 1.25rem !important;
+  font-weight: 500 !important;
+  font-size: 0.85rem !important;
+  transition: var(--transition-fast) !important;
+}
+
+.header-search-btn:hover {
+  background-color: var(--primary-hover) !important;
+  transform: translateY(-1px);
+}
+
+.login-btn-header {
+  background-color: var(--secondary-color) !important;
+  color: white !important;
+  padding: 0.5rem 1.5rem !important;
+  border-radius: var(--radius-md) !important;
+  font-weight: 600 !important;
+  margin-left: 1rem;
+  transition: var(--transition-normal) !important;
+}
+
+.login-btn-header:hover {
+  background-color: #000 !important;
+  color: white !important;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 991px) {
+  .header-search-form {
+    margin-top: 1rem;
+    max-width: 100%;
+  }
+  .login-btn-header {
+    margin-left: 0;
+    margin-top: 1rem;
+    text-align: center;
+  }
+}

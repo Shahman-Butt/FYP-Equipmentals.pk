@@ -1,140 +1,97 @@
 import React from "react";
-import playStore from "../../../images/playstore.png";
-import appStore from "../../../images/Appstore.png";
-import "./Footer2.css";
 import "./Footer.css";
-
-import { useLocation } from "react-router-dom";
-
-
+import { useLocation, Link } from "react-router-dom";
+import logo2 from "../../../images/logo2.png";
 
 const Footer = () => {
-
   const location = useLocation();
 
-  // if (location.pathname === "/about") {
-  //   return null;
-  // }
-  // if (location.pathname === "/account") {
-  //   return null;
-  // }
-  // if (location.pathname === "/contact") {
-  //   return null;
-  // }
-  // if (location.pathname === "/me/update") {
-  //   return null;
-  // }
-  if (location.pathname === "/about" ||  location.pathname === "/account" || location.pathname === "/admin/reviews"|| location.pathname === "/admin/product"|| location.pathname === "/admin/users" || location.pathname === "/admin/products" ||location.pathname === "/admin/dashboard" || location.pathname === "/contact" || location.pathname === "/me/update") {
+  const hiddenRoutes = [
+    "/about",
+    "/account",
+    "/admin/reviews",
+    "/admin/product",
+    "/admin/users",
+    "/admin/products",
+    "/admin/dashboard",
+    "/contact",
+    "/me/update",
+  ];
+
+  if (hiddenRoutes.includes(location.pathname)) {
     return null;
   }
-  
+
   return (
-  //   <>   
-  //   <div bg="white" style={{"margin-top": "10vmax"}}>
+    <footer className="modern-footer">
+      <div className="footer-container px-xl-5">
+        <div className="footer-grid">
+          {/* Brand Column */}
+          <div className="footer-col brand-col">
+            <Link to="/" className="footer-logo">
+               <img src={logo2} alt="EquipmentalsPk" />
+            </Link>
+            <p className="footer-description">
+              High-quality premium equipment rentals for your next big project. Reliable, verified, and ready to use.
+            </p>
+            <div className="social-links">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin-in"></i></a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
+            </div>
+          </div>
 
-  //   <div className="row py-2 px-xl-5">
-  //     <div className="col-lg-6 d-none d-lg-block">
-  //       <div className="d-inline-flex align-items-center">
-  //         <a className="text-dark" href style={{ "font-weight": "bold", "color": "#333;" }}>FAQs</a>
-  //         <span className="text-muted px-2">|</span>
-  //         <a className="text-dark" href style={{ "font-weight": "bold", "color": "#333;" }}>Help</a>
-  //         <span className="text-muted px-2">|</span>
-  //         <a className="text-dark" href style={{ "font-weight": "bold", "color": "#333;" }}>Support</a>
-  //       </div>
-  //     </div>
-  //     <div className="col-lg-6 text-center text-lg-right">
-  //       <div className="d-inline-flex align-items-center" style={{ "marginLeft": "80%" }}>
-  //         <a className="text-dark px-2" href>
-  //           <i className="fab fa-facebook-f" />
-  //         </a>
-  //         <a className="text-dark px-2" href>
-  //           <i className="fab fa-twitter" />
-  //         </a>
-  //         <a className="text-dark px-2" href>
-  //           <i className="fab fa-linkedin-in" />
-  //         </a>
-  //         <a className="text-dark px-2" href>
-  //           <i className="fab fa-instagram" />
-  //         </a>
-  //         <a className="text-dark pl-2" href>
-  //           <i className="fab fa-youtube" />
-  //         </a>
-  //       </div>
-  //     </div>
-  //   </div>
+          {/* Quick Links Column */}
+          <div className="footer-col">
+            <h4 className="footer-heading">Quick Links</h4>
+            <ul className="footer-links">
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/products">Rental Catalog</Link></li>
+              <li><Link to="/about">About Us</Link></li>
+              <li><Link to="/contact">Contact</Link></li>
+            </ul>
+          </div>
 
-  // </div>
-  // <footer id="footer">
-  //     <div className="leftFooter">
-  //       <h4>DOWNLOAD OUR APP</h4>
-  //       <p>Download App for Android and IOS mobile phone</p>
-  //       <img src={playStore} alt="playstore" />
-  //       <img src={appStore} alt="Appstore" />
-  //     </div>
+          {/* Legal Column */}
+          <div className="footer-col">
+            <h4 className="footer-heading">Legal</h4>
+            <ul className="footer-links">
+              <li><Link to="/terms">Terms & Conditions</Link></li>
+              <li><Link to="/privacy">Privacy Policy</Link></li>
+              <li><Link to="/returns">Return Policy</Link></li>
+              <li><Link to="/faq">FAQs</Link></li>
+            </ul>
+          </div>
 
-  //     <div className="midFooter">
-  //       <h1>EquipmentalsPk</h1>
-  //       <p>High Quality is our first priority</p>
-
-  //       <p>Copyrights 2021 &copy; EquipmentalsPk</p>
-  //     </div>
-
-  //     <div className="rightFooter">
-  //       <h4>Follow Us</h4>
-  //       <a href="http://instagram.com/">Instagram</a>
-  //       <a href="http://youtube.com/">Youtube</a>
-  //       <a href="http://instagram.com/">Facebook</a>
-  //     </div>
-  //   </footer>
-  //   </>
-  <>
-  <>
-  
-  </>
-
-
-
-<footer class="footer-distributed">
-
-			<div class="footer-left" >
-
-				<h3>Equipmentals<span>Pk</span></h3>
-
-				<p class="footer-links">
-					<a href="/" class="link-1">Home</a>
-					
-					<a href="/about">About</a>
-					
-					<a href="/products">Products</a>
-					
-					<a href="/contact">Contact</a>
-				</p>
-
-				<p class="footer-company-name">EquipmentalsPk © 2023</p>
-			</div>
-
-			<div class="footer-center">
-      <h5>Contact Details</h5>
-				
-          <li><i class="fas fa-map-marker-alt"></i> University of Engineering </li>
-					<li><i class="fas fa-phone"></i> (042) 99029452 </li>
-          <li><i class="fas fa-envelope"></i> <a href="mailto:support@company.com">EquipmentalsPk@gmail.com</a> </li>
-			
-
-			</div>
-
-			<div class="footer-right">
-      <h5>About the company</h5>
-				<p class="footer-company-about">
-					This is our FYP for session 2019 BS Computer Engineering, UET Lahore Campus 
-				</p>
-
-			
-			</div>
-
-		</footer>
-  </>
-  
+          {/* Contact Column */}
+          <div className="footer-col contact-col">
+            <h4 className="footer-heading">Contact Us</h4>
+            <ul className="footer-contact-info">
+              <li>
+                <i className="fas fa-map-marker-alt"></i>
+                <span>University of Engineering, Lahore Campus</span>
+              </li>
+              <li>
+                <i className="fas fa-phone"></i>
+                <span>(042) 99029452</span>
+              </li>
+              <li>
+                <i className="fas fa-envelope"></i>
+                <a href="mailto:EquipmentalsPk@gmail.com">EquipmentalsPk@gmail.com</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div className="footer-bottom">
+        <div className="container-fluid px-xl-5">
+          <p>&copy; {new Date().getFullYear()} EquipmentalsPk. All rights reserved.</p>
+          <p className="developed-by">Developed as FYP - Session 2019 BS Computer Engineering, UET Lahore</p>
+        </div>
+      </div>
+    </footer>
   );
 };
 
