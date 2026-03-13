@@ -135,7 +135,7 @@ The frontend application will load locally on `http://localhost:3000`.
 - **TypeScript Migration**: Enhance scaling robustness and component typing on both Node and React apps by porting the codebase securely to TypeScript.
 
 ## 👥 Author Information
-- **Developed by**: [Shahman Butt](https://github.com/Shahman-Butt)
+- **Developed by**: [Shahman Butt](https://github.com/Shahman-Butt) , [Marriam Salman](https://github.com/marriamsalman)
 - **Project Type**: Final Year Project (FYP) for University Degree Requirement
 
 ---
